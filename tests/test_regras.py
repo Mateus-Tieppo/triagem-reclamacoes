@@ -69,6 +69,7 @@ def test_relatorio_tem_cobertura():
 
 
 EXEMPLOS = {
+    "sem_estoque": "vendeu sem ter o produto em estoque",
     "nao_recebi": "ainda não recebi o pedido",
     "nao_chegou": "o pedido não chegou",
     "nao_entregue": "não foi entregue",
@@ -138,3 +139,7 @@ def test_regra_dispara_no_exemplo(nome, texto):
 ])
 def test_falso_positivo(texto, nao_pode):
     assert rotular(texto).rotulo != nao_pode
+
+
+def test_sem_estoque_vence_entrega():
+    assert rotular("cancelaram por falta de estoque e não recebi").rotulo == "sem_estoque"

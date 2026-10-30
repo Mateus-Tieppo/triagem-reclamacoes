@@ -56,3 +56,17 @@ def test_ler_devolvidos_nao_mistura_consistencia(tmp_path, monkeypatch):
     lote(["b"]).to_csv(tmp_path / "rotulos_consistencia_01.csv", index=False)
     assert len(rotulagem._ler_devolvidos("rotulos")) == 1
     assert len(rotulagem._ler_devolvidos("rotulos_consistencia")) == 1
+
+
+def test_juntar_guarda_secundaria_valida():
+    d = pd.DataFrame({"review_id": ["a", "b", "c"], "rotulo": ["outro"] * 3, "duvida": "false",
+                      "secundaria": ["item_faltando", None, ""]})
+    r = juntar_rotulos(ESP, [d]).set_index("review_id")
+    assert r.loc["a", "secundaria"] == "item_faltando" and r.loc["b", "secundaria"] == ""
+
+
+def test_juntar_recusa_secundaria_invalida():
+    d = pd.DataFrame({"review_id": ["a", "b", "c"], "rotulo": ["outro"] * 3, "duvida": "false",
+                      "secundaria": ["frete", "", ""]})
+    with pytest.raises(ValueError, match="secundária inválida: a"):
+        juntar_rotulos(ESP, [d])

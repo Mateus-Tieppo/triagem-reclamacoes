@@ -102,10 +102,16 @@ def test_avaliar_sem_revisao_fica_nan():
 def test_guia_tem_categorias_e_regra_principal():
     from triagem.taxonomia import GUIA_ROTULAGEM
     assert all(r in GUIA_ROTULAGEM for r in ROTULOS)
-    assert "problema que originou" in GUIA_ROTULAGEM
+    assert "regra só (origem)" in GUIA_ROTULAGEM
 
 
 def test_secao_aviso_conta_rotulos_do_claude():
     ouro = pd.DataFrame({"fonte": ["mateus", "claude", "claude"]})
     texto = "\n".join(avaliar.secao_aviso(ouro))
     assert "2 das 3" in texto and "53" not in texto
+
+
+def test_taxonomia_v4_tem_sem_estoque_e_guia_da_origem():
+    from triagem.taxonomia import GUIA_ROTULAGEM
+    assert "sem_estoque" in ROTULOS and len(ROTULOS) == 8
+    assert "Comentário leve" in GUIA_ROTULAGEM and "sem_estoque, nao_recebido_atraso, item_faltando" in GUIA_ROTULAGEM

@@ -19,6 +19,7 @@ from . import dados
 from .normalizar import normalizar
 
 PRIORIDADE: list[str] = [
+    "sem_estoque",
     "nao_recebido_atraso",
     "item_faltando",
     "produto_errado",
@@ -27,7 +28,7 @@ PRIORIDADE: list[str] = [
     "atendimento_loja",
     "outro",
 ]
-CATEGORIAS_ORIGEM = PRIORIDADE[:4]
+CATEGORIAS_ORIGEM = PRIORIDADE[:5]
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,8 @@ NAO_E_PRODUTO = r"(?!\s+(?:nenhum[a]? (?:resposta|retorno|contato|posicionamento
 QUANTIDADE = r"(?:um|uma|_num_|dois|duas|tres|quatro|o|a|os|as|parte|metade)\b(?!\s+(?:nota|nf)\b)"
 
 REGRAS: list[Regra] = [
+    # sem_estoque
+    Regra("sem_estoque", "sem_estoque", r"\b(?:estoque|indisponive(?:l|is)|esgotad[oa]s?)\b|\b(?:nao|n) (?:tinha|tem|tinham|havia) (?:mais )?(?:o produto|disponive)"),
     # nao_recebido_atraso
     Regra("nao_recebi", "nao_recebido_atraso", r"(?:\b(?:nao|n|nunca|nem)\s+(?:\w+\s+){0,2}|\bna\s+)" + r"rec[e]?b(?:i|emos|ido|eu|er|e)\b" + NAO_E_PRODUTO),
     Regra("nao_chegou", "nao_recebido_atraso", NAO + r"cheg(?:ou|aram|a)\b(?!\s+(?:tod[oa]s?|complet[oa]|perto|a nota|nota|a nf|nf)\b)"),

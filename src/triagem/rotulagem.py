@@ -48,12 +48,17 @@ def juntar_rotulos(esperados: pd.DataFrame, devolvidos: list[pd.DataFrame]) -> p
         "desconhecidos": sorted(set(todos.review_id) - esperado),
         "rótulo inválido": sorted(set(todos[~todos.rotulo.isin(ROTULOS)].review_id) & esperado),
     }
+    if "secundaria" in todos:
+        todos["secundaria"] = todos.secundaria.fillna("").astype(str).str.strip()
+        invalida = todos[(todos.secundaria != "") & ~todos.secundaria.isin(ROTULOS)]
+        problemas["secundária inválida"] = sorted(set(invalida.review_id) & esperado)
     partes = [f"{k}: {', '.join(v)}" for k, v in problemas.items() if v]
     if partes:
         raise ValueError("; ".join(partes))
     todos["duvida"] = todos.duvida.map(ler_booleano)
-    r = esperados[["review_id", "grupo"]].merge(todos[["review_id", "rotulo", "duvida"]], on="review_id")
-    return r[["review_id", "rotulo", "duvida", "grupo"]]
+    extra = ["secundaria"] if "secundaria" in todos else []
+    r = esperados[["review_id", "grupo"]].merge(todos[["review_id", "rotulo", *extra, "duvida"]], on="review_id")
+    return r[["review_id", "rotulo", *extra, "duvida", "grupo"]]
 
 
 def concordancia(a: pd.Series, b: pd.Series) -> dict:

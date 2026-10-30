@@ -8,3 +8,4 @@ __pycache__/
 results/*.joblib
 rotulagem/items.json
 rotulagem/rotulagem.html
+CLAUDE.md

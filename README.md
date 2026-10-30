@@ -1,5 +1,7 @@
 # Triagem de reclamações com LLM
 
+[![Testes](https://github.com/Mateus-Tieppo/triagem-reclamacoes/actions/workflows/testes.yml/badge.svg)](https://github.com/Mateus-Tieppo/triagem-reclamacoes/actions/workflows/testes.yml)
+
 Quando um cliente reclama, alguém precisa ler a mensagem e mandar para o time certo: logística, estoque, financeiro ou atendimento. Este projeto mede quão bem dá para automatizar essa triagem em português usando só modelos que rodam no próprio computador, sem API paga.
 
 Comparo três abordagens no mesmo conjunto de teste de 300 mensagens:
@@ -12,7 +14,7 @@ Os LLMs rodam no [Ollama](https://ollama.com): um modelo de 3 bilhões de parâm
 
 ## Dados
 
-Avaliações públicas do [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (licença CC BY-NC-SA 4.0). São pedidos de e-commerce, não de comida, mas os problemas são os mesmos de qualquer entrega: atraso, item faltando, pedido errado, produto avariado e cobrança.
+Avaliações públicas do [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (licença CC BY-NC-SA 4.0). São pedidos de e-commerce, com os problemas típicos de qualquer entrega: atraso, item faltando, pedido errado, produto avariado e cobrança.
 
 - 100.000 avaliações no total; 15.093 com nota 1 ou 2.
 - Depois de exigir comentário com pelo menos 15 caracteres e tirar duplicatas: **10.767 reclamações**.
@@ -62,7 +64,7 @@ Na prática, um sistema razoável seria usar o SVM como primeira passada e manda
 
 - **Rótulos de teste.** 247 das 300 mensagens foram rotuladas por um LLM. Nas mensagens rotuladas pelo Claude, o Qwen zero-shot acerta 85,8%; nas 53 rotuladas por mim, 67,9%. Parte do desempenho, então, vem de os modelos concordarem com o jeito de um LLM rotular. A coluna "F1 nas 53 rotuladas por mim" é a medida mais honesta, mas tem amostra pequena.
 - **Teto da tarefa.** Eu e o Claude concordamos em 64% (kappa 0,56). Um modelo perto desse nível está no limite do que dá para medir com uma categoria só por mensagem. Multirrótulo seria mais realista.
-- **Domínio.** Os dados são de e-commerce de 2016 a 2018, não de delivery de comida.
+- **Domínio.** Os dados são de e-commerce de 2016 a 2018. Outros tipos de entrega podem ter vocabulário e categorias diferentes.
 - **O SVM aprende com o Qwen.** Por isso ele dificilmente passaria o Qwen; o que importa nele é quanto da qualidade se mantém com latência quase zero.
 
 ## Como avaliei
@@ -107,6 +109,10 @@ data/
   ouro.csv       conjunto de teste (coluna fonte diz quem rotulou)
 tests/           testes do pipeline sem chamar nenhuma API
 ```
+
+## Licença
+
+Código sob a licença MIT (veja `LICENSE`). Os dados em `data/` derivam da base da Olist e seguem a licença CC BY-NC-SA 4.0.
 
 ## Ferramentas
 

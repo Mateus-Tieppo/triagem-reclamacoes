@@ -103,3 +103,9 @@ def test_guia_tem_categorias_e_regra_principal():
     from triagem.taxonomia import GUIA_ROTULAGEM
     assert all(r in GUIA_ROTULAGEM for r in ROTULOS)
     assert "problema que originou" in GUIA_ROTULAGEM
+
+
+def test_secao_aviso_conta_rotulos_do_claude():
+    ouro = pd.DataFrame({"fonte": ["mateus", "claude", "claude"]})
+    texto = "\n".join(avaliar.secao_aviso(ouro))
+    assert "2 das 3" in texto and "53" not in texto

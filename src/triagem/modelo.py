@@ -100,16 +100,21 @@ def probabilidades_fora_da_amostra(textos: list[str], rotulos: list[str], C: flo
 
 def palavras_que_pesaram(modelo: Pipeline, texto: str, categoria: str, k: int = 3) -> list[str]:
     """Os termos (só palavras, para ser legível) que mais puxaram o texto para a categoria."""
-    logistica = modelo.named_steps.get("logistica", modelo.named_steps.get("clf"))
-    if not hasattr(logistica, "coef_"):
+    clf = modelo.named_steps.get("logistica", modelo.named_steps.get("clf"))
+    if hasattr(clf, "calibrated_classifiers_"):
+        # SVM calibrado: média dos coeficientes dos SVMs de cada dobra da calibração.
+        coefs = np.mean([c.estimator.coef_ for c in clf.calibrated_classifiers_], axis=0)
+    elif hasattr(clf, "coef_"):
+        coefs = clf.coef_
+    else:
         return []
-    classes = list(logistica.classes_)
+    classes = list(clf.classes_)
     if categoria not in classes:
         return []
     if len(classes) == 2:
-        coef = logistica.coef_[0] * (1 if categoria == classes[1] else -1)
+        coef = coefs[0] * (1 if categoria == classes[1] else -1)
     else:
-        coef = logistica.coef_[classes.index(categoria)]
+        coef = coefs[classes.index(categoria)]
     palavras = dict(modelo.named_steps["tfidf"].transformer_list)["palavras"]
     pesos = palavras.transform([texto]).toarray()[0]
     contrib = pesos * coef[: len(pesos)]

@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import joblib
 import matplotlib
 
 matplotlib.use("Agg")
@@ -115,6 +116,24 @@ def tabela_md(df: pd.DataFrame, indice: bool = False) -> str:
     return "\n".join(linhas)
 
 
+def secao_aviso(ouro: pd.DataFrame) -> list[str]:
+    """Aviso de que parte do ouro foi rotulada pelo mesmo Claude que rotulou o treino do modelo novo."""
+    n = int((ouro.fonte == "claude").sum())
+    return [f"Atenção: {n} das {len(ouro)} mensagens do ouro foram rotuladas pelo Claude, que também rotulou o treino "
+            "do modelo novo (`rotulos-claude`). A comparação honesta com o Qwen é na coluna das rotuladas pelo Mateus.", ""]
+
+
+def secao_desenvolvimento() -> list[str]:
+    """F1 no desenvolvimento do modelo escolhido, para comparar com o F1 no ouro."""
+    arq = PASTA_RES / "modelo.joblib"
+    if not arq.exists():
+        return []
+    # O joblib é gerado pelo próprio projeto (`make treinar`).
+    m = joblib.load(arq)
+    return [f"F1 macro no desenvolvimento do modelo escolhido ({m['nome']}, forma {m['forma']}): "
+            f"{fmt_pct(m['f1_dev'])}. Detalhes em `results/desenvolvimento.md`.", ""]
+
+
 def secao_regras() -> list[str]:
     """Linhas de cobertura copiadas de results/regras.md."""
     arq = PASTA_RES / "regras.md"
@@ -171,7 +190,7 @@ def main():
           f"{int(ouro.duvida.sum())} marcadas como dúvida. "
           "F1 macro com intervalo de 95% por bootstrap (1.000 reamostragens).", "",
           tabela_md(tab), "", "### F1 por categoria", "", tabela_md(por_classe, indice=True), ""]
-    md += secao_regras() + secao_atraso()
+    md += secao_aviso(ouro) + secao_desenvolvimento() + secao_regras() + secao_atraso()
     (PASTA_RES / "resultados.md").write_text("\n".join(md))
     print("\n".join(md))
 

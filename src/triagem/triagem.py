@@ -79,6 +79,15 @@ def decidir(voto: Voto, probas: pd.Series, limiar: float, texto: Optional[str] =
     return Decisao(previsto, "modelo", voto.regra if voto.conflito else None, certeza, bool(motivos), "; ".join(motivos))
 
 
+def decidir_modelo(probas: pd.Series, limiar: float, texto: str) -> Decisao:
+    """O modelo decide sempre; vai para revisão quando não há texto ou a certeza é baixa."""
+    previsto, certeza = str(probas.idxmax()), float(probas.max())
+    if sem_conteudo(texto):
+        return Decisao(previsto, "modelo", None, certeza, True, "texto sem conteúdo")
+    baixa = certeza < limiar
+    return Decisao(previsto, "modelo", None, certeza, baixa, "certeza baixa" if baixa else "")
+
+
 def _gravar_jsonl(caminho: Path, linhas: list[dict]) -> None:
     caminho.write_text("".join(json.dumps(l, ensure_ascii=False) + "\n" for l in linhas))
 

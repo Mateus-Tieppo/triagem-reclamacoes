@@ -25,6 +25,7 @@ from .normalizar import MARCA_LINK, MARCA_NUM, normalizar
 from .regras import Voto, rotular
 
 ALVO_CONCORDANCIA = 0.85
+PASTA_SUPERVISAO = "supervisao_fraca"
 
 
 @dataclass(frozen=True)
@@ -130,8 +131,10 @@ def main():
                        "motivo_revisao": d.motivo_revisao,
                        "palavras": ", ".join(palavras_que_pesaram(modelo, r.texto, d.categoria))})
     tabela = pd.DataFrame(linhas)
-    tabela.to_csv(res / "triagem.csv", index=False)
-    joblib.dump({"modelo": modelo, "limiar": limiar, "C": C}, res / "modelo.joblib")
+    res_sf = res / PASTA_SUPERVISAO
+    res_sf.mkdir(parents=True, exist_ok=True)
+    tabela.to_csv(res_sf / "triagem.csv", index=False)
+    joblib.dump({"modelo": modelo, "limiar": limiar, "C": C}, res_sf / "modelo.joblib")
     _predizer_ouro(modelo, limiar, res / "preds")
 
     print(f"Treino: {len(textos_treino)} mensagens rotuladas pelas regras (de {len(pool)})")

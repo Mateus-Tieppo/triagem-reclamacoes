@@ -97,3 +97,9 @@ def test_avaliar_sem_revisao_fica_nan():
     preds = pd.DataFrame({"review_id": ["a"], "pred": ["outro"], "latencia_s": [0.0]})
     r = avaliar.avaliar(ouro, preds)
     assert pd.isna(r["taxa_revisao"]) and pd.isna(r["f1_aceitas"])
+
+
+def test_guia_tem_categorias_e_regra_principal():
+    from triagem.taxonomia import GUIA_ROTULAGEM
+    assert all(r in GUIA_ROTULAGEM for r in ROTULOS)
+    assert "problema que originou" in GUIA_ROTULAGEM

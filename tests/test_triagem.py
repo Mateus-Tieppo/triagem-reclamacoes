@@ -70,7 +70,7 @@ def test_triagem_csv_sem_ouro(tmp_path, monkeypatch):
 
     triagem.main()
 
-    csv = pd.read_csv(tmp_path / "results" / "triagem.csv")
+    csv = pd.read_csv(tmp_path / "results" / "supervisao_fraca" / "triagem.csv")
     assert list(csv.columns) == ["review_id", "texto", "categoria", "origem", "regra", "certeza",
                                  "revisao", "motivo_revisao", "palavras"]
     assert len(csv) == 60 and not csv.review_id.str.startswith("o").any()

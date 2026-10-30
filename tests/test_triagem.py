@@ -80,3 +80,13 @@ def test_triagem_csv_sem_ouro(tmp_path, monkeypatch):
         assert [l["review_id"] for l in linhas] == ["o0", "o1", "o2"]
         assert all({"pred", "latencia_s"} <= set(l) for l in linhas)
     assert "revisao" in linhas[0]
+
+
+def test_texto_so_com_numero_vai_para_revisao():
+    d = decidir(Voto(None, None, False, ()), p(item_faltando=0.98, outro=0.02), 0.8, texto="123456789012345")
+    assert d.revisao and d.motivo_revisao == "texto sem conteúdo"
+
+
+def test_texto_normal_nao_e_sem_conteudo():
+    d = decidir(Voto(None, None, False, ()), p(item_faltando=0.98, outro=0.02), 0.8, texto="faltou 1 item")
+    assert not d.revisao

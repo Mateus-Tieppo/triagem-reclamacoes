@@ -9,6 +9,7 @@ results/modelo.joblib e as predições no ouro para a avaliação. Não lê os r
 from __future__ import annotations
 
 import json
+import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
@@ -20,6 +21,7 @@ import pandas as pd
 
 from . import dados
 from .modelo import palavras_que_pesaram, probabilidades, probabilidades_fora_da_amostra, treinar
+from .normalizar import MARCA_LINK, MARCA_NUM, normalizar
 from .regras import Voto, rotular
 
 ALVO_CONCORDANCIA = 0.85
@@ -53,8 +55,16 @@ def escolher_limiar(probas: pd.DataFrame, rotulos: list[str], alvo: float = ALVO
     return round(limiar / 10, 1)
 
 
-def decidir(voto: Voto, probas: pd.Series, limiar: float) -> Decisao:
+def sem_conteudo(texto: str) -> bool:
+    """Texto sem nenhuma letra depois de normalizar (só número, emoji ou pontuação)."""
+    t = normalizar(texto).replace(MARCA_NUM, "").replace(MARCA_LINK, "")
+    return not re.search(r"[a-z]", t)
+
+
+def decidir(voto: Voto, probas: pd.Series, limiar: float, texto: Optional[str] = None) -> Decisao:
     previsto = str(probas.idxmax())
+    if texto is not None and sem_conteudo(texto):
+        return Decisao(previsto, "modelo", None, float(probas.max()), True, "texto sem conteúdo")
     if voto.rotulo and not voto.conflito:
         discorda = previsto != voto.rotulo
         return Decisao(voto.rotulo, "regra", voto.regra, float(probas[voto.rotulo]), discorda,
@@ -81,7 +91,7 @@ def _predizer_ouro(modelo, limiar: float, pasta: Path) -> None:
         t1 = time.perf_counter()
         probas = probabilidades(modelo, [r.texto]).iloc[0]
         t2 = time.perf_counter()
-        d = decidir(voto, probas, limiar)
+        d = decidir(voto, probas, limiar, r.texto)
         t3 = time.perf_counter()
         regras.append({"review_id": r.review_id, "pred": voto.rotulo or "outro", "latencia_s": round(t1 - t0, 6)})
         logistica.append({"review_id": r.review_id, "pred": str(probas.idxmax()), "latencia_s": round(t2 - t1, 6)})
@@ -114,7 +124,7 @@ def main():
 
     linhas = []
     for i, (r, voto) in enumerate(zip(pool.itertuples(), votos)):
-        d = decidir(voto, probas.iloc[i], limiar)
+        d = decidir(voto, probas.iloc[i], limiar, r.texto)
         linhas.append({"review_id": r.review_id, "texto": r.texto, "categoria": d.categoria, "origem": d.origem,
                        "regra": d.regra or "", "certeza": round(d.certeza, 4), "revisao": d.revisao,
                        "motivo_revisao": d.motivo_revisao,

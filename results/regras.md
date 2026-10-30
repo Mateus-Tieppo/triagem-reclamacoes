@@ -2,21 +2,21 @@
 
 | Categoria | Mensagens |
 | --- | --- |
-| nao_recebido_atraso | 3735 (35,7%) |
-| item_faltando | 1183 (11,3%) |
+| nao_recebido_atraso | 3731 (35,7%) |
+| item_faltando | 1185 (11,3%) |
 | produto_errado | 832 (8,0%) |
 | defeito_qualidade | 1035 (9,9%) |
-| cobranca_cancelamento | 416 (4,0%) |
-| atendimento_loja | 248 (2,4%) |
+| cobranca_cancelamento | 417 (4,0%) |
+| atendimento_loja | 233 (2,2%) |
 | outro | 167 (1,6%) |
-| Sem rótulo | 2837 (27,1%) |
-| Com conflito | 583 (5,6%) |
+| Sem rótulo | 2853 (27,3%) |
+| Com conflito | 581 (5,6%) |
 
 ### Disparos por regra
 
 | Regra | Categoria | Disparos |
 | --- | --- | --- |
-| nao_recebi | nao_recebido_atraso | 1712 |
+| nao_recebi | nao_recebido_atraso | 1704 |
 | nao_chegou | nao_recebido_atraso | 588 |
 | nao_entregue | nao_recebido_atraso | 742 |
 | nao_veio_produto | nao_recebido_atraso | 24 |
@@ -52,7 +52,7 @@
 | dinheiro_de_volta | cobranca_cancelamento | 237 |
 | cancelamento | cobranca_cancelamento | 463 |
 | cobranca_indevida | cobranca_cancelamento | 74 |
-| nao_responde | atendimento_loja | 299 |
+| nao_responde | atendimento_loja | 256 |
 | sem_resposta | atendimento_loja | 414 |
 | atendimento_ruim | atendimento_loja | 41 |
 | falta_comunicacao | atendimento_loja | 207 |

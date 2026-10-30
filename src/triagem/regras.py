@@ -48,17 +48,17 @@ class Voto:
 # Negação comum nas mensagens: "não", "n", "ñ" (vira "n"), "nunca", "nem".
 NAO = r"\b(?:nao|n|nunca|nem)\s+(?:\w+\s+){0,2}"
 # Depois de "não recebi", estas palavras indicam outra queixa (resposta, dinheiro, nota).
-NAO_E_PRODUTO = r"(?!\s+(?:nenhum[a]? (?:resposta|retorno|contato|posicionamento|posicao|satisfacao|informac\w*|e-?mail|mensagem|parecer|comunicado)|resposta|retorno|contato|o estorno|estorno|o reembolso|reembolso|meu dinheiro|o dinheiro|o valor|a nota|nota|e-?mail|_link_))"
+NAO_E_PRODUTO = r"(?!\s+(?:nenhum[a]? (?:resposta|retorno|contato|posicionamento|posicao|satisfacao|informac\w*|e-?mail|mensagem|parecer|comunicado)|resposta|retorno|contato|o estorno|estorno|o reembolso|reembolso|meu estorno|meu reembolso|a devolucao|devolucao|meu dinheiro|o dinheiro|o valor|a nota|nota|a nf|nf|e-?mail|_link_))"
 QUANTIDADE = r"(?:um|uma|_num_|dois|duas|tres|quatro|o|a|os|as|parte|metade)\b(?!\s+(?:nota|nf)\b)"
 
 REGRAS: list[Regra] = [
     # nao_recebido_atraso
-    Regra("nao_recebi", "nao_recebido_atraso", r"\b(?:nao|n|nunca|nem|na)\s+(?:\w+\s+){0,2}" + r"rec[e]?b(?:i|emos|ido|eu|er|e)\b" + NAO_E_PRODUTO),
-    Regra("nao_chegou", "nao_recebido_atraso", NAO + r"cheg(?:ou|aram|a)\b(?!\s+(?:tod[oa]s?|complet[oa]))"),
+    Regra("nao_recebi", "nao_recebido_atraso", r"(?:\b(?:nao|n|nunca|nem)\s+(?:\w+\s+){0,2}|\bna\s+)" + r"rec[e]?b(?:i|emos|ido|eu|er|e)\b" + NAO_E_PRODUTO),
+    Regra("nao_chegou", "nao_recebido_atraso", NAO + r"cheg(?:ou|aram|a)\b(?!\s+(?:tod[oa]s?|complet[oa]|perto|a nota|nota|a nf|nf)\b)"),
     Regra("nao_entregue", "nao_recebido_atraso", NAO + r"(?:foi |foram |me foi )?entreg(?:ue|ues|ou|aram|ado)\b(?!\s+(?:a |)nota|\s+(?:totalmente|completo|integralmente|tudo))"),
     Regra("nao_veio_produto", "nao_recebido_atraso", NAO + r"(?:veio|vieram|enviaram|enviou|mandaram|mandou)\s+(?:o |a |meu |minha )?(?:produto|pedido|encomenda|mercadoria|compra)\b"),
     Regra("entrega_nao_realizada", "nao_recebido_atraso", r"\bentrega\s+(?:nao|n)\s+(?:foi\s+)?(?:realizada|feita|efetuada)"),
-    Regra("atrasou", "nao_recebido_atraso", r"\batras(?:o|ad[oa]s?|ou|aram)\b"),
+    Regra("atrasou", "nao_recebido_atraso", r"(?<!sem )\batras(?:o|ad[oa]s?|ou|aram)\b"),
     Regra("demorou_chegar", "nao_recebido_atraso", r"\b(?:demor(?:ou|a|ando|ei)|levou)\b.{0,25}\b(?:cheg|entreg|receb|vir\b)\w*"),
     Regra("demora_entrega", "nao_recebido_atraso", r"\b(?:demora|demorada|demorado|lentidao)\s+(?:\w+\s+){0,2}(?:entrega|chegar|receber)|\bentrega\s+(?:muito\s+)?(?:demorada|lenta|atrasada)|\b(?:ta|esta|estao) demorando\b|\bchateada? com a demora\b|\b(?:estravi|extravi)\w*"),
     Regra("prazo_nao_cumprido", "nao_recebido_atraso", r"\b(?:fora do prazo|passou (?:d[ao] |o |a )?(?:data|prazo)|nao (?:\w+\s+)?cumpri\w*\s+(?:\w+\s+){0,3}(?:prazo|data|combinado)|prazo (?:\w+\s+){0,3}(?:passou|vencido|venceu|expirou|estourou|acabou|esgotou|finalizou))"),
@@ -79,7 +79,7 @@ REGRAS: list[Regra] = [
     Regra("veio_errado", "produto_errado", r"\b(?:veio|vieram|recebi|enviaram|mandaram|mandou|entregaram|chegou)\s+(?:o |a |um |uma )?(?:\w+\s+){0,2}errad[oa]s?\b"),
     Regra("diferente_anuncio", "produto_errado", r"\b(?:diferente|inferior|menor|maior|difere|nao condiz|noa condiz|condizente|nao (?:e|esta) como|nao e igual)\b.{0,30}\b(?:anuncio|anunciad[oa]|foto|fotos|imagem|imagens|descricao|descrito|site|pedido|comprei|pedi|encomendei|comprado|solicitado)\b"),
     Regra("nao_e_o_mesmo", "produto_errado", r"\b(?:nao|n)\s+(?:e|era|foi|corresponde|condiz)\s+(?:o |a )?(?:mesm[oa]|igual|conforme|com o|ao|o que (?:comprei|pedi)|(?:o )?que (?:comprei|pedi))"),
-    Regra("veio_outro", "produto_errado", r"\b(?:veio|venho|chegou|recebi|enviaram|mandaram|entregaram|enviado|entregue)\s+(?:um |uma |o |a )?outr[oa]s?\b(?!\s+(?:nao|n)\b)|\boutr[oa] (?:marca|modelo|cor|tamanho|produto)\b|\bfoi outr[oa]\b|\bque (?:chegou|veio|recebi) (?:e|era|foi) outr[oa]\b|\bque (?:nao|n) (?:pedi|comprei|encomendei|solicitei)\b"),
+    Regra("veio_outro", "produto_errado", r"\b(?:veio|venho|chegou|recebi|enviaram|mandaram|entregaram|enviado|entregue)\s+(?:um |uma |o |a )?outr[oa]s?\b(?!\s+(?:nao|n|e-?mail|_link_|mensagem|codigo)\b)|\boutr[oa] (?:marca|modelo|cor|tamanho|produto)\b|\bfoi outr[oa]\b|\bque (?:chegou|veio|recebi) (?:e|era|foi) outr[oa]\b|\bque (?:nao|n) (?:pedi|comprei|encomendei|solicitei)\b"),
     Regra("nao_original", "produto_errado", r"\b(?:nao (?:e|era|parece ser) (?:o )?original|falsificad[oa]|replica|pirata|fals[oa])\b"),
     # defeito_qualidade
     Regra("quebrado", "defeito_qualidade", r"\b(?:quebrad[oa]s?|quebrou|trincad[oa]s?|rachad[oa]s?|amassad[oa]s?|avariad[oa]s?|danificad[oa]s?|rasgad[oa]s?|furad[oa]s?|riscad[oa]s?|estragad[oa]s?|manchad[oa]s?|lascad[oa]s?|vazando|vazou|esfarelad[oa]|avaria\w*|violad[oa]|suj[oa]s?|travando|trava muito|sem funcionar|nao funcionando|soltando|descolando|descascando|enferrujad[oa]|mal lacrad[oa]|tort[oa]|mancha\w*|descostur\w*|derret\w*|queim\w*|sem funcionalidade|ja veio usad[oa]|era usad[oa]|linha solta|instavel)\b|\b(?:veio|chegou|produto|recebi o produto|deve estar) com problema|\bnao (?:tem|possui) (?:muita |boa )?qualidade\b|\bmaterial nao e (?:tao )?bom\b"),
@@ -94,7 +94,7 @@ REGRAS: list[Regra] = [
     Regra("cancelamento", "cobranca_cancelamento", r"\bcancel\w*\b"),
     Regra("cobranca_indevida", "cobranca_cancelamento", r"\b(?:cobranca|cobrad[oa]s?|cobraram|descontad[oa]|debitad[oa]|duas vezes no cartao|valor (?:\w+\s+)?(?:a mais|errado|indevido|divergente))\b"),
     # atendimento_loja
-    Regra("nao_responde", "atendimento_loja", r"\b(?:nao|n|ninguem|nem)\s+(?:me\s+)?(?:\w+\s+)?(?:respond\w*|retorn(?:am|aram|ou|a)\b|atend\w*|deu (?:retorno|resposta|satisfacao)|dao (?:retorno|satisfacao|resposta)|entr\w+ em contato)"),
+    Regra("nao_responde", "atendimento_loja", r"\b(?:nao|n|ninguem|nem)\s+(?:me\s+)?(?:\w+\s+)?(?:respond\w*|retorn(?:am|aram|ou|a)\b|me atend\w*|atend(?:em|eram|e o telefone|e telefone|imento)\b(?!\s+(?:o que|as|minhas|a minha|ao que))|deu (?:retorno|resposta|satisfacao)|dao (?:retorno|satisfacao|resposta)|entr\w+ em contato)"),
     Regra("sem_resposta", "atendimento_loja", r"\b(?:sem|nenhum|nenhuma|nao tive|nao obtive|nao recebi)\s+(?:\w+\s+)?(?:resposta|retorno|contato|satisfacao|posicionamento|posicao|explicac\w*|previsao|informac\w*|atendimento|comunicado)\b"),
     Regra("atendimento_ruim", "atendimento_loja", r"\b(?:pessimo|horrivel|mau|mal|falta de|sem|demora no|qualidade no)\s+atendimento\b|\bpouco caso\b|\batendimento\s+(?:\w+\s+)?(?:pessimo|horrivel|ruim|lamentavel)\b"),
     Regra("falta_comunicacao", "atendimento_loja", r"\bfalta de (?:comunicacao|informac\w*|respeito|atencao|contato|retorno|satisfacao)\b|\bdescaso\b|\bdificil (?:o )?contato\b|\bnao consig\w* (?:\w+ ){0,2}(?:contato|falar)\b"),
@@ -105,6 +105,12 @@ REGRAS: list[Regra] = [
 ]
 
 _COMPILADAS = [(r, re.compile(r.padrao)) for r in REGRAS]
+
+
+def regras_que_disparam(texto: str) -> list[str]:
+    """Nomes das regras que disparam no texto."""
+    t = normalizar(texto)
+    return [r.nome for r, p in _COMPILADAS if p.search(t)]
 
 
 def rotular(texto: str) -> Voto:
@@ -134,8 +140,7 @@ def relatorio(textos: list[str]) -> str:
     por_cat = Counter(v.rotulo for v in votos if v.rotulo)
     por_regra = Counter()
     for t in textos:
-        tn = normalizar(t)
-        por_regra.update(r.nome for r, p in _COMPILADAS if p.search(tn))
+        por_regra.update(regras_que_disparam(t))
     sem = sum(v.rotulo is None for v in votos)
     conflito = sum(v.conflito for v in votos)
     md = [f"## Cobertura das regras ({total} mensagens do pool de treino)", "",

@@ -51,14 +51,14 @@ O código de LLM continua no repositório (`make llm`, fora do `make tudo`) só 
 
 | Categoria | Mensagens |
 | --- | --- |
-| nao_recebido_atraso | 35,6% |
+| nao_recebido_atraso | 35,7% |
 | item_faltando | 11,3% |
 | produto_errado | 8,0% |
 | defeito_qualidade | 9,9% |
 | cobranca_cancelamento | 4,0% |
-| atendimento_loja | 2,4% |
+| atendimento_loja | 2,2% |
 | outro | 1,6% |
-| Sem rótulo | 27,1% |
+| Sem rótulo | 27,3% |
 | Com conflito | 5,6% |
 
 Os disparos de cada regra estão em `results/regras.md`.
@@ -70,26 +70,27 @@ Os disparos de cada regra estão em `results/regras.md`.
 | --- | --- |
 | Entrada | TF-IDF de palavras (1 e 2 palavras) e de caracteres (3 a 5), sobre o texto normalizado |
 | Algoritmo | Regressão logística com `class_weight="balanced"`, que dá a probabilidade de cada categoria |
-| Treino | As 7.033 mensagens que as regras rotularam sem conflito |
-| Validação | Cruzada em 5 partes (`random_state=42`); `C` escolhido entre 0,3, 1, 3 e 10. Ficou `C = 10` |
-| F1 macro na validação | 82,8%. **Isso mede concordância com as regras, não acerto real.** O acerto real está na seção 7 |
+| Treino | As 7.019 mensagens que as regras rotularam sem conflito |
+| Validação | Cruzada em 5 partes (`random_state=42`); `C` escolhido entre 0,3, 1, 3 e 10. Ficou `C = 10`, o maior valor da grade; um valor maior pode ser melhor e fica para testar |
+| F1 macro na validação | 82,9%. **Isso mede concordância com as regras, não acerto real.** O acerto real está na seção 7 |
 | Explicação | Para cada mensagem, as três palavras que mais puxaram para a categoria escolhida |
 
 ## 6. Decisão final e fila de revisão
 `src/triagem/triagem.py`. A regra foi fixada antes de olhar o conjunto de teste:
 - **Uma regra disparou sem conflito:** a categoria é a da regra. Vai para revisão se o modelo discordar.
 - **Nenhuma regra disparou, ou houve conflito:** o modelo decide. Vai para revisão se houve conflito ou se a certeza ficou abaixo do limiar.
+- **Texto sem nenhuma letra** (só número, emoji ou pontuação): vai sempre para revisão, com o motivo "texto sem conteúdo". Sem isso, um número de pedido colado sozinho saía com certeza alta.
 
 **O limiar de certeza é 0,80.** Ele foi escolhido nas predições fora da amostra da validação cruzada: é o início da faixa de certeza (de 0,1 em 0,1) a partir da qual toda faixa acima concorda pelo menos 85% com as regras. Olhamos faixa por faixa porque a média de tudo que passa do limiar esconde as mensagens incertas: com a média, o limiar daria 0,00 e nenhuma decisão incerta do modelo iria para revisão.
 
-**Resultado no pool de treino** (`results/triagem.csv`): 32,1% das mensagens vão para revisão.
+**Resultado no pool de treino** (`results/triagem.csv`): 32,2% das mensagens vão para revisão.
 
 | Motivo | Mensagens |
 | --- | --- |
-| Certeza baixa | 2.137 |
-| Regra e modelo discordam | 635 |
-| Conflito entre regras | 312 |
-| Conflito entre regras e certeza baixa | 271 |
+| Certeza baixa | 2.152 |
+| Regra e modelo discordam | 638 |
+| Conflito entre regras | 313 |
+| Conflito entre regras e certeza baixa | 268 |
 
 A fila é grande porque quase 80% das decisões do modelo vão para revisão: a maioria delas é de mensagens que nenhuma regra pegou, onde ele é inseguro. Preferimos mandar para um humano a classificar errado. Quem quiser uma fila menor pode baixar o alvo de 85% em `ALVO_CONCORDANCIA`.
 
@@ -99,16 +100,16 @@ Conjunto de teste: 300 reclamações, 53 rotuladas pelo Mateus e 247 pelo Claude
 | Abordagem | F1 macro | F1 nas 53 do Mateus | Revisão | F1 sem revisão | Latência |
 | --- | --- | --- | --- | --- | --- |
 | Regras sozinhas (controle) | 50,8% (44,3% a 56,9%) | 36,3% | - | - | < 1 ms |
-| Regressão logística sozinha | 57,3% (50,4% a 63,3%) | 42,2% | - | - | < 1 ms |
-| Híbrido (decisão final) | 54,8% (47,9% a 61,0%) | 44,9% | 32,3% | 67,7% | 1 ms |
+| Regressão logística sozinha | 57,8% (50,5% a 63,9%) | 42,2% | - | - | < 1 ms |
+| Híbrido (decisão final) | 54,9% (47,9% a 61,1%) | 44,9% | 33,3% | 68,9% | < 1 ms |
 | Referência: TF-IDF + SVM com rótulos do Qwen | 61,4% (54,1% a 68,0%) | 45,2% | - | - | < 1 ms |
 | Referência: Qwen 2.5 7B zero-shot | 74,9% (67,8% a 80,7%) | 60,5% | - | - | 1.041 ms |
 
 O que os números dizem:
-1. **O modelo aprende além das regras.** Treinado só com os rótulos delas, ele ganha das regras sozinhas em 6,5 pontos de F1 e em 5,9 pontos nas 53 do Mateus. É o papel do controle, como no Fila Viva.
-2. **O híbrido ficou abaixo do modelo sozinho no F1 geral** (54,8% contra 57,3%), porque quando uma regra dispara ela tem a palavra final, e as regras erram mais que o modelo. Nas 53 do Mateus, o híbrido fica um pouco acima (44,9% contra 42,2%). Não trocamos a regra de decisão depois de ver isso, porque seria escolher olhando o teste.
-3. **Nas mensagens que não vão para revisão, o híbrido chega a 67,7% de F1.** A fila de revisão concentra os casos difíceis.
-4. **Sem LLM, perdemos qualidade.** O Qwen fica 20 pontos acima. O SVM treinado com rótulos do Qwen fica 6,6 pontos acima do híbrido. É o preço de não depender de LLM nenhuma.
+1. **O modelo aprende além das regras.** Treinado só com os rótulos delas, ele ganha das regras sozinhas em 7,0 pontos de F1 e em 5,9 pontos nas 53 do Mateus. É o papel do controle, como no Fila Viva.
+2. **O híbrido ficou abaixo do modelo sozinho no F1 geral** (54,9% contra 57,8%), porque quando uma regra dispara ela tem a palavra final, e as regras erram mais que o modelo. Nas 53 do Mateus, o híbrido fica um pouco acima (44,9% contra 42,2%). Não trocamos a regra de decisão depois de ver isso, porque seria escolher olhando o teste.
+3. **Nas mensagens que não vão para revisão, o híbrido chega a 68,9% de F1.** A fila de revisão concentra os casos difíceis.
+4. **Sem LLM, perdemos qualidade.** O Qwen fica 20 pontos acima. O SVM treinado com rótulos do Qwen fica 6,5 pontos acima do híbrido. É o preço de não depender de LLM nenhuma.
 5. **`outro` é o ponto fraco** (8,7% de F1 no híbrido). Só 1,6% do pool tem regra de `outro`, e o conjunto de teste tem bem mais mensagens assim.
 
 Tabela completa e F1 por categoria em `results/resultados.md`.
@@ -119,7 +120,7 @@ Tabela completa e F1 por categoria em `results/resultados.md`.
 ## 9. Limitações
 - **Sem conjunto de desenvolvimento rotulado à mão.** A precisão das regras foi julgada lendo amostras, e o acerto real só apareceu na avaliação final.
 - **O conjunto de teste tem 247 rótulos feitos pelo Claude.** A coluna "53 do Mateus" é a medida mais honesta, mas é pequena.
-- **O modelo aprende os erros das regras.** A validação cruzada (82,8%) mede só concordância com elas.
+- **O modelo aprende os erros das regras.** A validação cruzada (82,9%) mede só concordância com elas.
 - **Uma categoria por mensagem.** Reclamações com dois problemas ("não chegou e quero o dinheiro") ficam com a de origem.
 
 ## 10. O que ficou de fora

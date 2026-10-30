@@ -13,9 +13,9 @@ As decisões, com os porquês e o que ficou de fora, estão em [DECISOES.md](DEC
 ## Como funciona
 
 1. **Normalização** (`normalizar.py`): minúsculas, sem acentos, links e números viram marcadores, "péssimooooo" vira "pessimo". A mesma função roda nas regras, no treino e na predição.
-2. **Regras legíveis** (`regras.py`): 43 expressões como "não recebi", "só veio um", "veio quebrado" e "estorno", cada uma votando numa categoria. Elas rotulam 72,9% das 10.453 reclamações de treino.
+2. **Regras legíveis** (`regras.py`): 43 expressões como "não recebi", "só veio um", "veio quebrado" e "estorno", cada uma votando numa categoria. Elas rotulam 72,7% das 10.453 reclamações de treino.
 3. **Modelo** (`modelo.py`): TF-IDF + regressão logística, treinado só com os rótulos das regras. Ele cobre as mensagens que nenhuma regra pega e dá a certeza de cada resposta.
-4. **Decisão final** (`triagem.py`): quando uma regra dispara, vale a regra; senão, o modelo. Vai para revisão quando regra e modelo discordam, quando duas regras se contradizem ou quando a certeza do modelo fica abaixo de 0,80.
+4. **Decisão final** (`triagem.py`): quando uma regra dispara, vale a regra; senão, o modelo. Vai para revisão quando regra e modelo discordam, quando duas regras se contradizem quando a certeza do modelo fica abaixo de 0,80 ou quando o texto não tem nenhuma letra.
 
 A saída é `results/triagem.csv`: uma linha por reclamação com categoria, origem (regra ou modelo), certeza, se vai para revisão, o motivo e as palavras que pesaram.
 
@@ -26,11 +26,11 @@ Conjunto de teste de 300 reclamações, que só foi lido na avaliação final. F
 | Abordagem | F1 macro | F1 nas 53 rotuladas por mim | Revisão | F1 sem revisão | Latência |
 | --- | --- | --- | --- | --- | --- |
 | Regras sozinhas | 50,8% (44,3% a 56,9%) | 36,3% | - | - | < 1 ms |
-| Regressão logística sozinha | **57,3%** (50,4% a 63,3%) | 42,2% | - | - | < 1 ms |
-| Sistema completo (regras + modelo + revisão) | 54,8% (47,9% a 61,0%) | **44,9%** | 32,3% | **67,7%** | 1 ms |
+| Regressão logística sozinha | **57,8%** (50,5% a 63,9%) | 42,2% | - | - | < 1 ms |
+| Sistema completo (regras + modelo + revisão) | 54,9% (47,9% a 61,1%) | **44,9%** | 33,3% | **68,9%** | < 1 ms |
 
-1. **O modelo aprende além das regras.** Treinado só com os rótulos delas, ganha das regras sozinhas em 6,5 pontos de F1.
-2. **A fila de revisão concentra os casos difíceis.** Nas mensagens que o sistema decide sozinho, o F1 chega a 67,7%. Em troca, cerca de um terço das mensagens vai para um humano.
+1. **O modelo aprende além das regras.** Treinado só com os rótulos delas, ganha das regras sozinhas em 7,0 pontos de F1.
+2. **A fila de revisão concentra os casos difíceis.** Nas mensagens que o sistema decide sozinho, o F1 chega a 68,9%. Em troca, cerca de um terço das mensagens vai para um humano.
 3. **O sistema completo ficou abaixo do modelo sozinho no F1 geral**, porque quando uma regra dispara ela decide, e as regras erram mais que o modelo. A regra de decisão foi fixada antes de olhar o teste, e não mudei depois para não escolher olhando o resultado.
 4. **O ponto fraco é a categoria `outro`** (elogio com nota baixa, texto sem sentido), que quase nenhuma regra cobre.
 
@@ -52,7 +52,7 @@ O Qwen é bem melhor, mas leva cerca de um segundo por mensagem e precisa de um 
 
 - **Sem conjunto de desenvolvimento rotulado à mão.** As regras foram julgadas lendo amostras do treino; o acerto real só aparece no teste.
 - **Rótulos de teste.** 247 das 300 mensagens de teste foram rotuladas pelo Claude (Anthropic) com as mesmas regras de rotulagem, sem ver os meus rótulos. A coluna "53 rotuladas por mim" é a medida mais honesta, mas tem amostra pequena. Nas 53 em comum, eu e o Claude concordamos em 64% (kappa de Cohen 0,56).
-- **O modelo aprende os erros das regras.** Por isso a validação cruzada (82,8%) mede só concordância com as regras.
+- **O modelo aprende os erros das regras.** Por isso a validação cruzada (82,9%) mede só concordância com as regras.
 - **Domínio.** Os dados são de e-commerce de 2016 a 2018. Outros tipos de entrega podem ter vocabulário e categorias diferentes.
 
 ## Dados

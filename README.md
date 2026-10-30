@@ -1,58 +1,48 @@
-# Triagem de reclamações sem LLM
+# Triagem de reclamações com ML clássico
 
 [![Testes](https://github.com/Mateus-Tieppo/triagem-reclamacoes/actions/workflows/testes.yml/badge.svg)](https://github.com/Mateus-Tieppo/triagem-reclamacoes/actions/workflows/testes.yml)
 
-Quando um cliente reclama, alguém precisa ler a mensagem e mandar para o time certo: logística, estoque, financeiro ou atendimento. Este projeto automatiza essa triagem em português **sem LLM e sem custo**: regras legíveis rotulam as reclamações, um modelo clássico aprende com elas e o que fica incerto vai para revisão humana.
+Quando um cliente reclama, alguém precisa ler a mensagem e mandar para o time certo: logística, estoque, financeiro ou atendimento. Este projeto automatiza essa triagem em português com um modelo clássico que roda num notebook, **sem LLM na triagem e sem custo por mensagem**.
 
-- **Custo zero:** roda num notebook, sem API, sem GPU e sem LLM, em cerca de 1 milissegundo por mensagem.
-- **Explicável:** cada decisão diz qual regra disparou e quais palavras pesaram.
-- **Humano na dúvida:** a mensagem incerta não é classificada no chute, vai para uma fila de revisão com o motivo.
+- **Custo zero na triagem:** sem API, sem GPU e sem LLM, em cerca de 2 milissegundos por mensagem.
+- **Humano na dúvida:** a mensagem incerta vai para uma fila de revisão. Nas que o modelo decide sozinho, ele acerta 91,3%.
+- **Rótulos de treino feitos uma vez pelo Claude (Anthropic).** A LLM entra só no desenvolvimento, para rotular 3.000 mensagens; a triagem não depende dela.
 
 As decisões, com os porquês e o que ficou de fora, estão em [DECISOES.md](DECISOES.md).
 
 ## Como funciona
 
-1. **Normalização** (`normalizar.py`): minúsculas, sem acentos, links e números viram marcadores, "péssimooooo" vira "pessimo". A mesma função roda nas regras, no treino e na predição.
-2. **Regras legíveis** (`regras.py`): 43 expressões como "não recebi", "só veio um", "veio quebrado" e "estorno", cada uma votando numa categoria. Elas rotulam 72,7% das 10.453 reclamações de treino.
-3. **Modelo** (`modelo.py`): TF-IDF + regressão logística, treinado só com os rótulos das regras. Ele cobre as mensagens que nenhuma regra pega e dá a certeza de cada resposta.
-4. **Decisão final** (`triagem.py`): quando uma regra dispara, vale a regra; senão, o modelo. Vai para revisão quando regra e modelo discordam, quando duas regras se contradizem quando a certeza do modelo fica abaixo de 0,80 ou quando o texto não tem nenhuma letra.
+1. **Rotulagem (uma vez):** 3.000 reclamações do treino rotuladas pelo Claude com o mesmo guia usado no conjunto de teste. 500 delas ficam separadas como conjunto de desenvolvimento.
+2. **Variáveis:** TF-IDF de palavras e de caracteres sobre o texto normalizado, mais 43 regras legíveis ("não recebi", "só veio um", "veio quebrado", "estorno") como colunas 0/1.
+3. **Modelo:** comparei SVM linear, regressão logística e Naive Bayes no desenvolvimento; venceu o SVM linear calibrado (71,0% de F1 macro no desenvolvimento).
+4. **Decisão:** o modelo decide e dá a certeza. Abaixo de 0,80 de certeza, ou sem texto, a mensagem vai para revisão.
 
-A saída é `results/triagem.csv`: uma linha por reclamação com categoria, origem (regra ou modelo), certeza, se vai para revisão, o motivo e as palavras que pesaram.
+A saída é `results/triagem.csv`: uma linha por reclamação com categoria, certeza, se vai para revisão, o motivo e as palavras que mais pesaram.
 
 ## Resultados
 
-Conjunto de teste de 300 reclamações, que só foi lido na avaliação final. F1 macro com intervalo de 95% por bootstrap.
-
-| Abordagem | F1 macro | F1 nas 53 rotuladas por mim | Revisão | F1 sem revisão | Latência |
-| --- | --- | --- | --- | --- | --- |
-| Regras sozinhas | 50,8% (44,3% a 56,9%) | 36,3% | - | - | < 1 ms |
-| Regressão logística sozinha | **57,8%** (50,5% a 63,9%) | 42,2% | - | - | < 1 ms |
-| Sistema completo (regras + modelo + revisão) | 54,9% (47,9% a 61,1%) | **44,9%** | 33,3% | **68,9%** | < 1 ms |
-
-1. **O modelo aprende além das regras.** Treinado só com os rótulos delas, ganha das regras sozinhas em 7,0 pontos de F1.
-2. **A fila de revisão concentra os casos difíceis.** Nas mensagens que o sistema decide sozinho, o F1 chega a 68,9%. Em troca, cerca de um terço das mensagens vai para um humano.
-3. **O sistema completo ficou abaixo do modelo sozinho no F1 geral**, porque quando uma regra dispara ela decide, e as regras erram mais que o modelo. A regra de decisão foi fixada antes de olhar o teste, e não mudei depois para não escolher olhando o resultado.
-4. **O ponto fraco é a categoria `outro`** (elogio com nota baixa, texto sem sentido), que quase nenhuma regra cobre.
-
-Tabela completa e F1 por categoria em [`results/resultados.md`](results/resultados.md); matrizes de confusão em `results/`.
-
-### Comparação com LLM
-
-Antes de chegar aqui, testei LLMs locais no [Ollama](https://ollama.com) no mesmo conjunto de teste:
+Conjunto de teste de 300 reclamações, lido só na avaliação final. F1 macro com intervalo de 95% por bootstrap.
 
 | Abordagem | F1 macro | F1 nas 53 rotuladas por mim | Latência |
 | --- | --- | --- | --- |
-| Qwen 2.5 7B, zero-shot | 74,9% (67,8% a 80,7%) | 60,5% | 1.041 ms |
-| TF-IDF + SVM treinado com rótulos do Qwen | 61,4% (54,1% a 68,0%) | 45,2% | < 1 ms |
-| Llama 3.2 3B, zero-shot | 61,5% (55,1% a 67,3%) | 51,9% | 359 ms |
+| Qwen 2.5 7B zero-shot (LLM local) | 74,9% (67,8% a 80,7%) | **60,5%** | 1.041 ms |
+| **ML clássico com rótulos do Claude** | **63,2%** (55,2% a 70,4%) | 45,4% | 2 ms |
+| Supervisão fraca, só regras (versão anterior) | 54,9% (47,9% a 61,1%) | 44,9% | 1 ms |
 
-O Qwen é bem melhor, mas leva cerca de um segundo por mensagem e precisa de um computador capaz de rodar um modelo de 7 bilhões de parâmetros. Sem LLM, a perda é de cerca de 20 pontos de F1 em troca de custo e latência quase zero e de rótulos que qualquer pessoa consegue ler e corrigir.
+1. **O Qwen continua na frente.** Nas 53 mensagens rotuladas por mim, a comparação mais honesta, ele faz 60,5% contra 45,4%.
+2. **O modelo clássico melhorou de 54,9% para 63,2%** com os rótulos do Claude. Parte desse ganho vem de 247 das 300 mensagens de teste também terem sido rotuladas pelo Claude; nas 53 rotuladas por mim o ganho foi pequeno.
+3. **A fila de revisão separa bem o fácil do difícil.** Metade das mensagens de teste vai para revisão; nas que o modelo decide sozinho, ele acerta 91,3%, contra 65,3% nas que vão para um humano.
+4. **O ponto fraco são as categorias pequenas:** `atendimento_loja`, `outro` e `cobranca_cancelamento`.
+
+Na prática: o modelo clássico resolve sozinho metade das reclamações com acerto alto, a custo zero, e manda o resto para uma pessoa. O Qwen classifica melhor, mas precisa de um computador que rode um modelo de 7 bilhões de parâmetros e leva cerca de um segundo por mensagem.
+
+Tabela completa, F1 por categoria e as versões anteriores em [`results/resultados.md`](results/resultados.md); a escolha do modelo em [`results/desenvolvimento.md`](results/desenvolvimento.md).
 
 ### Limitações
 
-- **Sem conjunto de desenvolvimento rotulado à mão.** As regras foram julgadas lendo amostras do treino; o acerto real só aparece no teste.
-- **Rótulos de teste.** 247 das 300 mensagens de teste foram rotuladas pelo Claude (Anthropic) com as mesmas regras de rotulagem, sem ver os meus rótulos. A coluna "53 rotuladas por mim" é a medida mais honesta, mas tem amostra pequena. Nas 53 em comum, eu e o Claude concordamos em 64% (kappa de Cohen 0,56).
-- **O modelo aprende os erros das regras.** Por isso a validação cruzada (82,9%) mede só concordância com as regras.
+- **Mesmo rotulador no treino e no teste.** O Claude rotulou o treino e 247 das 300 mensagens de teste. Por isso a coluna "53 rotuladas por mim" é a régua principal, mas tem amostra pequena. Nas 53 em comum, eu e o Claude concordamos em 64% (kappa de Cohen 0,56).
+- **Autoconsistência não é acerto.** Rotulando 200 mensagens duas vezes, o Claude concordou com ele mesmo em 98%.
+- **Categorias pequenas** têm poucos exemplos no treino e no desenvolvimento.
 - **Domínio.** Os dados são de e-commerce de 2016 a 2018. Outros tipos de entrega podem ter vocabulário e categorias diferentes.
 
 ## Dados
@@ -61,8 +51,8 @@ Avaliações públicas do [Brazilian E-Commerce Public Dataset by Olist](https:/
 
 - 100.000 avaliações no total; 15.093 com nota 1 ou 2.
 - Depois de exigir comentário com pelo menos 15 caracteres e tirar duplicatas: **10.767 reclamações**.
-- **Teste**: 300 reclamações sorteadas (`random_state=42`), em `data/ouro.csv`. Rotulei 53 à mão.
-- **Treino**: as outras 10.453, sem rótulo humano; as regras rotulam.
+- **Teste**: 300 reclamações sorteadas (`random_state=42`), em `data/ouro.csv`. Rotulei 53 à mão; as outras 247 foram rotuladas pelo Claude.
+- **Treino e desenvolvimento**: 3.000 das outras 10.453, rotuladas pelo Claude, em `data/rotulos_claude.csv`.
 
 ## Categorias
 
@@ -80,33 +70,34 @@ Regra principal: o rótulo é o problema que originou a reclamação. "Não cheg
 
 ## Como rodar
 
-Precisa de Python 3.9+. Os comandos criam um ambiente virtual em `.venv` sozinhos. Não precisa de Ollama.
+Precisa de Python 3.9+. Os comandos criam um ambiente virtual em `.venv` sozinhos. Não precisa de Ollama nem de acesso ao Claude: os rótulos já estão no repositório.
 
 ```bash
-make tudo       # testes, regras, treino, triagem e avaliação
+make tudo        # testes, regras, supervisão fraca, treino e avaliação
 
 make testes
-make regras     # aplica as regras e gera results/regras.md
-make triagem    # treina o modelo e gera results/triagem.csv
-make avaliar    # gera results/resultados.md e as matrizes de confusão
+make treinar     # compara os modelos no desenvolvimento e gera results/triagem.csv
+make avaliar     # gera results/resultados.md e as matrizes de confusão
 ```
 
-A comparação com LLM fica fora do `make tudo`: `make modelos`, `make llm`, `make prata` e `make baseline` precisam do Ollama aberto.
+`make selecionar` refaz a escolha das mensagens para rotular (só faz sentido antes de uma nova rotulagem). A comparação com LLM (`make modelos`, `make llm`, `make prata`, `make baseline`) precisa do Ollama aberto.
 
 ## Estrutura
 
 ```
 src/triagem/
-  normalizar.py  limpeza do texto
-  regras.py      regras legíveis e combinação dos votos
-  modelo.py      TF-IDF + regressão logística e explicação por palavras
-  triagem.py     decisão final, limiar e fila de revisão
-  verdade.py     conferência de atraso com as datas reais de entrega
-  avaliar.py     métricas, intervalos, matrizes e tabela final
-  taxonomia.py   categorias e regras de rotulagem
-  dados.py       filtro das reclamações e montagem dos conjuntos
-  llm.py, rodar_llm.py, prompts.py, baseline.py   comparação com LLM
-tests/           testes do pipeline, sem chamar nenhuma API
+  normalizar.py       limpeza do texto
+  regras.py           regras legíveis (variáveis do modelo)
+  selecao.py          escolha das mensagens para rotular
+  rotulagem.py        lotes e checagem dos rótulos do Claude
+  modelo.py           TF-IDF, regras como variáveis e os modelos candidatos
+  desenvolvimento.py  escolha do modelo, fila e predições no teste
+  triagem.py          decisão, limiar e a supervisão fraca (versão anterior)
+  avaliar.py          métricas, intervalos, matrizes e tabela final
+  taxonomia.py        categorias e guia de rotulagem
+  dados.py            filtro das reclamações e montagem dos conjuntos
+  llm.py, rodar_llm.py, prompts.py, baseline.py, verdade.py   comparação com LLM e conferências
+tests/                testes do pipeline, sem chamar nenhuma API
 ```
 
 ## Licença
@@ -115,4 +106,4 @@ Código sob a licença MIT (veja `LICENSE`). Os dados em `data/` derivam da base
 
 ## Ferramentas
 
-Python, pandas, scikit-learn e Matplotlib. O Claude (Anthropic) foi usado como apoio no código, para escrever as regras a partir de amostras do treino e para rotular 247 das 300 mensagens de teste, como descrito acima.
+Python, pandas, scikit-learn e Matplotlib. O Claude (Anthropic) foi usado como apoio no código e para rotular o treino e 247 das 300 mensagens de teste, como descrito acima.

@@ -1,21 +1,72 @@
 # Decisões
 
-O que decidimos, por quê e o que ficou de fora. Os números saem de `make tudo` (sem Ollama) e dos arquivos em `results/`.
+O que decidimos, por quê e o que ficou de fora. Os números saem de `make tudo` (sem Ollama e sem chamar o Claude) e dos arquivos em `results/`.
 
-## Sumário
-1. [A decisão central](#1-a-decisão-central)
-2. [Por que não usar LLM para rotular](#2-por-que-não-usar-llm-para-rotular)
-3. [Normalização](#3-normalização)
-4. [Regras legíveis](#4-regras-legíveis)
-5. [Modelo](#5-modelo)
-6. [Decisão final e fila de revisão](#6-decisão-final-e-fila-de-revisão)
-7. [Resultados](#7-resultados)
-8. [Conferência de atraso](#8-conferência-de-atraso)
-9. [Limitações](#9-limitações)
-10. [O que ficou de fora](#10-o-que-ficou-de-fora)
-11. [Quem fez o quê](#11-quem-fez-o-quê)
+A versão atual treina o modelo com rótulos feitos pelo Claude. A versão anterior, com supervisão fraca (só regras, sem LLM nenhuma), está logo abaixo como histórico.
+
+## Versão atual: treino com rótulos do Claude
+
+### A decisão
+**O Claude rotula o treino uma única vez; a triagem continua só com ML clássico, local e de graça.**
+
+A supervisão fraca parou em 54,9% de F1 macro no ouro, porque o modelo copiava os erros das regras. Para melhorar, trocamos a fonte dos rótulos de treino. O Mateus aceitou com isso deixar de dizer "sem LLM nenhuma": agora a LLM entra só no desenvolvimento, para rotular, e nunca na triagem.
+
+### O que foi rotulado
+`src/triagem/selecao.py` escolheu 3.000 mensagens do pool de treino, nenhuma do ouro:
+- **500 de desenvolvimento**, sorteadas fora das mensagens lidas para escrever as regras. É nelas que escolhemos modelo, forma de treino e limiar.
+- **1.000 de treino sorteadas.**
+- **1.500 de treino em que o modelo da supervisão fraca tinha menos certeza**, para cobrir os casos difíceis.
+
+Cada lote de 150 foi para um agente do Claude (Opus 5.5, outubro de 2026) que recebeu só os textos e o guia de rotulagem (`taxonomia.GUIA_ROTULAGEM`, o mesmo usado no ouro), sem nenhum rótulo. Os rótulos estão em `data/rotulos_claude.csv`; marcados com dúvida: 28%.
+
+**Consistência:** 200 mensagens do desenvolvimento foram rotuladas de novo, às cegas, por outros agentes. Acordo de 98,0% (kappa 0,97). Isso mede só se o Claude concorda com ele mesmo, não se acerta: nas 53 mensagens do ouro rotuladas pelos dois, o Claude e o Mateus concordaram em 64%.
+
+### Modelo
+`src/triagem/modelo.py` e `src/triagem/desenvolvimento.py`. Variáveis: TF-IDF de palavras e de caracteres mais as 43 regras como colunas 0/1 (as regras viraram pistas, não decisão). Comparamos no desenvolvimento três modelos e três formas de treino (A: só os rótulos do Claude; B: mais os rótulos das regras no resto do pool, com peso 0,1 ou 0,3):
+
+| Modelo | Forma | F1 macro no desenvolvimento |
+| --- | --- | --- |
+| **SVM linear calibrado** | **A** | **71,0%** |
+| Naive Bayes complementar | B, peso 0,1 | 70,4% |
+| Naive Bayes complementar | A | 68,7% |
+| Naive Bayes complementar | B, peso 0,3 | 68,0% |
+| Regressão logística | A | 67,8% |
+| SVM linear calibrado | B, peso 0,1 | 66,9% |
+| Regressão logística | B, peso 0,1 | 66,4% |
+| SVM linear calibrado | B, peso 0,3 | 66,2% |
+| Regressão logística | B, peso 0,3 | 65,9% |
+
+Venceu o SVM com só os rótulos do Claude. Somar os rótulos das regras piorou quase sempre. O modelo final treina só com as 2.500 de treino; o desenvolvimento não entra.
+
+### Decisão e fila de revisão
+O modelo decide sempre. A mensagem vai para revisão quando a certeza fica abaixo de 0,80 (mesmo critério por faixas da versão anterior, agora calculado no desenvolvimento) ou quando o texto não tem letras. No pool, 45,7% vão para revisão, todas por certeza baixa.
+
+### Resultados no ouro
+Avaliado uma única vez, no fim.
+
+| Abordagem | F1 macro | F1 nas 53 do Mateus | Acerto nas 53 | Revisão | Latência |
+| --- | --- | --- | --- | --- | --- |
+| **Rótulos do Claude + SVM** | **63,2%** (55,2% a 70,4%) | 45,4% | 60,4% | 50,0% | 2 ms |
+| Supervisão fraca (versão anterior) | 54,9% (47,9% a 61,1%) | 44,9% | - | 33,3% | 1 ms |
+| Qwen 2.5 7B zero-shot | 74,9% (67,8% a 80,7%) | 60,5% | - | - | 1.041 ms |
+
+O que os números dizem:
+1. **Não passamos do Qwen.** Nas 53 do Mateus, que é a régua honesta, o modelo novo faz 45,4% contra 60,5% do Qwen.
+2. **Melhorou bastante no geral:** de 54,9% para 63,2% de F1 no ouro. Mas 247 das 300 mensagens do ouro também foram rotuladas pelo Claude, então parte desse ganho é o modelo concordar com o jeito do Claude rotular. Nas 53 do Mateus o ganho foi de só 0,5 ponto.
+3. **Quando o modelo decide sozinho, ele acerta muito:** 91,3% de acerto nas 150 mensagens do ouro que não foram para revisão, contra 65,3% nas que foram. A fila de revisão separa bem o fácil do difícil; o preço é mandar metade para um humano.
+4. **O F1 caiu do desenvolvimento (71,0%) para o ouro (63,2%).**
+5. **As categorias pequenas continuam fracas:** `atendimento_loja` (20,0%), `outro` (44,4%) e `cobranca_cancelamento` (53,3%). O desenvolvimento teve só 2 mensagens de `atendimento_loja` e 16 de `cobranca_cancelamento`.
+
+A coluna "F1 sem revisão" de `results/resultados.md` (51,1%) é um F1 macro só sobre as categorias que aparecem nas aceitas e fica baixa porque quase nenhuma mensagem das categorias pequenas é aceita. O acerto nas aceitas (91,3%) descreve melhor o que acontece.
+
+### Limitações
+- **Rótulos de treino e de teste do mesmo rotulador.** Por isso a comparação com o Qwen vale nas 53 do Mateus, que são poucas.
+- **A consistência de 98% não é acerto.**
+- **Categorias pequenas com poucos exemplos** no treino e no desenvolvimento.
 
 ---
+
+# Histórico: supervisão fraca (versão anterior, sem LLM)
 
 ## 1. A decisão central
 **Regras legíveis rotulam, o modelo generaliza e o humano decide na dúvida.**
@@ -28,6 +79,8 @@ Não existe um rótulo "verdadeiro" para 10 mil reclamações, e rotular tudo à
 Isso se chama supervisão fraca (*weak supervision*). Tudo roda localmente, de graça e sem LLM.
 
 ## 2. Por que não usar LLM para rotular
+*Era a decisão da versão anterior; a versão atual passou a usar o Claude só para rotular o treino.*
+
 Testamos antes LLMs locais (seção 7). O Qwen 2.5 7B foi o melhor, mas decidimos não usar LLM em nenhuma etapa:
 - **Custo e hardware:** cerca de 1 segundo por mensagem num notebook, contra menos de 1 milissegundo do modelo clássico.
 - **Opinião que não dá para auditar:** um modelo treinado com rótulos de LLM copia a opinião da LLM. Uma regra pode ser lida e corrigida.

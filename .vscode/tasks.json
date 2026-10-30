@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Rodar tudo (testes, modelos, experimentos e tabela)",
+      "type": "shell",
+      "command": "make tudo",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Só rodar os testes",
+      "type": "shell",
+      "command": "make testes",
+      "problemMatcher": []
+    },
+    {
+      "label": "3. Só gerar a tabela de resultados",
+      "type": "shell",
+      "command": "make avaliar",
+      "problemMatcher": []
+    }
+  ]
+}

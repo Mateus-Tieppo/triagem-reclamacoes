@@ -1,0 +1,301 @@
+review_id,texto,rotulo,duvida,fonte
+4bb1ef78562973e974acec99a3272289,O produto veio com várias partes quebradas dentro da caixa.,defeito_qualidade,False,mateus
+4feabc2f3b7daf0d7d4c3fe442e78dff,"tenho nada a dizer, apenas que vocês não querem clientes, pois não prezam pelo os mesmos.",outro,False,mateus
+c8cebc0bbd0dd738f883d7a83139ca3e,Descumprimento de entrega em produto alimentício,defeito_qualidade,False,mateus
+6b4d02b418dda35f01bab89dc1dd939c,O relógio que veio com uma falha no vidro Mal acondicionado na embalagem Estou totalmente insatisfeito gostaria de devolver a mercadoria,cobranca_cancelamento,False,mateus
+b654f0de38f0558f566ce465688afbc8,Horrivel quero trocar,cobranca_cancelamento,False,mateus
+673c0f70f65a2758382210d0c374de31,Fiz o pedido de duas unidades do produto. Recebi somente uma unidade de um produto diferente!,produto_errado,False,mateus
+cada78cee5aa0ba52f79151eac8bf65d,"Ainda estou aguardando a entrega do produto que solicitei, sendo que já excedeu o prazo previsto para entrega. Estou muito insatisfeito.",nao_recebido_atraso,False,mateus
+0b80384cd6271d5d77a66f72af6dffdc,"O prazo de entrega é muito extenso. Eu não sei se apareceu antes, mas só vi depois que paguei. O produto chegou vazando.",defeito_qualidade,False,mateus
+95e5c2d6156e90a34bc2419eb0c53ee9,"Estou aguardando a resolução do meu caso, pois o produto não funciona. Desejo troca ló, mas até agora não tive nenhum retorno.",atendimento_loja,False,mateus
+3bc797c1130a55e41badb7c4288d5ff2,"Fiz a compra de 2 pendentes e recebi somente um fui retirar no correio da minha cidade e lá fui informada que havia somente uma ordem no pedido para ser retirado,estou tentando ligaar e não consigo.",item_faltando,False,mateus
+6035b5360d50887471b8f12ae1beda70,Comprei e paguei por dois produtos iguais e só recebi um.,item_faltando,False,mateus
+d7c65b7c92d37a501a5a531d6a811e7a,"O produto não foi satisfatório para mim, ele é a pilha eu um elétrico, não tem rádio, pequeno, não foi aprovado pela minha família.",defeito_qualidade,False,mateus
+a34ba33faede53b2060490a1439bf425,"Data prevista para entrega 17/5, estamos com urgência desse produto e nada.",nao_recebido_atraso,False,mateus
+24fe4ba29481f47ccc979b85a13fbe8f,infelizmente recebi o produto danificado,defeito_qualidade,False,mateus
+df8a0088f014a0de94991955bd9171b8,Produto entregue com avaria e não tem estoque para repor,atendimento_loja,False,mateus
+d82aa6626c634f4366418d4adaccc59d,Comprei o relógio e não veio o que eu pedi e tudo indica que ê falsificado. Não gostei.,defeito_qualidade,False,mateus
+4dd68a0dee5ede8a445f797c46bca436,o acabento que estava na foto era bonito a que chegou foi de um sintetico feio com um acabento todo borrado orrivel nao gostei,defeito_qualidade,False,mateus
+4e424f744c8185c17c7d275a562ac344,"Produto avariado, quebrado",defeito_qualidade,False,mateus
+118cea1913e2f9d91f24066bf570fe20,"péssima embalagem , tive que colar ele todo, fique com preguiça pelo preço de mandar de volta, mas não indico pra ninguém a loja...",defeito_qualidade,False,mateus
+47e1b45b868488b943e59b34e40ada58,No site o produto parecia ser grande mas quando chegou veio super pequeno ! Não terá utilidade no meu caso pois comprei para guarda coisa grande e n vai caber !! #Decepcionada,defeito_qualidade,False,mateus
+3a8123d1d40cbc7a0cb4f26f165b901c,Solicito entrega do material,nao_recebido_atraso,False,mateus
+446e0af1cbd73d5e619953e84d679238,"Não achei legal a loja, pois eu pedi um produto e eles me entregaram outro. Então não indico essa loja targaryen",produto_errado,False,mateus
+f224725a43d26e6347dbac95d20b93c8,Minha mercadoria chegou antes do prazo e é exelente,outro,False,mateus
+f68c666d0da3fa80119264a11c1a5ad4,O produto não é adequado ao que condiz na descrição.,produto_errado,False,mateus
+625ba6a605ebd829668711ff7bfba730,Demorar na integra,nao_recebido_atraso,False,mateus
+cf27d64ca02457460c178a9781e48bdb,"PRODUTO CHEGOU COM MUITO ATRASO, EMBALAGEM DANIFICADA, PRODUTO VEIO FALTANDO UMA PORCA(PARAFUSO) PARA MONTAGEM, CORREIO NÃO ENTREGOU, TIVE QUE BUSCÁ-LO. NÃO RECOMENDO.",nao_recebido_atraso,False,mateus
+5996f015679189ea4416c5c7b73f3e30,"o produto foi entregue,mas demorou muito.",nao_recebido_atraso,False,mateus
+92eef30e5fc30a92440e557dc9864f47,"Até agora não consegui fazer esse troço funcionar. testei vários programas e nada, não reconhece. Meu carro é um Santana 2001.",produto_errado,False,mateus
+235caada97e835c59d07e71bfa7fac30,"O produto tinha nota fiscal de todos os itens, mas há partes faltando.",item_faltando,False,mateus
+a7cafa076d1df41e75cf06a5e298564d,"Ao colocar a película, as laterais ficaram sem a proteção pergunta : a película foi embalada incorretamente (apesar de constar como xperia xz), ou a película é deste modo mesmo (menor que a tela)",outro,False,mateus
+080d4fd2a99b7dcb4a0dd83577c43df2,Fiz a compra no Black Friday com outros dois pedidos. Os outros dois chegaram na semana seguinte enquanto este não chegou até agora.,item_faltando,False,mateus
+96a0bf45c21d1d48d837e5b7e6dddf4b,"Comprei o perfume Silver intense, e recebi o tradicional,silver scent, optei por não fazer a devolução ,vou ficar com prejuizo.",produto_errado,False,mateus
+778d4ddd19e2cda6c77e96a8f1ceb458,"Na descrição do produto no site, foi informado que seria entregue o produto + manual + bateria específica. Porém a Bateria não foi enviada junto com o produto.",item_faltando,False,mateus
+459ca96310cf869cc4b8e4705f756256,Não vi nem a cor dele,produto_errado,False,mateus
+6bf774d5b92bd5f3e42313aef94ae2d2,"O produto comprado veio totalmente diferente e com qualidade inferior ao da foto. A mochila não é toda azul/preto como na imagem, veio azul/vermelho. Não recomendo o material de fabricação é péssimo.",produto_errado,False,mateus
+d119c526d8e0fb640a895e41efd98eeb,Não entregou o produto e muito menos um reebolso,nao_recebido_atraso,False,mateus
+a588560a3ca6f7bd1df906e0986ed2e2,"Me arrependi pela compra pelo fato de AINDA utilizarem os Correios p/ entrega. No site falava de 6 a 11 dias, daqui uns dias já vai dar 1 mês e o Correios não entregou..... Sacanagem, pagar frete!!",nao_recebido_atraso,False,mateus
+a496e6d3e99974c0fbc0f5872cb97a39,. Estou chateado com o site. Motivo em que o meu pedido veio diferente do que pedi. E estou com dificuldade para trocar.,cobranca_cancelamento,False,mateus
+f4c7da1f6e31950b0b34ff38e9c5a1b8,RECEBI UMA UNIDADE SENDO QUE COMPREI 2!!!!!!,item_faltando,False,mateus
+f76c1205c2a85f2be09fbbe71d8d0b7d,COMPREI DOIS PENDENTES SÓ CHEGOU UM. PRECISO SABER O QUE FOI QUE HOUVE?,item_faltando,False,mateus
+8ea92066d4e1fe229bf1535d2612589d,"Como que disponibilizam um item pra venda, se depois percebem que não tem mais em estoque? Tão de sacanagem. Lixo. Nada além disso.",outro,False,mateus
+8b40afea38292b4a7389ecdaa9e4c5af,Pedi um produto que vinha com cabo para telefone Apple conforme imagem. Me enviaram um sem o cabo e com um cabo pirata para Samsung! Ridículo!,produto_errado,False,mateus
+0dd7e277fa93293ee07973a2161c87a9,"Lindas peças, porém muito frágeis.",defeito_qualidade,False,mateus
+20dad7f6c15ff588dae8dbab9d8e8f11,não tenho como ficar feliz pois passei o natal com minha sala vazia,atendimento_loja,False,mateus
+1046ca5f5f68c5a3ab1c7291720cfe24,A compra foram dois controles e chegou um. Cadê o outro?,item_faltando,False,mateus
+2efe057e1432ce1299410b75ee7cc417,"Solicitei informações acerca da entrega de meu produto e fui informado que o recebeu dentro do prazo avençado, contudo hoje (19/12/2017) ainda não o recebi.",nao_recebido_atraso,False,mateus
+492d69b4cdb03d9222aa6516eb72ca87,"Não recebi o produto, solicitei devolucao do valor pago no meu cartão de crédito e não obtive be nenhum retorno",cobranca_cancelamento,False,mateus
+45164c0bd23bb13bc24467d1cfa103a5,"Ja reclamei varias vezes do atraso, não tive retorno e ainda não recebi a mercadoria.",nao_recebido_atraso,False,mateus
+8fea3b51c7f1046f3d0d2a720852df2c,"NAO GOSTEI DO PRODUTO, E PIOR QUE A LOJA NAO DÁ OPÇAO DE TROCA NO SITE, E NO CONTATO DAS lannister NAO TEM OPÇAO PRA FALAR...",defeito_qualidade,False,mateus
+347e3116a7cebff8c6f9ea10817a3dc9,"O lustre veio totalmente quebrado, o vidro chegou todo estraçalhando",defeito_qualidade,False,mateus
+7e14d7e57165a8bc9fa0a92560b34b1a,"O produto não aparece o mesmo da foto , veio MOLHADO e com o cheiro muito forte . Não compraria novamente e muito menos indicaria",produto_errado,False,mateus
+7e51c2194cf17e6905b07959c4af1180,"Sinplesmente não atualizaram a pagina e eu comprei uma coisa que nunca iria chegar e esperei 10 dias a toa , loja horrível!",nao_recebido_atraso,False,mateus
+ab2d2358a30ac80938d219df23436091,COMPREI O PRODUTO COM UM KIT COM 3 E ME FOI ENTREGUE SOMENTE UM FRASCO.,item_faltando,False,mateus
+12f4400029f175e7e2ebfa35b106b899,"O cumprimento do prazo ocorreu, entretanto a qualidade do produto foi péssima. O produto não vem em embalagem original da Philips e apresenta diferenças entre a lamina original. O uso demonstrou-se pe",defeito_qualidade,False,claude
+04b864df69259d7372fd50fd10d05bdd,Só chegou uma capa a transparente a fumê não chegou,item_faltando,False,claude
+f492ac8126ded816404de867e1aad969,"Por enquanto recebi apenas um dos produtos, o soquete. O pendente aramado duplo diamante não chegou e consta como entregue.",item_faltando,False,claude
+c5ee151af544784ccaebbf457229b0ba,Setup é chines não funciona corretamente.,defeito_qualidade,False,claude
+5567a50eb8f5ccc35bb7310d6add084c,Absurdo comprar um produto e ele não estar disponível,cobranca_cancelamento,True,claude
+e80e9b305e64fd907e9a8e2eae389d9a,Veio com um defeito no acrílico que fica bem aparente.,defeito_qualidade,False,claude
+2a8f99537dc66ad1299024fb9d439070,o produto veio pela metade e veio outro produto,item_faltando,True,claude
+6bd1bfde20db7089e63f83a086ecdebb,Até o momento o produto não foi entregue. Não recomendo a ninguém comprar pela stark. E não adianta colocar a culpa no péssimo serviço que os Correios vem prestando. Precisa ter outros transportes,nao_recebido_atraso,False,claude
+92c957d8f7ccaa672c558045255cea5d,"Me enviaram uma mesa errada, produto que neste mesmo site custa metade do valor.",produto_errado,False,claude
+6d43c93b3681bcd2ab77d7599ec4b424,já comprei por diversas vezes nessa loja e esse foi a compra que mais atrasou.,nao_recebido_atraso,False,claude
+2a61ddc668310df42ba28eddffcf57d3,Não vou recomendar a loja 😡 Porque eu comprei dois produtos e só recibi um. Entrei no site e o outro vcs cancelaram.,item_faltando,True,claude
+a6a8e08c5712dfe45642af2646f1846a,Não é o produto que queria tento fazer a devolução e não me respondem.,produto_errado,True,claude
+7dc413fa659b6a02a3a4d275972d458c,O produto veio sem a embalagem,defeito_qualidade,True,claude
+859b628a247fd164de9532ce7b2caf10,"Não existe rastreamento da mercadoria, pois não há atualização da mesma. Quando houve foi 15 dias depois da última atualização, dizendo que, a mercadoria ainda não havia chegado na unidade SSA.",nao_recebido_atraso,False,claude
+81f96f2486e7f0cc44ccb5b5d95bb139,"Produto c defeito, tentei por várias vezes, mas foi muitas, devolver o produto abrindo chamado na lannister e não consegui.",defeito_qualidade,False,claude
+64fbf5052ba67fac0cd625282a1e08c2,Infelizmente o produto enviado (Braçadeira Armband ) veio com defeito de fabrica. Também venho relatar que o material do produto e de péssima qualidade (parece produto de feira (xing ling)) totalme,defeito_qualidade,False,claude
+063206d99c13a5fb17596e17de8719ed,"comprei uma cortina de 3x2,80. me enviaram duas cortinas, sendo cada uma de 1,50x2,80. PALHAÇADAAAAAAAAAAAAAAAAAAAAAAAAA. se eu quisesse uma cortina de 1,50 eu comprava de 1x50, e não de 3 metros",produto_errado,False,claude
+6280ca6a9e8c3a56b668ec8c5396caaf,Passou dos dias previstos.,nao_recebido_atraso,False,claude
+32ab9c9a219a720d3db440a25e128b0f,Não tinham o produto e só foi notificado depois de 15 dias,cobranca_cancelamento,True,claude
+16542dee3cb122659e9ef33431f5f4a6,"O produto veio com defeito, funciona só de vez em quando, pois na maioria das vezes, ele não le o cd, ou o drive nao é reconhecido, e quando isso acontece, faz um barulho diferente e alto",defeito_qualidade,False,claude
+43da079520d5960b81a18388f997442f,Até o momento não recebi o produto nem nada que justificasse tal atraso.,nao_recebido_atraso,False,claude
+7bf34ed71a1f8c1dc7d7a6460dc4e003,Está até hoje vendendo tanto nas lannister como na stark informando que ainda tem 3 unidades mas não entregam.,nao_recebido_atraso,False,claude
+6af42a3fd6ca4949fdd58b81cc6e823f,ATE AGORA NÃO RECEBI O PRODUTO APESAR DE JÁ TER PAGO,nao_recebido_atraso,False,claude
+ea13f408f9f91e78274f1caa2c9663d2,"Produto chegou quebrado, ficaram de trocar",defeito_qualidade,False,claude
+25f98a34c972a64ba034c44e9aa02a82,Eu não recebi nada é não consigo fala nas lojas lannister e nem na targaryen. Preciso que vocês me ajude por favor.,nao_recebido_atraso,False,claude
+c19c91182b35dbd2a53db23bccf66cbe,O pedido foi cancelado e não consegui utilizar o crédito!! Preciso de um novo voucher do meu credito referente essa compra.,cobranca_cancelamento,False,claude
+c51912d7891e841fa4d61240c7c85153,"Eu estou puto dá vida, pois comprei uma creatina universal na promoção 200g+200g grátis no valor de R$69,90. Daí eu aumentei a compra para 2 itens, ou seja, chegaria 4 unidades. Daí chegou só 2.",item_faltando,False,claude
+f2568f3a35a02e20dab9df59ffe9c623,"Mandei várias dúvidas por email, não recebi respostas.",atendimento_loja,False,claude
+20ed6f7406276be2ebcd5e9ce6c14113,Gostaria de saber se vao devolver o meu dinheiro,cobranca_cancelamento,False,claude
+8166534eb1e0ece55817b9fee81c92e2,Não recebi o produto portanto nao posso avaliar ainda,nao_recebido_atraso,False,claude
+549989cb4659749182a0cc2cb30ac64f,Preciso resolver um.problema comprei dois produtos mais recebi apenas um,item_faltando,False,claude
+c8d692d13e49a5ee984aa84d8768221d,"O produto não foi entregue e ate o momento não foi resolvido, enviaram somente um e-mail solicitando se tenho interesse em cancelar a compra ou receber um produto similar não sei qual é.",nao_recebido_atraso,False,claude
+3aa93a18e63fa74c4534ae0135bdccca,"Não gostei da qualidade do produto, pelo preço deveria ter mais qualidade, Lojas lannister entregou antes do prazo.",defeito_qualidade,False,claude
+9784540fc8cb2ca0cb17bccc8f2faf6f,"Eu comprei um celular smartphone , não chegou não recomendo comprar nesta loja targaryen e lannister porque não chegou meu produto. Eu comprei está data,07/06/2017. Era pra chegar no dia .05/07/2017.",nao_recebido_atraso,False,claude
+cedf7442463fb31dddd3f334267a57ec,Recebi metade dos produtos,item_faltando,False,claude
+58fba994301774191d7fef8f8af5bcd7,"eu nem lembrava mais disso, comprei o cel e os cabos e nunca chegou.....",nao_recebido_atraso,False,claude
+a55607825e2db379c4012a4e926aa7a5,Comprei 4 aparelhos e só chegaram 2. Cadê os outros ?,item_faltando,False,claude
+d683039ed1b0b3b6d8a025c73fa5deb2,Produto não foi entregue até o presente momento e o prazo dado pela empresa já expirou.,nao_recebido_atraso,False,claude
+04a1a2bcef00b57523cf847fc89fa883,"O baratheon é excelente, a entrega é rápida, mais os parceiros demora entregar os produtos, favor me informar quando a minha compra for por parceiros que vão se responsabilizar pele entra.",nao_recebido_atraso,True,claude
+4b5169c0eac1a640c7cdca3688275e47,"Boa Noite! O produto não foi entregue no endereço de destino.Esse mesmo produto já esteve retido no correio,sem ser entregue no destino de origem ""Eu quero o meu produto""já que o mesmo está sendo pag",nao_recebido_atraso,False,claude
+fcec38a323a1120a152e2a6939692bae,Achei o produto com acabamento ruim,defeito_qualidade,False,claude
+a061791c0bec3f4862936b05668466fd,"A pergunta é, quando vcs irão entregar a minha mercadoria que já foi paga?",nao_recebido_atraso,False,claude
+8dda0b425abc1dff16f4f1d295f80c3e,"Tive problemas com a entrega, não recebi o produto ainda.",nao_recebido_atraso,False,claude
+fddadbf97b7b0bed29cc25cc6363fbd9,o produto nao e o que esperava fragil e super caro.,defeito_qualidade,False,claude
+76823ada94c8861ecebcfbc7c270853f,O tecido é grosso parece mais organza 1ue cetim....nao gostei o acabamento também é muito ruim.,defeito_qualidade,False,claude
+b979f04caa83cfa7b5f55348945343f2,não recomendaria pois não estou com o meu produto e a loja não fez nada pelo seu cliente,nao_recebido_atraso,False,claude
+1710eeb99646ecfaf3bd9143d88443fe,Ainda não recebi e quero cancela a compra,nao_recebido_atraso,False,claude
+8341c8e936454d7de07e3c4e0381057d,Pedi duas unidades do produto e recebi somente uma. Alem disso recebi outro produto que nao comprei. Tento mandar mensagem e ninguem responde,item_faltando,True,claude
+9a1f2df20e4a8fbf7c50f83d1b5c86a3,Só recebi metade dos produtos que eu paguei...,item_faltando,False,claude
+d1464a43022581fc4fc1e6cf31d2f84a,Não recomendo. Produto não funcionou e veio numa embalagem sem proteção.,defeito_qualidade,False,claude
+459d0b27d6be17f93c37a5694b5e58a2,PRODUTO NÃO CHEGOU DENTRO DO PRAZO INFORMADO,nao_recebido_atraso,False,claude
+01217c69b27054a1cf6c82c41e7703af,"Bom dia! O produto chegou dentro do prazo de entrega, porém chegou quebrado, estou tentando falar na loja, mas ninguém resolve.",defeito_qualidade,False,claude
+62807bda54b6c1fc8bd49ed3d814eca0,Preciso do vale para adquirir outro .,cobranca_cancelamento,False,claude
+b1c1171c617b5d41500b42f133f99d49,"Qualidade nem de longe é equiparável ao preço. Corrente pequena, de má qualidade, e construção do pingente horrível. Decepcionado.",defeito_qualidade,False,claude
+0e6ecb18d90facae5c3afc39dd282861,muito insatisfeita pois não obtive retorno do meu pedido,nao_recebido_atraso,True,claude
+08606d3c3e529b530894dc840d83b38e,Recebi os produtos errados.Não consigo reclamar com a lannister. Preciso que sejam substituídas. PS: NOTA FISCAL Nº 015094 BALASSA E BONFATTI MAGAZINE LTDA EPP 06/10/2017,produto_errado,False,claude
+bc70ffd3352c5c31ae8c07a12c49e9d5,Ainda vou vê se chega a tempo marcado Aguardando minha encomenda,nao_recebido_atraso,True,claude
+5ad0e3c0eee5f86ff7c2d690fcf6bc64,Faltou uma unidade comprei duas unidade e recebi uma empresa não é confiável espero um esclarecimento...,item_faltando,False,claude
+14d1da977f444b14df5ab717636fac7c,"Pedi o cancelamento deste produto, mas a loja ou o sistema do site da lannister não cancelaram. O produto foi deixado na agência dos Correios. Não pretendo ir buscá-lo. Desejo o estorno do valor.",cobranca_cancelamento,False,claude
+c7904f887693da0000f7fe5066d726cb,Não veio na caixa o moedor de pimenta,item_faltando,False,claude
+a680d5f552f5a6ba0004ad0366fa5278,"Comprei 6 kits de ""Cloreto de Magnésio PA 240 Capsulas de 500 mg"". Chegaram apenas 2 kits em embalagens distintas. Restam chegar ainda 4 kits. Já reclamei no site, mas ainda não obtive resposta.",item_faltando,False,claude
+0fc8ee84b981d886c127b8876e70acc5,"depois de quase 2 meses vou cancelar essa compra , que não foi entregue",nao_recebido_atraso,False,claude
+8fe8cfd7493774f708fd79405412ed93,O produto não me foi entregue e consta como sendo.,nao_recebido_atraso,False,claude
+bd9ff9329765ed79c1b081269e9f08aa,Não recebi o jogo na cor tabaco. Só o vermelho.,item_faltando,True,claude
+195b99808d30502805d4509b286bd665,"Não gostei da qualidade de entrega, pois não foi entregue no meu endereço, mandaram para um correio super longe da minha casa. Se pagamos o frete deveria ser entregue diretamente no nosso endereço.",nao_recebido_atraso,True,claude
+a7025424e2bef9bc16b191e57be2aea3,Olá assim foi me vendido um frasco com 120 cápsulas e é foi entregue um frasco com 60 cápsulas. ..,produto_errado,True,claude
+e74598307b6209e21d6514a830224b76,Entrega atrasada.,nao_recebido_atraso,False,claude
+a3910da9db422ce438e20443d07d90aa,Nao recebi e nao pedi o cancelamento,nao_recebido_atraso,False,claude
+7399485c587f93d560a295541e0c8cb1,"Estou em processo de devolução. Esperei mais de dois meses para receber uma mochila da Kipling. O modelo não é o que eu comprei, não é original é falso e não foi targaryen que me vendeu foi Gaste Pouco",produto_errado,False,claude
+5814216a79c16218907f1b48f9cf5e00,Sé melhorassem o tempo de entrega para região norte tenho sertesa que aumentariam as vendas é teriam clientes muito mais satisfeitos. Obrigado é até próxima.,nao_recebido_atraso,True,claude
+c798db3e711955a33ef02be97455dfa6,"Vocês me enviaram o produto errado. Eu comprei um crucifixo de 41 cm, e na caixa estava uma imagem do Divino Pai eterno. O que devo fazer?",produto_errado,False,claude
+a6181fd23f2f354807ddc989c21d322f,"Cobraram o Frete e tive que retirar nos correios, ao chegar a entrega estava incompleta!!! Não comprem porque o pós venda não existe pelo jeito!!!",item_faltando,False,claude
+33bc65b0286e93b8cbfdd377c93bea14,Estou no aguardo do produto !!,nao_recebido_atraso,False,claude
+f6d2fac188b274803aead02ba49f4bfe,"o produto veio correto e no prazo, porem veio com uma peça quebrada",defeito_qualidade,False,claude
+736dceb52710b5ac3da55c9b3ad6150a,"É lamentável o que está acontecendo,está muito difícil comprar pela internet. Sendo que a compra está paga,já debitada do meu cartão,e até agora não consigo usufruir do meu produto.Não tenho notícias!",nao_recebido_atraso,False,claude
+1a274373ba56f308a9c45e3d2bce3697,"Comprei há um mês atrás e nunca chegou, não existe canal de comunicação eficiente e até pra reclamar q não chegou tive q esperar quase uma semana",nao_recebido_atraso,False,claude
+6addb9bbfea477d2da68d2aa091c6e1e,No site estava dizendo que seria 2 litros porém me foi enviado um frasco de 500 ml,produto_errado,False,claude
+d80190346de27cf5d861c6d6004a67ad,"Bom dia, Ainda não entendi porque meu produto ainda não chegou, a vassoura feiticeira chegou mas a saia para cama box ainda não...",item_faltando,False,claude
+458d87b8d51afc4fbd525a4621b8d44d,"Acho que pelo preço cobrado no frete, deveria haver mais respeito ao cliente em relação ao prazo!!!!",nao_recebido_atraso,False,claude
+025f981f3f8b3d5724af2300f13af961,Tinha q manda os produtos através de uma empresa própria de entrega. Os correios atrasam Comprei 27/04 e ontem 25/05 os correios vão entregar e diz q endereço é incompleto. E ai? O frete q paguei?,nao_recebido_atraso,False,claude
+2c95a050f64c5357721691a2127183b3,Falta ser entregue o suporte para os pés. Só chegou as vasilhas,item_faltando,False,claude
+c2af30e49ec2243e0206fd03fc80d65c,"Comprei dois pendentes e até agora não chegou, já passou dos 12 dias de prazo e nada, segundo o que informaram é que o correios irá entregar no prazo de 5 dias.. já se passaram 3 dias e nada ate ago",nao_recebido_atraso,False,claude
+a1e4004d097905bdb27eea709bb1fb26,Até o momento o produto não chegou. Está fora do prazo de entrega.,nao_recebido_atraso,False,claude
+b70ee7df6663faee96a00f884ac3af02,"Relógio chegou solto da caixa, sem nenhuma proteção. Com possibilidade de quebra e riscos.",defeito_qualidade,True,claude
+216f51c018d208ed006dd6d73367552b,"Gostaria de pedir a troca do produto, pois mandaram o modelo arredo.",produto_errado,False,claude
+09fc7c8705a3face8b43c173a89bc54d,cancelei a minha compra no mesmo dia e mesmo assim me enviaram o Produto. quero fazer a devolução,cobranca_cancelamento,False,claude
+1a0529fcbc70d676d7749c08b1cb1b34,Boa tarde Paguei o frete ate meu endereco E nao recebo o produto Sempre tenho q ir ate o correio retirar Dessa vez nao cosegui ir no prazo e o produto voi devolvido Qual precedimento agora,nao_recebido_atraso,True,claude
+a2a57bf2fc42d185910f9881502faa18,Recebi apenas um dos produtos e a empresa não entrou em contato comigo .,item_faltando,False,claude
+10d2b9b37e7adb0bf8655c2337531246,"O prazo de entrega era até o dia 16/03 e ainda não recebi, comprei para dar de presente esperando que chegasse até o dia do prazo e não foi o que aconteceu.",nao_recebido_atraso,False,claude
+5699fa3e1f73a7d8b6ce96c15ad17b29,"Se não se tem o produto, informe no site para que você comprador não perca o seu tempo!!!",cobranca_cancelamento,True,claude
+d838d6e37f4ee0ce4d0a56e5d5211038,O produto ainda não chegou,nao_recebido_atraso,False,claude
+b2d976dd8ce9f84823d532c7012e8e26,ate o momento nao foi entregue meu pedido,nao_recebido_atraso,False,claude
+d8e95a9b5568ed817e67ae830fcbda7c,Superou as expectativas...,outro,False,claude
+652ab096011ff771eb3948b10f633581,"Não recebi o produto, e no site consta como entregue.",nao_recebido_atraso,False,claude
+9eddce65a39ebef2765cc8e97a983218,Preciso efetuar a troca enviei msg e nada de resposta,atendimento_loja,True,claude
+440fe2fd103011b48daf226749c457c0,"Recebinum email, nele constava que houve um problema no transporte da minha encomenda, porém quando pedi um exclarecimento, simplesmente ignoraram.",nao_recebido_atraso,True,claude
+350cb03aad3275f5d1f0eff2a05f46f6,"EU ACHEI LINDO MAIS É MUITO PEQUENO,COMO FAZEM UM POTE PARA ARROZ QUE NÃO CABE UM PACOTE DE ARROZ???DEIXOU A DESEJAR,GOSTARIA DE DEVOLVER",produto_errado,True,claude
+8d77652bd17f07720f109d1eea6bf503,ainda não recebi a encomenda até agora!,nao_recebido_atraso,False,claude
+75ec59a42a106fc92d88134998ba7900,"Já comprei tem quase dois meses,ainda não chegou.. falta de respeito com o cliente.. Mas não vou julgar..quem sou eu Precisa melhorar a comunicação.. E ainda aguardo meu pedido",nao_recebido_atraso,False,claude
+456be61f896c9bd3767bce76676ec74b,Produto da foto não era igual ao que recebi. Veio com defeito. Perdi dados ao transferir. Não consigo acessar micros. Solicito informações para devolução e crédito em vale-compra.,produto_errado,True,claude
+e123f83a54652efe0c42f2c05874b0c0,"Recebi o aparelho Playstation 2 e não veio com o controle original veio um paralelo, o aparelho apresenta defeito, de primeira liga e se desligado não liga novamente só depois de muitos tempo que liga",defeito_qualidade,True,claude
+4974aa84b531a6c1bb14b88a7847f209,"Tive que retirar no correio, não achei certo,pois paguei o frete. Gostaria de saber se vou receber o dinheiro do frete de volta?",cobranca_cancelamento,True,claude
+612201a213fb01d4f977e5711837356b,"Só não gostei das fragrâncias, bem enjoativas e doces.",outro,True,claude
+0735b219f9537d2fbc80cc75d12d7c56,O produto era pra ser entregue até 23/01 e até o momento (03/02) ainda não recebi.,nao_recebido_atraso,False,claude
+778c1c88259213fca022b83911cfba27,Precisa ter esta avaliação em todos os produtos q se compra pq ainda tenho compras a receber,outro,False,claude
+acffd0aa0a8bc0112b38fc7ebffb7a08,"Comprei 6 memórias, só recebi 5.",item_faltando,False,claude
+4b01fb5f37c6d5fc4bf47b0735b07142,Bom dia Comprei 2 controles e chegou apenas 1,item_faltando,False,claude
+b8e7c9c38c0c7e12c667d338ed030647,Comprei três unidades do extensor VGA e só me foi entregue uma. Não recebo resposta dos meus questionamentos e não recebi a nota fiscal,item_faltando,False,claude
+9eb99ee59a9fd2aeec98e6989e505c6d,O calçado demorou para chegar e já havia sido usado. O solado estava como se já tivessem usado.,defeito_qualidade,False,claude
+eef257db1ec8d36de355d272048eb3e7,Ja é as egunda vez que tenho problemas com entregas,nao_recebido_atraso,True,claude
+42bed280726542b7875993ee3408bc27,"O espelho veio quebrado e todo riscado, vou devolver o produto. Estou no aguardo de como devo proceder.",defeito_qualidade,False,claude
+3a0fd124d55874a20994ba75d0f57c67,Comprei um produto e veol outro.Aguardo providências.Favor entree em contato.,produto_errado,False,claude
+3639b950e01dcb13e78d423d698e8b24,"Recomendo a loja, porém, a entrega pelo Correios está cada dia mais difícil. Ao rastrear o objeto aparece que o Correios saiu para entrega, sendo que na realidade não houve tentativa de entrega",nao_recebido_atraso,False,claude
+ebc75dc1e5f1aab722d127a0847be818,tive problemas com a entrega a mercadoria não foi entrgue,nao_recebido_atraso,False,claude
+ff4dbac42a6268977df00d6d06f87d2f,não veio na cor q eu fiz a compra,produto_errado,False,claude
+e8d169289c6437a99a82f36d58b0884f,Recebi minha compra pela metade,item_faltando,False,claude
+e1bc9e2f33c3fa1cb40845c285f0c02b,"Já comprei várias vezes no site ""lannister"";mas desta última vez,fiz uma compra de um TONER no 04.10.16 e só prometeram p/ 25.11.16 e ainda não recebi o produto.",nao_recebido_atraso,False,claude
+543425db81ab7755d8190a4c7eb93642,produto n foi entregue,nao_recebido_atraso,False,claude
+eb0d162696d811ceb00a6aab83b0d75a,"Não mandam outro nem cancelam a compra anterior, ou seja, descaso.",cobranca_cancelamento,True,claude
+b943aa9b8877835e183d136d2712479e,"10 dias após efetuar a compra, gerar o boleto e pagar, recebo um e-mail cancelando a compra por falta do produto. Para o estorno do valor me obrigaram a ir em uma agência bancaria e retirar o valor!",cobranca_cancelamento,False,claude
+fd644e568474e304218a448b762344ae,Zero não entregaram e não dão satisfação! Vou devolver,nao_recebido_atraso,False,claude
+e4aa9557c9355612df82caddb8477460,"Bom dia! Não posso avaliar, não recebi produto ainda,",nao_recebido_atraso,False,claude
+ea064d00128289d0d4d756e625ef5431,Bem diferente do que aparece na foto,produto_errado,False,claude
+9fd8de7d9ef7590e39acd2f7148b6d5e,"Além de não entregar o produto, fiz uma reclamação é não deram nenhuma satisfação.",nao_recebido_atraso,False,claude
+46159f7759139eddcf550dcab720f07b,eu pedi o cartucho A78 e me entregaram o A85,produto_errado,False,claude
+d83266b693a5efb48f5fbae3f120637e,"só entregaram até agora 1 produto( unidade) , Falta entregar o outro produto que Comprei. Foram 2 unidades. E até agora não chegou o outro filtro. Estou preocupado.",item_faltando,False,claude
+3e58383c00bda1781ee840066b94b1b3,"Comprei um relógio e não entregou , era previsto pro dia 06/06 , e voltou pra São Paulo",nao_recebido_atraso,False,claude
+60d722b75799a5f731e210fc95ec3e5c,"Não recebi meu produto,e ja mandei mensagem pra loja mas ninguém me responde.",nao_recebido_atraso,False,claude
+153ef790db4a65fb8acb9f66e7f32299,"comprei paguei o frete, e tive que buscar no correio, como posso esta satisfeito, e pior abri uma reclamação e estou até hoje esperando uma resposta do MarketPlace.",nao_recebido_atraso,True,claude
+7350f4db1ec22880713ff7c247d8bd65,"Não recebi o meu produto e ao enviar um pedido de suporte, não fui respondido dentro do prazo",nao_recebido_atraso,False,claude
+9db043a63b54e244ad49089aa4dd4b4d,"Não recebi o produto até agora é não falaram nada como vai ficar, quando vou ter o dinheiro de volta ,ou o reenvio do produto porque tem quase 30 dias da compra e continuo sem saber. Não recomendo.",nao_recebido_atraso,False,claude
+22fffb924a0dc1d48e94a98e4ca32dc7,Espero ainda receber o produto🙏🏻,nao_recebido_atraso,False,claude
+065a274e4384a233c5cd44baea60ae2e,"Paguei frete, porém não recebi meu produto, tive que retirar na agência dos correios. Acho que deveriam ter um pouco de boa vontade nas entregas e fazer o correto, entregar a mercadoria.",nao_recebido_atraso,False,claude
+b98b5439161b0cb2c4b70928380064cd,"demora, paguei um absurdo no frete ainda não chego, eu reclamei para correio para a lojas amiricanas, o correio falo q não pode faser bada q eu tenho q esperar, ja passo do prazo de entrega",nao_recebido_atraso,False,claude
+d1612f2df440afddd343d6788628fb28,quero receber mminha compra,nao_recebido_atraso,False,claude
+6e755cbed347777aa1d6e8bd73424869,Demora muito pra chegar,nao_recebido_atraso,False,claude
+4bbd26c22370d9ceeb45fc685ee15d63,não recebi o produto consta que o mesmo voltou para o remetente. como faço para que possa reviar-lo?,nao_recebido_atraso,False,claude
+5812d3eb41d341f21a0096f23b1861bb,O produto veio errado. e a nota fiscal certa. Já liguei para lannister e estou esperando a resposta,produto_errado,False,claude
+5e63a03c44a7415aeff1778a0f960fdd,"Infelizmente estou tentando, entrar em contato com a central de atendimento e não consigo. Não recebi o meu produto e também não tive nenhum retorno do status.",nao_recebido_atraso,False,claude
+b3ef4767af71b2cdf7a6ebc529d8d300,"Meu produto não chegou, se não chegar em 3 dias úteis não comprarei mais da lannister.com.... Perda total de credibilidade.. Tentei entrar em contato via telefone e simplesmente se quer fui atendido.",nao_recebido_atraso,False,claude
+d9d6cdf1d4f971b3ee0180d58739df39,"Não recebi o produto, alegaram problemas, fiquei sem entender.",nao_recebido_atraso,False,claude
+9d8c414738305af1419d9ab505caceef,"Produto completamente diferente da propaganda,de péssima qualidade,os desenhos da cortina é muito claro e manchado,na foto as cores são muito mais vibrantes,só vou ficar com o produto pq sou obrigada.",produto_errado,False,claude
+bd19504db445780d18cc3db69fde83b2,Minha mercadoria não chegou ainda pq ??,nao_recebido_atraso,False,claude
+f60e942a213a57b16dee10b28b800468,Estou aguardando instalação do produto em loja especializada.,outro,False,claude
+c287f9ddfc7416dfd6e9bdc30fc955ce,Fiz a compra no início de setembro e até hoje 11 de outubro não recebi o produto aguardando uma solução da empresa,nao_recebido_atraso,False,claude
+cd49e5e8f4cedc28fa9b0ab941150f60,O produto veio com a caixa do Lego amassada e é presente. Não é porque não pedi embrulho que não tenham que ter o devido cuidado.,defeito_qualidade,True,claude
+459c0d0a025865576d199e10d29410d7,"Recebi o produto no prazo certo, mas está com defeito, não está funcionando!",defeito_qualidade,False,claude
+85abb793414a8bb0aa14d81eea882357,"Já recebi tudo que tinha que receber, agora eu gostaria de parar de receber Spawn da loja lannister já ficou chato todos os dias aparecer coisa que eu não me interesso na minha caixa de mensagem",outro,False,claude
+607957a0a16be63148e7e51fc2b7c1a5,Poderia ter sido melhor se a entrega fosse em minha residência... Pois tive que enfrentar uma tremenda fila para retirar nos correios!,nao_recebido_atraso,True,claude
+f2a329d3f60b4dc9215c54bd4451e0cf,Tive problemas mandei email para devolver a lannister disse que eu receberia retorno da targaryen em 48 hrs e ja se passaram 3 dias e nada ainda.,atendimento_loja,False,claude
+eeafacf5860957c8c7f64dd182586816,produto com defeito,defeito_qualidade,False,claude
+3c91e5759e2496ced866d1fb6839ed66,"Olá. Não estou entendo o que está acontecendo. Dizem que o produto foi entregue, mas a principio não recebi nada.",nao_recebido_atraso,False,claude
+c76ecf50da6714104597ba87c9d4fd3d,"Produto com defeito, não funciona, sem qualidade, já é a terceira vez que reclamo e nada foi feito.",defeito_qualidade,False,claude
+b80ebd05911ec6272b36323c5a26ef34,"Não recebi meu produto, quando foi entregue?",nao_recebido_atraso,False,claude
+2a235d2fcf8fb7386a11bc5bec0b5922,"O PRODUTO CONSTA COMO ENTREGUE NO DIA 16-08, MAS HOJE DIA 20-08, O PRODUTO AINDA NÃO FOI ENTREGUE.",nao_recebido_atraso,False,claude
+f2d5d65d51b46f123bd3b21c183e690c,"Cancelei o pedido no site, sem sucesso, pois o site alegava estar fora do ar. Depois, tentei recusar a entrega do correio, e o entregador também não aceitou. Agora, sem retorno a respeito da devolução",cobranca_cancelamento,False,claude
+d0a19c1e207e62dc274f7acbc3538fe6,O produto vendido é falsificado . A imagem do produto é embaçada pra não dar pra perceber claras diferenças entre ele e o original,produto_errado,False,claude
+8f7525471eede168806f82371f962312,"Na discriminação dizia que era de sisal, mas NÃO É. Vu dar entrada no PROCON.",produto_errado,False,claude
+b4e8ec7012eef81503df0e1e6c65f281,"Recebi o produto, porém, veio com defeito. Não funciona, nem se quer liga. Já comprei vários produtos pela Internet, inclusive das Lojas lannister. Estou insatisfeito com este q comprei.",defeito_qualidade,False,claude
+f8ab72cec00c206602e97085ce595a42,"Ainda não recebi o produto, mas acredito que a demora seja por conta da greve dos caminhoneiros. Então, não posso opinar sobre a qualidade dos serviços.",nao_recebido_atraso,False,claude
+16a1a92194df29f6b8fcf795203cf321,"Recebi meu pedido incompleto, embora a nota contasse os 2 produtos conforme a compra e pagamento, dentro da caixa só havia 1 dos produtos comprados. Vale salientar que a embalagem não estava violada.",item_faltando,False,claude
+64f7ea746a8452a22e929f707c0695ef,"entrega foi rápido, mas tem um porem. Gostei do produtos em partes, muito bonito o kit, mas a parte do desenho e em papel sem alguma proteção, poderia ser impermeabilizado ou pintado .",defeito_qualidade,True,claude
+e20044cd7966c29db8a4f4e0272a40d5,não vou confirmar uma entrega como essa onde de dois produtos comprado so chegou um so que que o codigo de da compra e rastreamento diz que foi entregue as duas mercadorias complicado isso,item_faltando,False,claude
+507d0d0cd22788d175d25a7fb2b60ca4,O prazo de entrega enorme de 16 dias úteis não foi respeitado. No site dá como dificuldade de entrega mas não fala qual. Preciso q me entregue o mais rápido possível ou me devolvam o dinheiro!!!!!!!!!,nao_recebido_atraso,False,claude
+ec853cb1fae287e4d1d2c1bfc02a0b2c,Um vergonha...sempre fui cliente mas de hoje em diante não compro MAIS,outro,False,claude
+c2ed33bcbe7d48bdb67bc5a31bdb442e,Não recebi está demorando muito,nao_recebido_atraso,False,claude
+2bae21a6ac9c6567db8068487bf3235d,O produto não chegou ainda,nao_recebido_atraso,False,claude
+0d9d92adaf307d05e2a54228263baaeb,Quero devolver pois recebi algo que não pedi,produto_errado,False,claude
+4b781a9675c3378088afea00909f11a6,Comprei um motog5 splus platinum e recebi um motog5 Dourado reembalado e com características de ja ter sido usado. O produto veio com película de vidro aplicada além de uma capa protetora. Embalagem n,produto_errado,False,claude
+7eb5d8e6c3915c86958d7d7be6b1c95c,"Recebi e-mail informando ""Imprevisto durante a entrega do pedido"" sendo que não tive nenhum contato apenas e-mail automáticos quero saber o que aconteceu com a entrega e quero meu dinheiro de volta",nao_recebido_atraso,False,claude
+7738e692281ac9fd122e55b37ac20502,Péssimo parceiros de vcs,outro,False,claude
+7e7f587e6b4302a7cfbcd4c495bc9fdb,A capa de colchão azul marinho não foi entregue e consta no site que foi entregue!!! Aguardo a capa de colchão solteiro azul marinho pois não veio e está constando que me entregaram!!!!!,nao_recebido_atraso,True,claude
+869c6ab5623de2d783b54744cab27150,Ainda não recebeu nem a capa do tablet nem o hd externo.,nao_recebido_atraso,False,claude
+aaa5fba9e8840f7ea9a68f4e2c6efa0e,Vou mandar o produto de volta. Estou esperando o andamento da solicitação de devolução que fiz à stark.,outro,True,claude
+3db771ff38e7c1d66fadc354a5c3111f,"Já faz mais de 1 mês que comprei, e nada de enviar meu produto. Disseram que vão enviar só em fevereiro. Vou aguardar, mas nem me ofereceram enviar outro produto similar",nao_recebido_atraso,False,claude
+4a77d135f5c9a49417c4934132a0f0a2,"Comprei 2 itens, um rosa e outro preto mas recebi os 2 pretos.",produto_errado,False,claude
+4161f18e26ce5826d931b44c9806439f,"A qualidade da bola é inferior ao que eu estava esperando. Fiquei muito decepcionada quando a 1a firma não entregou o meu pedido, o que acabou ocasionando perda em termos de compra.",defeito_qualidade,False,claude
+083cea852e4bef40b5d4d436da1fc8ef,"O prazo de entrega não foi cumprida e só comprei para dar de presente para uma mãe que está prestes a ganhar bebê. Só comprei pelo site por conta da data de entrega 19/05, terá o parto sem a bolsa.",nao_recebido_atraso,False,claude
+f48efda92d748b8be3d6d8cb473f7597,O produto deveria ter chegado dia 03/11 mas nao chegou. Ele continua como no status da nota fiscal emitida. A empresa responsável designava 20 dias úteis (que ja é um tempo considerável).,nao_recebido_atraso,False,claude
+a81fcdebd11916ac088145190db25ad3,"Quando você compra um produto pela internet você acredita que isso venha certo e que ao menos você receba o que comprou, e eu não recebi o que comprei vieram faltando produtos.",item_faltando,False,claude
+d53a2cff1aa21f535c0ba94b1a60db7c,Na verdade está no correio . A forma de entrega é muito demorada.,nao_recebido_atraso,False,claude
+f815cf61868be9cf498089e21a19b817,Não recebi o produto correto. Estou esperando um retorno até agora.,produto_errado,False,claude
+e057360360ac06fb9abc25efe4505413,"Receber com atraso é sempre ruim. O produto deveria ser entregue até 26/04/2018 e até o momento, não foi.",nao_recebido_atraso,False,claude
+1d302aa45a8b088bb8b5615b70719bf8,A ENTREGA ESTA PARA DIA 04/04 E ATÉ O MOMENTO NÃO RECEBI. GOSTARIA DE SABER O QUE ESTÁ ACONTECENDO.,nao_recebido_atraso,False,claude
+1d6fdd553755df4964ac944de75db240,"No rastreamento do pedido aparecia que já havia sido entregue ao destinatário, todavia, não recebi em meu endereço.",nao_recebido_atraso,False,claude
+c7678bab1a0764781dfc86ac563a2be5,Recebi um produto so que comprei outro produto também rastreie o código e vi que esta no correio da penha aguardando retirada isso está errado pois paguei o frete aguardo mns,item_faltando,True,claude
+6e41331438d5e516a5d19add4b90e191,"O Produto não foi entregue disseram no rastreiamento que ele ainda não chegou na unidade de Salvador, isso foi no dia 23/03/18 e hoje 13/04/18 não tenho mais nenhuma notícia. Espero Resposta fas",nao_recebido_atraso,False,claude
+be608f299c5286b203ca789ab55bd908,Comprei o cartucho esperando que fosse original. Faltaram informações / esclarecimentos de que se tratava de um produto compatível.,produto_errado,False,claude
+ceebb36daa7e066b3fb4c9f15a3a9506,Pedido de 03 balanças.....depois de atraso na entrega...recebi apenas 01 balança...Nota fiscal rasurada na quantidade.....má fé total..... Estou cancelando compra junto a administradora de cartao....,item_faltando,False,claude
+bb847ada3e685e087e7ca974a606c42e,Realizei a compra com quase um mês de antecedência e o vencedor foi postar o produto com menos de uma semana para o prazo de entrega. Além de realizar perguntar se estava tudo ok e não ser respondido.,nao_recebido_atraso,True,claude
+4dc19c580a08521cc0ffc2a637a60e7d,Não chegou estou esperando,nao_recebido_atraso,False,claude
+17f1f63fd0d9fad6d9d2f5fae225d68b,"Não recebi tudo que comprei. Já enviei reclamação para o stark, mas ainda não recebi nenhum retorno",item_faltando,False,claude
+f54ac87539c637b8a7700f07c1e9e445,ainda não obtive resposta do porquê do atraso,nao_recebido_atraso,False,claude
+7f2bc80552ac81bc0f6972735d9c71f7,vendeu e não entregou,nao_recebido_atraso,False,claude
+a071c652f613fd725cff4ccf6f2f3ca9,"Não existe pós venda, é impossível saber o status da compra. péssimo vendedor.",atendimento_loja,False,claude
+89229ecfab701ba433e52b3b5ddadd4e,"Meu produto não veio novo, veio embalado em uma caixa de sapato.",defeito_qualidade,True,claude
+afb6b942609ed1033530e06710458bed,"Quanto a compra faltou a opção da fragrância , pois eu tinha interesse era no almíscar, no mais o que veio perde a fixação.",produto_errado,True,claude
+2a1a36b6a8fcd0d7d318f4bfeb85caaa,"Não recebi meu produto, veio um kit de pincéis com nota fiscal de outra pessoa. E até agora não tive um retorno.",produto_errado,False,claude
+6870672797f5d617b5b322f2d56c7e8c,"Demora na entrega, o produto veio arranhado em algumas partes e a película mesmo propria para o celular, e menhor do que a tela.",defeito_qualidade,True,claude
+ea367d520c1e07a970c0452a97496afe,Nao recebi um dos produtos. o pedido veio incompleto!,item_faltando,False,claude
+c1de68f1a9bc4ff16dff11a37740657e,"Recebi o produto todo amassado com marcas de uso já começando a enferrujar, não recomendo, muito mal embalado, caixa veio rasgada e amassada prejudicando o produto.",defeito_qualidade,False,claude
+6497e16f1195e76f14d9e9f6a4c031a6,Até agora não recebi o produto e não fui informada sobre a chegada dele.,nao_recebido_atraso,False,claude
+0f67d495e52b4fc53648803b72f6745a,"O produto é bom, mas a lannister deve estar fazendo uma promoção às avessas, pois paguei 2 mas recebi só 1, já fiz a reclamação no site mas até agora nada!",item_faltando,False,claude
+f3401a1de0c152923ba58cf7b7d2b84a,A capa protetora não é exatamente o que eu esperava deixa a desejar no tipo material e na qualidade.,defeito_qualidade,False,claude
+e144681952b0736e09fc0643ffb909ce,Só achei que o perfume não fixa bem sai logo o cheiro.,defeito_qualidade,False,claude
+4a9afdea5368328d6e1037878ee69d64,O problema não é com a loja mais sim com o produto tem que deixar carregando o dia inteiro pra ouvir meia hora de música e não funciona enquanto carrega desliga sozinho.,defeito_qualidade,False,claude
+1bd777419b840aae94d9115bd6ef9ef4,"Comprei dois produtos ao mesmo tempo e só recebi um, o mesmo fornecedor, na mesma loja .",item_faltando,False,claude
+f00abffd2cffb032dfedc22c05cfd105,porque recebi o e mail dizendo que nao iria receber o produto mas no dia sequinte ele apareceu,outro,True,claude
+1956d4e13dce5a820f1d0e53d22e7a5c,O produto é desproporcional e de péssima qualidade. Não acredito que uma instituição com um nome desses se queime por tão pouco. Só não entro com pedido de devolução pra evitar desgastes.,defeito_qualidade,False,claude
+7a9438aceee43236b521668ff377b01a,"Eu efetuei a compra de um pendrive dia 13/02/17, o prazo de entrega era até 14/03/17, porém não foi entregue. Entrei em contato com o stark que me informou que meu produto nem saiu do fornecedor.",nao_recebido_atraso,False,claude
+b7c9e20cf48170ef505e502cae85a46d,Não seria justo não recomendar a loja pois não recebi o produto pois o Correios não entregou. Talvez seria interessante a loja utilizar outra transportadora.,nao_recebido_atraso,False,claude
+2f97a0e75596224896b36a3fe920d68c,"não respondem a e-mails, houve problema na entrega e nem deram muita satisfação nem importancia",atendimento_loja,True,claude
+a85c5b44259d5bdc70728b254a53d647,"Produto de baixa qualidade, não protege o computador em nada, é quase como um tecido, muito fino pra proteger o notebook de um eventual impacto, que deveria ser a função do produto.",defeito_qualidade,False,claude
+bdd56d3c32a5088cdd2663d0dd355a17,"Entrega antes do prazo, o problema é que o scanner está com algum problema, pois não consigo conectar meu celular que é um moto G4 play, nem pelo wi-fi ou bluetooth, o sinal do scanner não aparece.",defeito_qualidade,False,claude
+addedbee3c810eb802219c1822a805ec,"O abajur veio certinho, porém o ki bolsa, a pequena veio rasgada e agora a troca é uma burocracia. Difícil o pós venda.",defeito_qualidade,False,claude
+7d02f4eb2feb119b854edcbabe18a44f,consta que meu pedido foi entregue mas nao chegou ha possibilidade de informar assinatura de quem recebeu no local???,nao_recebido_atraso,False,claude
+d058dca0fce39b0bf287bd8729f7c08c,"a loja enviou outro produto no lugar, sem previa autorização",produto_errado,False,claude
+7ee219d53d560f6b4e29f7d6c6e11ee0,Gostaria de saber se o relógio é a prova d'água...,outro,False,claude
+0c71f75ebc19248f5d3631859bfaeb4d,Produto não chegou na data.,nao_recebido_atraso,False,claude
+e0764ca569adc993c63fabe0e0411f34,Solicitei cancelamento e estou aguardando o retorno. Não entendi porque estão me enviando essa avaliação...,cobranca_cancelamento,False,claude
+168ee7dada8c99577ca064c0fef3be4b,"Tentei cancelar a compra 5 minutos após efetuar a mesma e fui informado que não era mais possivel, pode isso?",cobranca_cancelamento,False,claude
+9152b4cbaa6e6da01e9f0d4a91703569,"Produto com codigo correto, mas a impressora não reconhece o toner.",defeito_qualidade,False,claude
+e1faa94ae8554c5cf732241ec26dff5a,Foram entregues 3 banners. Falta 1. Não chegou!,item_faltando,False,claude
+a86ab7d74756d0e54b6634ee78b5017f,"Senhores boa tarde! Informo pelo presente que o produto acima citado não foi entregue até a presente data. Att, Adnailde",nao_recebido_atraso,False,claude
+37b784d90e253b9c15c65271f3edda67,Comprei 4 cortinas na 5°cortina que comprei veio bem menor que as outras...o pior que ficaram todas juntas...bem desigual,produto_errado,True,claude
+256e445ddba830565ad576854f406761,"sem comentarios, muito confusa a informação sobre entrega",nao_recebido_atraso,True,claude
+8f9772ae7dec3db4af0418fd7fb1be4d,Produto com entrega atrasada,nao_recebido_atraso,False,claude
+667fb15825dfa618b7306a432ef4c95c,"Comprei um produto de 1 litro e chegou em de 300 ml. Nao veio a nota fiscal do produto, sem falar que o mesmo chegou em uma embalagem duvidosa.",produto_errado,False,claude
+49ef301dc6c63131b8f858018969980b,O produto chegou com defeito não funcionando até agora não estou conseguindo trocar o controle fui numas das lojas lannister ninguém saber informar com troco o controle estou decepcionado com isso.,defeito_qualidade,False,claude
+75b980a5652a6e31fe63ee16edaecddb,O problema nao foi a demora e sim pedir vermelha e veio preta.,produto_errado,False,claude
+2c4166dd9e853e78b8e211b4697a3b1e,"O produto nao foi entregue pois no endereço constava numero 171 e na realidade é o 170, isto não justifica a nao entrega,",nao_recebido_atraso,False,claude
+0a496b93b0b74d53cfab255b07317881,"Não no produto porque veio com defeito, mas não vou trocá-lo. As mercadorias não são revisadas na empresa que o vende. No caso, no lugar da tecla nº 7 tem o número 4, ou seja, 2 teclas nº 4",defeito_qualidade,False,claude
+f29bbead1034936360ff92f70abbe8f6,Produto demorou muito para chegar,nao_recebido_atraso,False,claude
+7a8060864dd4497725b1255500ddad3a,"na hota da ocmpra estava escrito que era 30 caixas por 9,90 e só veio 1 e ainda me cobra o frete do dobro do produto quero devolver.",item_faltando,True,claude
+254757105deb49eaddc3f03249b6a89d,Pedi 3 unidades do produto é só foram entregues 2 unidades,item_faltando,False,claude
+9d1a163d060812d013765627ef96c50b,Loja sem credibilidade.,outro,False,claude
+e86cb3008bfd93b297b178bfc009f72e,"Além da demora para emitir a nota fiscal, a demora para a devolução do dinheiro, em caso de cancelamento da compra, demora uma eternidade. Já faz 2 semanas que solicitei o cancelamento e nada.",cobranca_cancelamento,False,claude
+4066a28eefe9e750aa01ad19ab2fe494,O meu pedido ainda não chegou,nao_recebido_atraso,False,claude
+ccfb458e7b7f545580cb01604062d132,"O produto foi entregue no prazo, porém no segundo dia parou de funcionar, tive que optar pela devolução.",defeito_qualidade,False,claude
+55eb2b1206caaa2a767dde1e00620653,Produto nao entregue ate 2 dias apos o prazo. Ausência de informacoes sobre o ocorrido.,nao_recebido_atraso,False,claude
+64cbc30ba05c3e97943bfbfae9160cb6,"recebi a encomenda em prazo record, porém comprei duas unidades e recebi somente um, já encaminhei um e-mail para a loja visto q não encontrei num de telefone para ligar, acredito q será resolvido",item_faltando,False,claude
+bef30f6cc7c608fe09c60764ab497bc5,"paguei por um MOP giratório cod 7824 e entregaram mop cod 8210, de qualidade muito inferior . Quero cancelar compra.",produto_errado,False,claude
+83a4feae179836a9552ede6eef305499,"Mercadoria nao veio conforme pedido, com certeza erro na hora da conferencia e agora Q transtorno",produto_errado,False,claude
+cd58381bd125465fe2c4dd8ef3d9a180,"Produto chegou em péssimo estado, sujo, lascado, rasgado e não consigo nem ligar nem enviar email para fazer minha reclamação e pedir meu dinheiro de volta.",defeito_qualidade,False,claude
+4ef60fc337effaeca34f35c0ccd4aa1c,"Não recebi, passou do prazo, tentei localizar e disse que:o produto tinha saído dos correios de SP,encaminhado a outra agência,e,na outra agência,fui informando que o produto não tinha chagado lá.",nao_recebido_atraso,False,claude
+b54d93335f6d35fd40f41494ca9bf0fa,"Na página do produto a foto mostra um produto original, com a maçã da apple. O produto chegou e não é um produto original.",produto_errado,False,claude
+aaab917291fea34988b9a0cb60e0716f,"Comprei o relógio, unissex e enviaram um relógio feminino, bem menor que as especificações do anúncio.",produto_errado,False,claude

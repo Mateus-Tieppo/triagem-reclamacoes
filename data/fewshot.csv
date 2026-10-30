@@ -1,0 +1,15 @@
+review_id,texto,rotulo
+55c44c57acb1e65a082ab9bb135ce003,Previsão estava para 20/12/2017 e ainda não chegou.,nao_recebido_atraso
+b28bfbd00dfd0c6d80e9cb524e0f205e,Produto não chegou está com 2 dias de atraso,nao_recebido_atraso
+d7e28674fec88e38d7ea705f731ff07b,Chegou meu produto fui verificar o suporte de tv faltou o aste de ajuste da TV,item_faltando
+fa598a2cbeb3e9e4979052c332ef424f,"Veio faltando 1 kit de pendentes!!!!! Aguardando a solução. Eu pedi e paguei por 2 kits, ou seja 4 pendentes!!!!",item_faltando
+2d125f19609179b95782d57271caa88d,"Recebi o produto errado,pedi gotas e veio comprimido",produto_errado
+e42fae5637cb7fdadbf376e39f237a5c,Recebi o produto errado comprei um modelo e veio outro,produto_errado
+f91978f4a01c8e97897adb8f282833c5,O produto veio com defeito !,defeito_qualidade
+3fa17bbc03c21106e7b19dcc9f36db43,"O produto veio mal embalado com peça quebrada e não foi resolvido o problema, estou aguardando.",defeito_qualidade
+e43589d9b1eb36907925a598bf511d52,Não responde as solicitações de atendimento.,atendimento_loja
+3399c230c47b20e122f6b143546b61a7,"muito ruim, atendimento somente eletronico, vc é obrigado a esperar pele boa vontade da loja para entrar em contato.",atendimento_loja
+db4f22dcb2755418fd606405cd997d08,Cancelei o meu pedido em 15/12/2017 e até hoje não recebi meu vale referente ao valor pago.,cobranca_cancelamento
+e6e81ec109aeb30a59141ed7f15db1e1,Cancelaram minha compra Não sei nem. O motivo,cobranca_cancelamento
+a7205ba9f4515ded74acbc6e45a7666b,Bom produto: superou as minhas espectativas,outro
+b72b9ca42368b47db990e1d964b07c5e,Compra efetuada em 28/11 e a nota fiscal ainda não foi emitida....,outro

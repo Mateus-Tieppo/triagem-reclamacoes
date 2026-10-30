@@ -1,0 +1,230 @@
+<title>Rotulagem Triagem Olist</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: uma coluna de trabalho; a mensagem no topo, sete botões logo abaixo, navegação no rodapé do cartão. */
+:root{
+  --bg:#f2f4f3; --surface:#ffffff; --fg:#17201d; --muted:#5d6b66; --line:#d6dedb;
+  --accent:#0f6b5c; --accent-ink:#ffffff; --warn:#a15c00; --warn-bg:#fff3df; --done:#0f6b5c;
+  --c1:#b4462b; --c2:#8a5a00; --c3:#6b4bb0; --c4:#1d6fa3; --c5:#4f6b2a; --c6:#a3306b; --c7:#5d6b66;
+  --font-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111816; --surface:#18211e; --fg:#e7eeeb; --muted:#9aaba5; --line:#2c3a35;
+  --accent:#4fbfa8; --accent-ink:#0b1311; --warn:#f0b35a; --warn-bg:#33270f; --done:#4fbfa8;
+  --c1:#ef8a70; --c2:#e0b050; --c3:#b39cf0; --c4:#6fb8e8; --c5:#a6c776; --c6:#ec82b5; --c7:#9aaba5;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111816; --surface:#18211e; --fg:#e7eeeb; --muted:#9aaba5; --line:#2c3a35;
+  --accent:#4fbfa8; --accent-ink:#0b1311; --warn:#f0b35a; --warn-bg:#33270f; --done:#4fbfa8;
+  --c1:#ef8a70; --c2:#e0b050; --c3:#b39cf0; --c4:#6fb8e8; --c5:#a6c776; --c6:#ec82b5; --c7:#9aaba5;
+  color-scheme:dark}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--font-body);font-size:16px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:760px;margin:0 auto;display:grid;gap:18px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px}
+h1{font-size:1.35rem;margin:0;text-wrap:balance}
+.sub{color:var(--muted);font-size:.9rem;margin:2px 0 0}
+.progress{font-family:var(--font-mono);font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.progress b{color:var(--fg)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--done);width:0;transition:width .25s}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:16px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-family:var(--font-mono);font-size:.78rem;color:var(--muted);align-items:center}
+.stars{letter-spacing:.1em}
+.pill{border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+.pill.unsure{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
+.text{font-size:1.25rem;line-height:1.55;margin:0;min-height:3.2em;overflow-wrap:anywhere}
+.choices{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.choice{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:start;text-align:left;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:8px;padding:9px 11px;cursor:pointer}
+.choice:hover{border-color:var(--c)}
+.choice:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.choice kbd{grid-row:span 2;font-family:var(--font-mono);font-size:.8rem;font-weight:600;border:1px solid var(--line);border-radius:5px;padding:1px 6px;background:var(--surface);color:var(--c)}
+.choice strong{font-size:.95rem}
+.choice span{font-size:.8rem;color:var(--muted);line-height:1.35}
+.choice[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--accent-ink)}
+.choice[aria-pressed="true"] span{color:var(--accent-ink);opacity:.9}
+.nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.nav .grp{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-size:.9rem;padding:7px 12px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn[aria-pressed="true"]{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
+.btn:disabled{opacity:.45;cursor:default}
+.status{font-size:.85rem;color:var(--muted);min-height:1.3em}
+.status.err{color:var(--c1)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{cursor:pointer;font-weight:700}
+details ul{padding-left:1.1em;margin:10px 0 0;display:grid;gap:6px;font-size:.92rem;max-width:65ch}
+.dist{display:grid;gap:6px}
+.dist .row{display:grid;grid-template-columns:160px 1fr 34px;gap:10px;align-items:center;font-size:.85rem}
+.dist .row i{display:block;height:8px;border-radius:4px;background:var(--c);min-width:2px}
+.dist .row em{font-style:normal;font-family:var(--font-mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.keys{font-size:.8rem;color:var(--muted)}
+.keys kbd{font-family:var(--font-mono);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.done-banner{background:var(--surface);border:1px solid var(--done);border-radius:10px;padding:14px 16px}
+@media (max-width:480px){.text{font-size:1.1rem}.dist .row{grid-template-columns:120px 1fr 30px}}
+@media (prefers-reduced-motion:reduce){.bar>i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Rotulagem do conjunto ouro</h1>
+      <p class="sub">300 avaliações negativas da Olist, escolhidas ao acaso (seed 42). Um motivo principal por mensagem.</p>
+    </div>
+    <div class="progress" id="progress"><b>0</b> / 300 rotuladas</div>
+  </header>
+  <div class="bar" aria-hidden="true"><i id="barfill"></i></div>
+
+  <div class="done-banner" id="done" hidden><strong>Pronto: as 300 estão rotuladas.</strong> Volte ao chat e avise o Claude; ele lê os rótulos direto daqui.</div>
+
+  <section class="card" aria-live="polite">
+    <div class="meta">
+      <span id="pos">#1</span>
+      <span class="stars" id="stars" title="Nota da avaliação"></span>
+      <span class="pill" id="state">sem rótulo</span>
+      <span class="pill unsure" id="unsurePill" hidden>dúvida</span>
+    </div>
+    <p class="text" id="text">Carregando…</p>
+    <div class="choices" id="choices"></div>
+    <div class="nav">
+      <div class="grp">
+        <button class="btn" id="prev" type="button">← Anterior</button>
+        <button class="btn" id="next" type="button">Próxima →</button>
+      </div>
+      <div class="grp">
+        <button class="btn" id="unsure" type="button" aria-pressed="false">Marcar dúvida (D)</button>
+        <button class="btn primary" id="jump" type="button">Ir para a próxima sem rótulo</button>
+      </div>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="keys"><kbd>1</kbd> a <kbd>7</kbd> rotula e avança · <kbd>D</kbd> marca dúvida · <kbd>←</kbd> <kbd>→</kbd> navega</div>
+  </section>
+
+  <details>
+    <summary>Regras de rotulagem</summary>
+    <ul>
+      <li><b>Motivo principal:</b> escolha o problema que originou a reclamação. Consequências (loja não responde, pedi reembolso) só viram o rótulo quando são o único problema citado.</li>
+      <li><b>Não chegou ou atrasou</b> vence quando a pessoa ainda não recebeu nada daquele pedido. Se recebeu parte, é <b>item faltando</b>.</li>
+      <li><b>Produto errado</b> inclui modelo, cor ou tamanho diferente do pedido e produto diferente do anúncio.</li>
+      <li><b>Defeito ou qualidade</b> é quando chegou o produto certo, mas quebrado, com defeito ou ruim.</li>
+      <li><b>Cobrança ou cancelamento</b> é quando o dinheiro é o assunto: cobrança indevida, estorno não feito, cancelamento sem pedido.</li>
+      <li><b>Outro</b> cobre elogios com nota baixa, texto sem sentido e o que não couber em nada.</li>
+      <li>Se ficar em dúvida entre duas, escolha a melhor e aperte <b>D</b>. As marcadas entram na análise de concordância.</li>
+    </ul>
+  </details>
+
+  <details open>
+    <summary>Distribuição até agora</summary>
+    <div class="dist" id="dist" style="margin-top:10px"></div>
+  </details>
+</div>
+
+<script>
+const ITEMS = __DATA__;
+const CATS = [
+  {k:"nao_recebido_atraso", n:"Não chegou ou atrasou", d:"Nada recebido ainda, ou chegou fora do prazo", c:"--c1"},
+  {k:"item_faltando", n:"Item faltando", d:"Chegou parte do pedido", c:"--c2"},
+  {k:"produto_errado", n:"Produto errado", d:"Outro modelo, cor, tamanho ou diferente do anúncio", c:"--c3"},
+  {k:"defeito_qualidade", n:"Defeito ou qualidade", d:"Chegou o certo, mas quebrado ou ruim", c:"--c4"},
+  {k:"atendimento_loja", n:"Atendimento da loja", d:"Só reclama de falta de resposta ou suporte", c:"--c5"},
+  {k:"cobranca_cancelamento", n:"Cobrança ou cancelamento", d:"Estorno, reembolso, cobrança indevida", c:"--c6"},
+  {k:"outro", n:"Outro", d:"Elogio, sem sentido ou não se encaixa", c:"--c7"},
+];
+const labels = new Map(); // id -> {label, unsure}
+let idx = 0, db = null, canWrite = false, started = false;
+const $ = id => document.getElementById(id);
+
+function buildChoices(){
+  const box = $("choices");
+  CATS.forEach((c,i)=>{
+    const b = document.createElement("button");
+    b.type="button"; b.className="choice"; b.id="cat-"+c.k; b.style.setProperty("--c",`var(${c.c})`);
+    b.innerHTML = `<kbd>${i+1}</kbd><strong></strong><span></span>`;
+    b.querySelector("strong").textContent=c.n; b.querySelector("span").textContent=c.d;
+    b.addEventListener("click",()=>choose(c.k));
+    box.appendChild(b);
+  });
+}
+function firstUnlabeled(from){
+  for(let s=0;s<ITEMS.length;s++){const j=(from+s)%ITEMS.length; if(!labels.has(ITEMS[j].id)) return j;}
+  return -1;
+}
+function render(){
+  const it = ITEMS[idx], cur = labels.get(it.id);
+  $("pos").textContent = `#${idx+1} de ${ITEMS.length}`;
+  $("stars").textContent = "★".repeat(it.n)+"☆".repeat(5-it.n);
+  $("text").textContent = it.t;
+  const cat = cur && CATS.find(c=>c.k===cur.label);
+  $("state").textContent = cat ? cat.n : "sem rótulo";
+  $("unsurePill").hidden = !(cur && cur.unsure);
+  $("unsure").setAttribute("aria-pressed", String(!!(cur && cur.unsure)));
+  CATS.forEach(c=>$("cat-"+c.k).setAttribute("aria-pressed", String(!!cur && cur.label===c.k)));
+  $("prev").disabled = idx===0; $("next").disabled = idx===ITEMS.length-1;
+  const n = ITEMS.filter(x=>labels.has(x.id)).length;
+  $("progress").innerHTML = `<b>${n}</b> / ${ITEMS.length} rotuladas`;
+  $("barfill").style.width = (100*n/ITEMS.length)+"%";
+  $("done").hidden = n<ITEMS.length;
+  const counts = Object.fromEntries(CATS.map(c=>[c.k,0]));
+  labels.forEach(v=>{ if(v.label in counts) counts[v.label]++; });
+  const max = Math.max(1,...Object.values(counts));
+  $("dist").innerHTML = "";
+  CATS.forEach(c=>{
+    const r=document.createElement("div"); r.className="row"; r.style.setProperty("--c",`var(${c.c})`);
+    r.innerHTML=`<span></span><i style="width:${100*counts[c.k]/max}%"></i><em>${counts[c.k]}</em>`;
+    r.querySelector("span").textContent=c.n; $("dist").appendChild(r);
+  });
+}
+function status(msg, err){ const s=$("status"); s.textContent=msg||""; s.className="status"+(err?" err":""); }
+
+const pending = new Map();
+async function save(id, body){
+  if(!canWrite){ status("Os rótulos só são salvos com o claude.ai aberto e logado na sua conta.", true); return; }
+  // uma escrita por vez por documento
+  const prev = pending.get(id) || Promise.resolve();
+  const p = prev.then(()=>db.collection("labels").doc(id).set(body)).then(
+    ()=>status("Salvo."),
+    e=>{ status(e && e.code==="invalid_argument" ? "Sem permissão para salvar nesta visualização." : "Não consegui salvar agora. Tente de novo em instantes.", true); }
+  );
+  pending.set(id,p); return p;
+}
+function choose(k){
+  const it=ITEMS[idx], cur=labels.get(it.id);
+  const body={label:k, unsure:!!(cur&&cur.unsure), at:new Date().toISOString()};
+  labels.set(it.id, body); save(it.id, body);
+  const nx = firstUnlabeled(idx+1); if(nx>=0) idx=nx;
+  render();
+}
+function toggleUnsure(){
+  const it=ITEMS[idx], cur=labels.get(it.id);
+  if(!cur){ status("Escolha um rótulo antes de marcar dúvida."); return; }
+  const body={...cur, unsure:!cur.unsure, at:new Date().toISOString()};
+  labels.set(it.id, body); save(it.id, body); render();
+}
+document.addEventListener("keydown",e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+  if(/^[1-7]$/.test(e.key)){ choose(CATS[+e.key-1].k); e.preventDefault(); }
+  else if(e.key==="ArrowLeft" && idx>0){ idx--; render(); }
+  else if(e.key==="ArrowRight" && idx<ITEMS.length-1){ idx++; render(); }
+  else if(e.key==="d"||e.key==="D"){ toggleUnsure(); }
+});
+$("prev").onclick=()=>{ if(idx>0){idx--;render();} };
+$("next").onclick=()=>{ if(idx<ITEMS.length-1){idx++;render();} };
+$("jump").onclick=()=>{ const j=firstUnlabeled(idx); if(j>=0){idx=j;render();} };
+$("unsure").onclick=toggleUnsure;
+
+buildChoices(); render();
+status("Conectando ao armazenamento…");
+(async()=>{
+  db = window.claude ? await window.claude.use("db") : null;
+  if(!db){ status("Armazenamento indisponível: abra a página no claude.ai, logado, para salvar os rótulos.", true); return; }
+  canWrite = true;
+  db.collection("labels").onSnapshot(snap=>{
+    snap.docs.forEach(d=>{ const v=d.data(); if(v && v.label) labels.set(d.id,{label:v.label,unsure:!!v.unsure,at:v.at}); });
+    if(!started){ started=true; const j=firstUnlabeled(0); idx = j>=0?j:0; status(""); }
+    render();
+  }, e=>status("A conexão com o armazenamento caiu. Recarregue a página.", true));
+})();
+</script>

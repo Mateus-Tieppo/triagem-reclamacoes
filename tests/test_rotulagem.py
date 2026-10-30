@@ -47,3 +47,12 @@ def test_concordancia():
     r = concordancia(pd.Series(["a", "b", "a"]), pd.Series(["a", "b", "b"]))
     assert r["acordo"] == pytest.approx(2 / 3)
     assert "kappa" in r
+
+
+def test_ler_devolvidos_nao_mistura_consistencia(tmp_path, monkeypatch):
+    from triagem import rotulagem
+    monkeypatch.setattr(rotulagem, "PASTA_LOTES", tmp_path)
+    lote(["a"]).to_csv(tmp_path / "rotulos_01.csv", index=False)
+    lote(["b"]).to_csv(tmp_path / "rotulos_consistencia_01.csv", index=False)
+    assert len(rotulagem._ler_devolvidos("rotulos")) == 1
+    assert len(rotulagem._ler_devolvidos("rotulos_consistencia")) == 1

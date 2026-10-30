@@ -69,7 +69,7 @@ def _gravar_lotes(lotes: list[pd.DataFrame], prefixo: str) -> None:
 
 
 def _ler_devolvidos(prefixo: str) -> list[pd.DataFrame]:
-    return [pd.read_csv(p, dtype={"review_id": str}) for p in sorted(PASTA_LOTES.glob(f"{prefixo}_*.csv"))]
+    return [pd.read_csv(p, dtype={"review_id": str}) for p in sorted(PASTA_LOTES.glob(f"{prefixo}_[0-9]*.csv"))]
 
 
 def _amostra_consistencia(para_rotular: pd.DataFrame) -> pd.DataFrame:

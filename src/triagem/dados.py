@@ -20,7 +20,7 @@ def reclamacoes(caminho: Path = ARQUIVO_BRUTO) -> pd.DataFrame:
     neg["texto"] = neg.review_comment_message.str.replace(r"\s+", " ", regex=True).str.strip()
     neg = neg[neg.texto.str.len() >= 15]
     neg = neg.drop_duplicates("texto").drop_duplicates("review_id")
-    return neg[["review_id", "review_score", "texto"]].reset_index(drop=True)
+    return neg[["review_id", "order_id", "review_score", "texto"]].reset_index(drop=True)
 
 
 def amostra_ouro(pool: pd.DataFrame, n: int = 300) -> pd.DataFrame:
@@ -37,3 +37,17 @@ def pool_treino(pool: pd.DataFrame, ouro_ids: set[str], excluir: set[str] = froz
     """Tudo que não está no ouro nem nos exemplos do few-shot."""
     fora = set(ouro_ids) | set(excluir)
     return pool[~pool.review_id.isin(fora)].reset_index(drop=True)
+
+
+def pool_de_treino() -> pd.DataFrame:
+    """Reclamações fora do ouro e do few-shot. Usa só os ids do ouro, nunca os rótulos."""
+    pool = reclamacoes()
+    ouro_ids = set(amostra_ouro(pool).review_id)
+    fewshot_ids = set(pd.read_csv(ARQUIVO_FEWSHOT).review_id)
+    return pool_treino(pool, ouro_ids, fewshot_ids)
+
+
+def amostra_desenvolvimento(n: int = 200, seed: int = SEED) -> pd.DataFrame:
+    """Amostra do pool de treino para ler e escrever as regras."""
+    pool = pool_de_treino()
+    return pool.sample(min(n, len(pool)), random_state=seed)

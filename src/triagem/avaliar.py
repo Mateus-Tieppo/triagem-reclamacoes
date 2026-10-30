@@ -23,6 +23,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from . import dados
 from .llm import INVALIDO
 from .taxonomia import ROTULOS
+from .verdade import ARQUIVO_PEDIDOS, conferir_atraso
 
 PASTA_PREDS = dados.RAIZ / "results" / "preds"
 PASTA_RES = dados.RAIZ / "results"
@@ -57,6 +58,13 @@ def avaliar(ouro: pd.DataFrame, preds: pd.DataFrame) -> dict:
     baixo, alto = f1_bootstrap(y, p)
     seguro = m[~m.duvida.astype(bool)]
     humano = m[m.fonte == "mateus"] if "fonte" in m else m.iloc[0:0]
+    if "revisao" in m:
+        aceitas = m[~m.revisao.fillna(True).astype(bool)]
+        presentes = sorted(set(aceitas.rotulo) | set(aceitas.pred_final))
+        taxa_revisao = float(1 - len(aceitas) / len(m))
+        f1_aceitas = f1_score(aceitas.rotulo, aceitas.pred_final, labels=presentes, average="macro", zero_division=0) if len(aceitas) else float("nan")
+    else:
+        taxa_revisao = f1_aceitas = float("nan")
     return {
         "n": len(m),
         "acuracia": accuracy_score(y, p),
@@ -66,6 +74,8 @@ def avaliar(ouro: pd.DataFrame, preds: pd.DataFrame) -> dict:
         "f1_humano": f1_score(humano.rotulo, humano.pred_final, labels=ROTULOS, average="macro", zero_division=0) if len(humano) else float("nan"),
         "invalidas": float((m.pred == INVALIDO).mean()),
         "latencia_mediana_ms": float(m.latencia_s.median() * 1000),
+        "taxa_revisao": taxa_revisao,
+        "f1_aceitas": f1_aceitas,
         "f1_por_classe": dict(zip(ROTULOS, f1_score(y, p, labels=ROTULOS, average=None, zero_division=0))),
         "matriz": confusion_matrix(y, m.pred, labels=ROTULOS + [INVALIDO]),
     }
@@ -105,6 +115,27 @@ def tabela_md(df: pd.DataFrame, indice: bool = False) -> str:
     return "\n".join(linhas)
 
 
+def secao_regras() -> list[str]:
+    """Linhas de cobertura copiadas de results/regras.md."""
+    arq = PASTA_RES / "regras.md"
+    if not arq.exists():
+        return []
+    linhas = [l for l in arq.read_text().splitlines() if l.startswith(("| Sem rótulo", "| Com conflito"))]
+    return ["### Cobertura das regras no pool de treino", "", "| | Mensagens |", "| --- | --- |", *linhas, ""]
+
+
+def secao_atraso() -> list[str]:
+    """Conferência de atraso com as datas reais, se o arquivo de pedidos existir."""
+    md = ["### Conferência de atraso com datas reais de entrega", ""]
+    tri = PASTA_RES / "triagem.csv"
+    if not ARQUIVO_PEDIDOS.exists() or not tri.exists():
+        return md + ["Pulada: falta `data/raw/olist_orders_dataset.csv` (base pública da Olist no Kaggle).", ""]
+    r = conferir_atraso(pd.read_csv(tri), pd.read_csv(ARQUIVO_PEDIDOS))
+    return md + [f"Entre as {r['n_atraso']} mensagens do pool classificadas como `nao_recebido_atraso`, "
+                 f"{fmt_pct(r['pct_atrasado_entre_atraso'])} são de pedidos de fato atrasados ou não entregues, "
+                 f"contra {fmt_pct(r['pct_atrasado_geral'])} no pool todo.", ""]
+
+
 def main():
     ouro = dados.carregar_ouro()
     linhas, detalhes = [], {}
@@ -122,6 +153,8 @@ def main():
             "F1 sem dúvida": fmt_pct(r["f1_sem_duvida"]),
             "F1 nas 53 humanas": fmt_pct(r["f1_humano"]),
             "Inválidas": fmt_pct(r["invalidas"]),
+            "Revisão": "-" if pd.isna(r["taxa_revisao"]) else fmt_pct(r["taxa_revisao"]),
+            "F1 sem revisão": "-" if pd.isna(r["f1_aceitas"]) else fmt_pct(r["f1_aceitas"]),
             "Latência mediana": f"{r['latencia_mediana_ms']:.0f} ms" if r["latencia_mediana_ms"] >= 1 else "< 1 ms",
             "_f1": r["f1_macro"],
         })
@@ -138,6 +171,7 @@ def main():
           f"{int(ouro.duvida.sum())} marcadas como dúvida. "
           "F1 macro com intervalo de 95% por bootstrap (1.000 reamostragens).", "",
           tabela_md(tab), "", "### F1 por categoria", "", tabela_md(por_classe, indice=True), ""]
+    md += secao_regras() + secao_atraso()
     (PASTA_RES / "resultados.md").write_text("\n".join(md))
     print("\n".join(md))
 

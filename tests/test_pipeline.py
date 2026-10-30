@@ -83,3 +83,17 @@ def test_baseline_aprende_padrao_simples():
     rotulos = ["nao_recebido_atraso"] * 20 + ["defeito_qualidade"] * 20 + ["item_faltando"] * 20
     m = treinar(textos, rotulos).best_estimator_
     assert list(m.predict(["o pedido não chegou", "chegou com defeito"])) == ["nao_recebido_atraso", "defeito_qualidade"]
+
+
+def test_avaliar_com_revisao():
+    ouro = pd.DataFrame({"review_id": ["a", "b"], "rotulo": ["outro", "item_faltando"], "duvida": [False, False]})
+    preds = pd.DataFrame({"review_id": ["a", "b"], "pred": ["outro", "outro"], "latencia_s": [0.0, 0.0], "revisao": [False, True]})
+    r = avaliar.avaliar(ouro, preds)
+    assert r["taxa_revisao"] == 0.5 and r["f1_aceitas"] == pytest.approx(1.0)
+
+
+def test_avaliar_sem_revisao_fica_nan():
+    ouro = pd.DataFrame({"review_id": ["a"], "rotulo": ["outro"], "duvida": [False]})
+    preds = pd.DataFrame({"review_id": ["a"], "pred": ["outro"], "latencia_s": [0.0]})
+    r = avaliar.avaliar(ouro, preds)
+    assert pd.isna(r["taxa_revisao"]) and pd.isna(r["f1_aceitas"])

@@ -42,5 +42,9 @@ def test_reproduzivel():
 
 def test_ids_lidos_para_regras_fora_do_ouro():
     ids = ids_lidos_para_regras()
-    assert 600 <= len(ids) <= 800
+    assert 800 <= len(ids) <= 1000
     assert not ids & set(dados.amostra_ouro(dados.reclamacoes()).review_id)
+
+
+def test_ids_lidos_inclui_a_semente_padrao():
+    assert set(dados.amostra_desenvolvimento(200, dados.SEED).review_id) <= ids_lidos_para_regras()

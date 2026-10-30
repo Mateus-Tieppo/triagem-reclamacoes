@@ -23,7 +23,7 @@ from . import dados
 from .modelo import CANDIDATOS, GRADES, montar_candidato, palavras_que_pesaram, probabilidades
 from .regras import rotular
 from .rotulagem import ARQUIVO_ROTULOS
-from .selecao import SEED_NOVO
+from .selecao import SEED_NOVO, ids_lidos_para_regras
 from .triagem import decidir_modelo, escolher_limiar
 
 FORMAS = {"A": None, "B0.1": 0.1, "B0.3": 0.3}
@@ -44,13 +44,19 @@ def montar_treino(rotulos: pd.DataFrame, pool: pd.DataFrame, peso_regras: Option
     return textos, rots, np.asarray(pesos)
 
 
+def conjunto_dev(rotulos: pd.DataFrame, pool: pd.DataFrame, excluir: set[str]) -> pd.DataFrame:
+    """Desenvolvimento com texto, sem as mensagens lidas para escrever as regras."""
+    dev = rotulos[(rotulos.grupo == "dev") & ~rotulos.review_id.isin(excluir)]
+    return dev.merge(pool[["review_id", "texto"]], on="review_id")
+
+
 def _f1(y, p) -> float:
     return float(f1_score(y, p, labels=sorted(set(y) | set(p)), average="macro", zero_division=0))
 
 
 def comparar(rotulos: pd.DataFrame, pool: pd.DataFrame):
     """F1 no desenvolvimento de cada par (modelo, forma de treino) e o melhor estimador de cada um."""
-    dev = rotulos[rotulos.grupo == "dev"].merge(pool[["review_id", "texto"]], on="review_id")
+    dev = conjunto_dev(rotulos, pool, ids_lidos_para_regras())
     linhas, modelos = [], {}
     for forma, peso in FORMAS.items():
         textos, rots, pesos = montar_treino(rotulos, pool, peso)

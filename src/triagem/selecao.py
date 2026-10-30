@@ -22,9 +22,9 @@ ARQUIVO_PARA_ROTULAR = dados.RAIZ / "data" / "para_rotular.csv"
 
 
 def ids_lidos_para_regras() -> set[str]:
-    """Mensagens lidas para escrever as regras (amostras de desenvolvimento das sementes 0 a 3)."""
+    """Mensagens lidas para escrever as regras: amostras de desenvolvimento das sementes 0 a 3 e da padrão."""
     ids: set[str] = set()
-    for s in range(4):
+    for s in (0, 1, 2, 3, dados.SEED):
         ids |= set(dados.amostra_desenvolvimento(200, s).review_id)
     return ids
 

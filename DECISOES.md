@@ -13,7 +13,7 @@ A supervisão fraca parou em 54,9% de F1 macro no ouro, porque o modelo copiava 
 
 ### O que foi rotulado
 `src/triagem/selecao.py` escolheu 3.000 mensagens do pool de treino, nenhuma do ouro:
-- **500 de desenvolvimento**, sorteadas fora das mensagens lidas para escrever as regras. É nelas que escolhemos modelo, forma de treino e limiar.
+- **500 de desenvolvimento**, sorteadas fora das mensagens lidas para escrever as regras. A revisão final achou 11 delas numa amostra que pode ter sido lida para as regras; essas saíram, e a escolha usa 489. É nelas que escolhemos modelo, forma de treino e limiar.
 - **1.000 de treino sorteadas.**
 - **1.500 de treino em que o modelo da supervisão fraca tinha menos certeza**, para cobrir os casos difíceis.
 
@@ -26,11 +26,11 @@ Cada lote de 150 foi para um agente do Claude (Opus 5.5, outubro de 2026) que re
 
 | Modelo | Forma | F1 macro no desenvolvimento |
 | --- | --- | --- |
-| **SVM linear calibrado** | **A** | **71,0%** |
-| Naive Bayes complementar | B, peso 0,1 | 70,4% |
-| Naive Bayes complementar | A | 68,7% |
+| **SVM linear calibrado** | **A** | **70,8%** |
+| Naive Bayes complementar | B, peso 0,1 | 70,2% |
+| Naive Bayes complementar | A | 68,5% |
 | Naive Bayes complementar | B, peso 0,3 | 68,0% |
-| Regressão logística | A | 67,8% |
+| Regressão logística | A | 67,6% |
 | SVM linear calibrado | B, peso 0,1 | 66,9% |
 | Regressão logística | B, peso 0,1 | 66,4% |
 | SVM linear calibrado | B, peso 0,3 | 66,2% |
@@ -39,14 +39,14 @@ Cada lote de 150 foi para um agente do Claude (Opus 5.5, outubro de 2026) que re
 Venceu o SVM com só os rótulos do Claude. Somar os rótulos das regras piorou quase sempre. O modelo final treina só com as 2.500 de treino; o desenvolvimento não entra.
 
 ### Decisão e fila de revisão
-O modelo decide sempre. A mensagem vai para revisão quando a certeza fica abaixo de 0,80 (mesmo critério por faixas da versão anterior, agora calculado no desenvolvimento) ou quando o texto não tem letras. No pool, 45,7% vão para revisão, todas por certeza baixa.
+O modelo decide sempre. A mensagem vai para revisão quando a certeza fica abaixo de 0,80 (mesmo critério por faixas da versão anterior, agora calculado no desenvolvimento) ou quando o texto não tem letras. No pool, 45,7% vão para revisão, todas por certeza baixa. Esse número está um pouco subestimado: nas 2.500 mensagens de treino a predição é do próprio modelo que as viu, e a certeza fica mais alta.
 
 ### Resultados no ouro
 Avaliado uma única vez, no fim.
 
 | Abordagem | F1 macro | F1 nas 53 do Mateus | Acerto nas 53 | Revisão | Latência |
 | --- | --- | --- | --- | --- | --- |
-| **Rótulos do Claude + SVM** | **63,2%** (55,2% a 70,4%) | 45,4% | 60,4% | 50,0% | 2 ms |
+| **Rótulos do Claude + SVM** | **63,2%** (55,2% a 70,4%) | 45,4% | 60,4% | 50,0% | 1 ms |
 | Supervisão fraca (versão anterior) | 54,9% (47,9% a 61,1%) | 44,9% | - | 33,3% | 1 ms |
 | Qwen 2.5 7B zero-shot | 74,9% (67,8% a 80,7%) | 60,5% | - | - | 1.041 ms |
 
@@ -54,8 +54,8 @@ O que os números dizem:
 1. **Não passamos do Qwen.** Nas 53 do Mateus, que é a régua honesta, o modelo novo faz 45,4% contra 60,5% do Qwen.
 2. **Melhorou bastante no geral:** de 54,9% para 63,2% de F1 no ouro. Mas 247 das 300 mensagens do ouro também foram rotuladas pelo Claude, então parte desse ganho é o modelo concordar com o jeito do Claude rotular. Nas 53 do Mateus o ganho foi de só 0,5 ponto.
 3. **Quando o modelo decide sozinho, ele acerta muito:** 91,3% de acerto nas 150 mensagens do ouro que não foram para revisão, contra 65,3% nas que foram. A fila de revisão separa bem o fácil do difícil; o preço é mandar metade para um humano.
-4. **O F1 caiu do desenvolvimento (71,0%) para o ouro (63,2%).**
-5. **As categorias pequenas continuam fracas:** `atendimento_loja` (20,0%), `outro` (44,4%) e `cobranca_cancelamento` (53,3%). O desenvolvimento teve só 2 mensagens de `atendimento_loja` e 16 de `cobranca_cancelamento`.
+4. **O F1 caiu do desenvolvimento (70,8%) para o ouro (63,2%).**
+5. **As categorias pequenas continuam fracas:** `atendimento_loja` (20,0%), `outro` (44,4%) e `cobranca_cancelamento` (53,3%). O desenvolvimento teve muito poucas mensagens de `atendimento_loja` e `cobranca_cancelamento`.
 
 A coluna "F1 sem revisão" de `results/resultados.md` (51,1%) é um F1 macro só sobre as categorias que aparecem nas aceitas e fica baixa porque quase nenhuma mensagem das categorias pequenas é aceita. O acerto nas aceitas (91,3%) descreve melhor o que acontece.
 

@@ -4,7 +4,7 @@
 
 Quando um cliente reclama, alguém precisa ler a mensagem e mandar para o time certo: logística, estoque, financeiro ou atendimento. Este projeto automatiza essa triagem em português com um modelo clássico que roda num notebook, **sem LLM na triagem e sem custo por mensagem**.
 
-- **Custo zero na triagem:** sem API, sem GPU e sem LLM, em cerca de 2 milissegundos por mensagem.
+- **Custo zero na triagem:** sem API, sem GPU e sem LLM, em cerca de 1 milissegundo por mensagem.
 - **Humano na dúvida:** a mensagem incerta vai para uma fila de revisão. Nas que o modelo decide sozinho, ele acerta 91,3%.
 - **Rótulos de treino feitos uma vez pelo Claude (Anthropic).** A LLM entra só no desenvolvimento, para rotular 3.000 mensagens; a triagem não depende dela.
 
@@ -14,7 +14,7 @@ As decisões, com os porquês e o que ficou de fora, estão em [DECISOES.md](DEC
 
 1. **Rotulagem (uma vez):** 3.000 reclamações do treino rotuladas pelo Claude com o mesmo guia usado no conjunto de teste. 500 delas ficam separadas como conjunto de desenvolvimento.
 2. **Variáveis:** TF-IDF de palavras e de caracteres sobre o texto normalizado, mais 43 regras legíveis ("não recebi", "só veio um", "veio quebrado", "estorno") como colunas 0/1.
-3. **Modelo:** comparei SVM linear, regressão logística e Naive Bayes no desenvolvimento; venceu o SVM linear calibrado (71,0% de F1 macro no desenvolvimento).
+3. **Modelo:** comparei SVM linear, regressão logística e Naive Bayes no desenvolvimento; venceu o SVM linear calibrado (70,8% de F1 macro no desenvolvimento).
 4. **Decisão:** o modelo decide e dá a certeza. Abaixo de 0,80 de certeza, ou sem texto, a mensagem vai para revisão.
 
 A saída é `results/triagem.csv`: uma linha por reclamação com categoria, certeza, se vai para revisão, o motivo e as palavras que mais pesaram.
@@ -26,7 +26,7 @@ Conjunto de teste de 300 reclamações, lido só na avaliação final. F1 macro 
 | Abordagem | F1 macro | F1 nas 53 rotuladas por mim | Latência |
 | --- | --- | --- | --- |
 | Qwen 2.5 7B zero-shot (LLM local) | 74,9% (67,8% a 80,7%) | **60,5%** | 1.041 ms |
-| **ML clássico com rótulos do Claude** | **63,2%** (55,2% a 70,4%) | 45,4% | 2 ms |
+| **ML clássico com rótulos do Claude** | **63,2%** (55,2% a 70,4%) | 45,4% | 1 ms |
 | Supervisão fraca, só regras (versão anterior) | 54,9% (47,9% a 61,1%) | 44,9% | 1 ms |
 
 1. **O Qwen continua na frente.** Nas 53 mensagens rotuladas por mim, a comparação mais honesta, ele faz 60,5% contra 45,4%.
@@ -106,4 +106,4 @@ Código sob a licença MIT (veja `LICENSE`). Os dados em `data/` derivam da base
 
 ## Ferramentas
 
-Python, pandas, scikit-learn e Matplotlib. O Claude (Anthropic) foi usado como apoio no código e para rotular o treino e 247 das 300 mensagens de teste, como descrito acima.
+Python, pandas, scikit-learn e Matplotlib. O Claude (Anthropic) foi usado como apoio no código, para escrever as regras a partir de amostras do treino e para rotular o treino e 247 das 300 mensagens de teste, como descrito acima.

@@ -53,3 +53,10 @@ def test_palavras_no_svm_calibrado():
     from triagem.modelo import palavras_que_pesaram
     m = montar_candidato("svm").fit(TEXTOS, ROTS)
     assert "quebrado" in palavras_que_pesaram(m, "veio quebrado", "defeito_qualidade")
+
+
+def test_conjunto_dev_tira_ids_lidos():
+    from triagem.desenvolvimento import conjunto_dev
+    rot = pd.DataFrame({"review_id": ["a", "b"], "rotulo": ["outro", "outro"], "grupo": ["dev", "dev"]})
+    pool = pd.DataFrame({"review_id": ["a", "b"], "texto": ["x", "y"]})
+    assert list(conjunto_dev(rot, pool, {"a"}).review_id) == ["b"]

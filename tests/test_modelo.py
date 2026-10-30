@@ -30,3 +30,25 @@ def test_palavras_que_pesaram():
     m = treinar(TEXTOS, ROTS).best_estimator_
     assert "quebrado" in palavras_que_pesaram(m, "veio quebrado", "defeito_qualidade")
     assert palavras_que_pesaram(m, "veio quebrado", "outro") == []
+
+
+from triagem.modelo import CANDIDATOS, VariaveisRegras, montar_candidato  # noqa: E402
+from triagem.regras import REGRAS  # noqa: E402
+
+
+def test_variaveis_regras():
+    m = VariaveisRegras().transform(["não chegou", "xyz"])
+    assert m.shape == (2, len(REGRAS)) and m[0].sum() >= 1 and m[1].sum() == 0
+
+
+@pytest.mark.parametrize("nome", CANDIDATOS)
+def test_candidato_tem_7_colunas(nome):
+    m = montar_candidato(nome).fit(TEXTOS, ROTS)
+    p = probabilidades(m, ["não chegou"])
+    assert list(p.columns) == ROTULOS and p.loc[0, "outro"] == 0
+
+
+def test_palavras_no_candidato_logistica():
+    m = montar_candidato("logistica").fit(TEXTOS, ROTS)
+    assert "quebrado" in palavras_que_pesaram(m, "veio quebrado", "defeito_qualidade")
+    assert palavras_que_pesaram(montar_candidato("nb").fit(TEXTOS, ROTS), "veio quebrado", "defeito_qualidade") == []

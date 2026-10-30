@@ -1,17 +1,17 @@
-## Escolha no desenvolvimento (489 mensagens rotuladas pelo Claude)
+## Escolha no desenvolvimento (467 mensagens rotuladas pelo Claude)
 
 Forma A: só os rótulos do Claude. Forma B: mais os rótulos das regras no resto do pool, com o peso indicado.
 
 | Modelo | Forma de treino | F1 macro no desenvolvimento | Hiperparâmetros |
 | --- | --- | --- | --- |
-| svm | A | 70,8% | {'clf__estimator__C': 0.3} |
-| nb | B0.1 | 70,2% | {'clf__alpha': 0.1} |
-| nb | A | 68,5% | {'clf__alpha': 0.1} |
-| nb | B0.3 | 68,0% | {'clf__alpha': 0.1} |
-| logistica | A | 67,6% | {'clf__C': 30} |
-| svm | B0.1 | 66,9% | {'clf__estimator__C': 1} |
-| logistica | B0.1 | 66,4% | {'clf__C': 30} |
-| svm | B0.3 | 66,2% | {'clf__estimator__C': 1} |
-| logistica | B0.3 | 65,9% | {'clf__C': 30} |
+| logistica | A | 75,7% | {'clf__C': 10} |
+| nb | B0.1 | 72,5% | {'clf__alpha': 0.1} |
+| nb | B0.3 | 70,1% | {'clf__alpha': 0.1} |
+| svm | B0.1 | 68,6% | {'clf__estimator__C': 1} |
+| logistica | B0.1 | 68,2% | {'clf__C': 30} |
+| logistica | B0.3 | 67,9% | {'clf__C': 30} |
+| svm | B0.3 | 66,7% | {'clf__estimator__C': 1} |
+| svm | A | 66,1% | {'clf__estimator__C': 0.1} |
+| nb | A | 60,0% | {'clf__alpha': 0.1} |
 
-Escolhido: svm, forma A. Limiar de certeza: 0.8.
+Escolhido: logistica, forma A. Limiar de certeza: 0.8.

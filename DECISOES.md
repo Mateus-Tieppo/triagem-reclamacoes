@@ -2,9 +2,50 @@
 
 O que decidimos, por quê e o que ficou de fora. Os números saem de `make tudo` (sem Ollama e sem chamar o Claude) e dos arquivos em `results/`.
 
-A versão atual treina o modelo com rótulos feitos pelo Claude. A versão anterior, com supervisão fraca (só regras, sem LLM nenhuma), está logo abaixo como histórico.
+A versão atual usa um guia de rotulagem calibrado entre o Mateus e o Claude (8 categorias, com `sem_estoque`) e treina o modelo clássico com rótulos do Claude feitos nesse guia. As versões anteriores ficam abaixo como histórico.
 
-## Versão atual: treino com rótulos do Claude
+## Versão atual: guia calibrado (v4.1) e treino com rótulos do Claude
+
+### Por que mexer nos rótulos
+Na versão anterior, o Mateus e o Claude concordavam em só 64% das mensagens, e em 33% das difíceis. O modelo aprendia o jeito do Claude e era cobrado pelo jeito do Mateus, então nenhuma troca de algoritmo resolvia. O problema era o guia, que deixava margem para decidir de jeitos diferentes.
+
+### Calibração do guia
+Três rodadas em mensagens do treino (nunca do teste). Em cada uma, o Mateus e um agente do Claude rotularam as mesmas mensagens às cegas; as divergências viraram regras. Histórico completo em [docs/guia-rotulagem.md](docs/guia-rotulagem.md).
+
+| Rodada | Guia | Mensagens | Concordância na principal | Kappa | Contando a secundária |
+| --- | --- | --- | --- | --- | --- |
+| Antes | 7 categorias, sem desempate | 12 difíceis | 33% | | |
+| 1 | v2: categoria `sem_estoque` e ordem da entrega | 40 | 72,5% | 0,68 | 82,5% |
+| 2 | v3: exceções escolhidas em tese | 20 | 50,0% | 0,42 | 80,0% |
+| 3 | v4: uma regra só, a da origem | 20 | 75,0% | 0,69 | 90,0% |
+
+A rodada 2 foi a mais útil: as exceções que pareciam boas em tese contradiziam o jeito como o Mateus rotula na prática, e a v4 voltou a uma regra única. Kappa de 0,69 é concordância substancial.
+
+**Guia v4.1, em resumo:** quando há mais de um problema, vale o primeiro na ordem `sem_estoque`, entrega, item faltando, produto errado, defeito; atendimento e cobrança só são o rótulo quando são o único problema; comentário leve nunca vence problema concreto; engano do consumidor sem diferença real é `outro`. Cada mensagem tem uma principal e, quando houver, uma secundária.
+
+### Rotulagem com o guia novo
+- **Treino:** os 3.000 do treino foram rotulados de novo pelo Claude (11,7% mudaram; dúvida caiu de 28% para 14%; 18% com secundária). Os antigos ficam em `data/rotulos_claude_v1.csv`.
+- **Teste:** o Mateus revisou as 53 dele no guia novo (mudou 15); as outras 247 foram rotuladas de novo pelo Claude. Os rótulos antigos ficam na coluna `rotulo_v1` de `data/ouro.csv`.
+- **LLMs:** Qwen e Llama rodaram de novo com o guia v4.1 no prompt, para a comparação continuar justa.
+
+### Resultado
+Mesmo pipeline da versão anterior (TF-IDF, regras como variáveis, três modelos comparados no desenvolvimento). Venceu a regressão logística só com os rótulos do Claude: 75,7% de F1 macro no desenvolvimento (antes 70,8%).
+
+| Abordagem | Acurácia nas 300 | F1 macro nas 300 | Acurácia nas 53 do Mateus | F1 macro nas 53 | Latência |
+| --- | --- | --- | --- | --- | --- |
+| **ML clássico, guia v4.1** | **82,3%** | 65,7% (56,6% a 73,4%) | **75,5%** | 50,7% | < 1 ms |
+| Qwen 2.5 7B zero-shot, guia v4.1 | 81,3% | **72,9%** (65,8% a 79,1%) | **75,5%** | **56,0%** | 1.123 ms |
+| Qwen 2.5 7B few-shot, guia v4.1 | 83,0% | 73,6% (65,5% a 80,2%) | 75,5% | 55,1% | 1.058 ms |
+| Llama 3.2 3B zero-shot, guia v4.1 | 66,0% | 52,9% (45,3% a 60,1%) | 58,5% | 38,0% | 517 ms |
+
+1. **Na acurácia, o modelo clássico empata com o Qwen.** Nas 53 do Mateus, os dois acertam 75,5%; nas 300, o clássico faz 82,3% contra 81,3% do Qwen zero-shot. Roda em menos de 1 ms, contra cerca de 1 segundo.
+2. **No F1 macro, o Qwen continua na frente** (56,0% contra 50,7% nas 53). Essa métrica dá o mesmo peso a cada categoria, e o Qwen vai melhor nas pequenas: `sem_estoque`, `atendimento_loja` e `outro`.
+3. **A fila de revisão ficou bem menor:** 20,9% do pool (antes 45,7%). No teste, o modelo decide sozinho 72% das mensagens e acerta 90,3% delas; nas que vão para revisão, acerta 61,9%.
+4. **Ainda vale o aviso:** 247 das 300 mensagens do teste foram rotuladas pelo Claude, que também rotulou o treino. A comparação honesta é nas 53 do Mateus, que são poucas: lá a diferença de acurácia é zero e a de F1 tem intervalo largo.
+
+---
+
+## Versão 2: treino com rótulos do Claude (guia antigo)
 
 ### A decisão
 **O Claude rotula o treino uma única vez; a triagem continua só com ML clássico, local e de graça.**

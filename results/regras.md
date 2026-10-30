@@ -1,21 +1,23 @@
-## Cobertura das regras (10453 mensagens do pool de treino)
+## Cobertura das regras (10451 mensagens do pool de treino)
 
 | Categoria | Mensagens |
 | --- | --- |
-| nao_recebido_atraso | 3731 (35,7%) |
-| item_faltando | 1185 (11,3%) |
-| produto_errado | 832 (8,0%) |
-| defeito_qualidade | 1035 (9,9%) |
-| cobranca_cancelamento | 417 (4,0%) |
-| atendimento_loja | 233 (2,2%) |
-| outro | 167 (1,6%) |
-| Sem rótulo | 2853 (27,3%) |
-| Com conflito | 581 (5,6%) |
+| sem_estoque | 195 (1,9%) |
+| nao_recebido_atraso | 3695 (35,4%) |
+| item_faltando | 1180 (11,3%) |
+| produto_errado | 825 (7,9%) |
+| defeito_qualidade | 1034 (9,9%) |
+| cobranca_cancelamento | 364 (3,5%) |
+| atendimento_loja | 227 (2,2%) |
+| outro | 166 (1,6%) |
+| Sem rótulo | 2765 (26,5%) |
+| Com conflito | 627 (6,0%) |
 
 ### Disparos por regra
 
 | Regra | Categoria | Disparos |
 | --- | --- | --- |
+| sem_estoque | sem_estoque | 195 |
 | nao_recebi | nao_recebido_atraso | 1704 |
 | nao_chegou | nao_recebido_atraso | 588 |
 | nao_entregue | nao_recebido_atraso | 742 |

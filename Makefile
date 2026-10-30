@@ -6,7 +6,7 @@ export PYTHONPATH := src
 GRANDE ?= qwen2.5:7b
 PEQUENO ?= llama3.2:3b
 
-.PHONY: instalar testes modelos llm prata baseline regras triagem avaliar tudo
+.PHONY: instalar testes modelos llm prata baseline regras supervisao selecionar treinar avaliar tudo
 
 $(PY):
 	python3 -m venv $(VENV)
@@ -37,10 +37,16 @@ baseline: instalar
 regras: instalar
 	$(PY) -m triagem.regras
 
-triagem: instalar
+supervisao: instalar
 	$(PY) -m triagem.triagem
+
+selecionar: instalar
+	$(PY) -m triagem.selecao
+
+treinar: instalar
+	$(PY) -m triagem.desenvolvimento
 
 avaliar: instalar
 	$(PY) -m triagem.avaliar
 
-tudo: testes regras triagem avaliar
+tudo: testes regras supervisao treinar avaliar

@@ -28,7 +28,7 @@ A rodada 2 piorou, e foi a que mais ensinou: as regras que eu escolhi no papel c
 
 1. **Rotulagem (uma vez):** 3.000 reclamações do treino rotuladas pelo Claude com o guia calibrado. Parte delas fica separada como conjunto de desenvolvimento.
 2. **Variáveis:** TF-IDF de palavras e de caracteres sobre o texto normalizado, mais 44 regras legíveis ("não recebi", "só veio um", "sem estoque", "estorno") como colunas 0/1.
-3. **Modelo:** comparei regressão logística, SVM linear e Naive Bayes no desenvolvimento; venceu a regressão logística (75,7% de F1 macro no desenvolvimento).
+3. **Modelo:** comparei regressão logística, SVM linear e Naive Bayes no desenvolvimento; venceu a regressão logística (73,8% de F1 macro no desenvolvimento).
 4. **Decisão:** o modelo decide e dá a certeza. Abaixo de 0,80 de certeza, ou sem texto, a mensagem vai para revisão.
 
 A saída é `results/triagem.csv`: uma linha por reclamação com categoria, certeza, se vai para revisão, o motivo e as palavras que mais pesaram.
@@ -46,7 +46,7 @@ Conjunto de teste de 300 reclamações, lido só na avaliação final. Os LLMs r
 1. **Na acurácia, empata com o Qwen** e passa do Llama, rodando mais de mil vezes mais rápido.
 2. **No F1 macro, o Qwen ainda ganha.** Essa métrica dá o mesmo peso a cada categoria, e o Qwen vai melhor nas pequenas (`sem_estoque`, `atendimento_loja`, `outro`), que têm poucos exemplos.
 3. **A fila de revisão é pequena e confiável:** no teste, o modelo decide sozinho 72% das mensagens e acerta 90,3% delas.
-4. **Evolução do modelo nas 53 rotuladas por mim:** F1 de 44,9% (só regras) para 45,4% (rótulos do Claude, guia antigo) e 50,7% (guia calibrado).
+4. **Nas 53 rotuladas por mim, as versões do projeto ficam próximas.** Medidas no mesmo gabarito, a versão só com regras faz 52,1% de F1 e 75,5% de acurácia, e esta, 50,7% e 75,5%. Com 53 mensagens, essas diferenças estão dentro do ruído. Onde o modelo novo se separa é nas 300: 82,3% de acurácia contra 71,3% da versão só com regras.
 
 Na prática: o modelo clássico resolve sozinho quase três quartos das reclamações com acerto alto, a custo zero, e manda o resto para uma pessoa. O Qwen é um pouco melhor nas categorias raras, mas precisa de um computador que rode um modelo de 7 bilhões de parâmetros.
 

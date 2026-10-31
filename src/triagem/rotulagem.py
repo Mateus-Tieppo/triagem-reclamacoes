@@ -6,8 +6,8 @@
     python -m triagem.rotulagem consistencia-juntar    # data/rotulos_claude_consistencia.csv
 
 Cada lote vai para um agente que lê só os textos e o guia de rotulagem e grava
-rotulos_XX.csv (review_id, rotulo, duvida). A junção falha se faltar, sobrar ou
-repetir algum id, ou se algum rótulo não for uma das 7 categorias.
+rotulos_XX.csv (review_id, rotulo, duvida e, opcional, secundaria). A junção falha se
+faltar, sobrar ou repetir algum id, ou se algum rótulo não for uma das categorias.
 """
 
 from __future__ import annotations

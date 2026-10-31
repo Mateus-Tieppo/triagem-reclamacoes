@@ -6,7 +6,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ollama/qwen2.5-7b (few) | 83,0% | 73,6% (65,5% a 80,2%) | 78,1% | 55,1% | 0,0% | - | - | 1058 ms |
 | ollama/qwen2.5-7b (zero) | 81,3% | 72,9% (65,8% a 79,1%) | 76,6% | 56,0% | 0,0% | - | - | 1123 ms |
-| rotulos-claude/logistica (forma-A) | 82,3% | 65,7% (56,6% a 73,4%) | 67,3% | 50,7% | 0,0% | 28,0% | 71,0% | < 1 ms |
+| rotulos-claude/logistica (forma-A) | 82,3% | 65,7% (56,6% a 73,4%) | 67,3% | 50,7% | 0,0% | 28,0% | 71,0% | 1 ms |
 | supervisao-fraca/logistica (sozinho) | 72,0% | 56,5% (48,3% a 63,4%) | 60,9% | 49,9% | 0,0% | - | - | < 1 ms |
 | supervisao-fraca/hibrido (final) | 71,3% | 55,0% (46,9% a 61,3%) | 59,2% | 52,1% | 0,0% | 32,3% | 73,6% | 1 ms |
 | ollama/llama3.2-3b (few) | 64,7% | 54,1% (45,9% a 61,0%) | 55,3% | 37,4% | 0,0% | - | - | 511 ms |
@@ -28,7 +28,7 @@
 
 Atenção: 247 das 300 mensagens do ouro foram rotuladas pelo Claude, que também rotulou o treino do modelo novo (`rotulos-claude`). A comparação honesta com o Qwen é na coluna das rotuladas pelo Mateus.
 
-F1 macro no desenvolvimento do modelo escolhido (logistica, forma A): 75,7%. Detalhes em `results/desenvolvimento.md`.
+F1 macro no desenvolvimento do modelo escolhido (logistica, forma A): 73,8%. Detalhes em `results/desenvolvimento.md`.
 
 ### Cobertura das regras no pool de treino
 

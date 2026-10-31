@@ -46,5 +46,13 @@ def test_ids_lidos_para_regras_fora_do_ouro():
     assert not ids & set(dados.amostra_ouro(dados.reclamacoes()).review_id)
 
 
-def test_ids_lidos_inclui_a_semente_padrao():
-    assert set(dados.amostra_desenvolvimento(200, dados.SEED).review_id) <= ids_lidos_para_regras()
+def test_ids_lidos_nao_mudam_com_o_pool():
+    # 5 amostras de 200 (sementes 0 a 3 e 42) sobre o pool da época, com sobreposição: 957 ids.
+    assert len(ids_lidos_para_regras()) == 957
+
+
+def test_ids_lidos_vem_de_arquivo_congelado():
+    import pandas as pd
+    from triagem.selecao import ARQUIVO_IDS_LIDOS
+    congelados = set(pd.read_csv(ARQUIVO_IDS_LIDOS, dtype={"review_id": str}).review_id)
+    assert ids_lidos_para_regras() == congelados and len(congelados) > 900

@@ -29,18 +29,18 @@ A rodada 2 foi a mais útil: as exceções que pareciam boas em tese contradizia
 - **LLMs:** Qwen e Llama rodaram de novo com o guia v4.1 no prompt, para a comparação continuar justa.
 
 ### Resultado
-Mesmo pipeline da versão anterior (TF-IDF, regras como variáveis, três modelos comparados no desenvolvimento). Venceu a regressão logística só com os rótulos do Claude: 75,7% de F1 macro no desenvolvimento (antes 70,8%).
+Mesmo pipeline da versão anterior (TF-IDF, regras como variáveis, três modelos comparados no desenvolvimento). Venceu a regressão logística só com os rótulos do Claude: 73,8% de F1 macro no desenvolvimento (antes 70,8%). O desenvolvimento usa 489 mensagens: tira as lidas para escrever as regras, cuja lista fica congelada em `data/ids_lidos_regras.csv`.
 
 | Abordagem | Acurácia nas 300 | F1 macro nas 300 | Acurácia nas 53 do Mateus | F1 macro nas 53 | Latência |
 | --- | --- | --- | --- | --- | --- |
-| **ML clássico, guia v4.1** | **82,3%** | 65,7% (56,6% a 73,4%) | **75,5%** | 50,7% | < 1 ms |
-| Qwen 2.5 7B zero-shot, guia v4.1 | 81,3% | **72,9%** (65,8% a 79,1%) | **75,5%** | **56,0%** | 1.123 ms |
-| Qwen 2.5 7B few-shot, guia v4.1 | 83,0% | 73,6% (65,5% a 80,2%) | 75,5% | 55,1% | 1.058 ms |
+| **ML clássico, guia v4.1** | 82,3% | 65,7% (56,6% a 73,4%) | **75,5%** | 50,7% | **< 1 ms** |
+| Qwen 2.5 7B zero-shot, guia v4.1 | 81,3% | 72,9% (65,8% a 79,1%) | **75,5%** | **56,0%** | 1.123 ms |
+| Qwen 2.5 7B few-shot, guia v4.1 | **83,0%** | **73,6%** (65,5% a 80,2%) | **75,5%** | 55,1% | 1.058 ms |
 | Llama 3.2 3B zero-shot, guia v4.1 | 66,0% | 52,9% (45,3% a 60,1%) | 58,5% | 38,0% | 517 ms |
 
 1. **Na acurácia, o modelo clássico empata com o Qwen.** Nas 53 do Mateus, os dois acertam 75,5%; nas 300, o clássico faz 82,3% contra 81,3% do Qwen zero-shot. Roda em menos de 1 ms, contra cerca de 1 segundo.
 2. **No F1 macro, o Qwen continua na frente** (56,0% contra 50,7% nas 53). Essa métrica dá o mesmo peso a cada categoria, e o Qwen vai melhor nas pequenas: `sem_estoque`, `atendimento_loja` e `outro`.
-3. **A fila de revisão ficou bem menor:** 20,9% do pool (antes 45,7%). No teste, o modelo decide sozinho 72% das mensagens e acerta 90,3% delas; nas que vão para revisão, acerta 61,9%.
+3. **A fila de revisão ficou bem menor:** cerca de 24% das mensagens que o modelo não viu no treino (antes 45,7% no pool todo; o número do pool todo, 20,9%, é otimista porque inclui as 2.500 do treino). No teste, o modelo decide sozinho 72% das mensagens e acerta 90,3% delas; nas que vão para revisão, acerta 61,9%.
 4. **Ainda vale o aviso:** 247 das 300 mensagens do teste foram rotuladas pelo Claude, que também rotulou o treino. A comparação honesta é nas 53 do Mateus, que são poucas: lá a diferença de acurácia é zero e a de F1 tem intervalo largo.
 
 ---

@@ -19,14 +19,16 @@ from .triagem import PASTA_SUPERVISAO
 SEED_NOVO = 2026
 N_DEV, N_ALEATORIO, N_INCERTO = 500, 1000, 1500
 ARQUIVO_PARA_ROTULAR = dados.RAIZ / "data" / "para_rotular.csv"
+ARQUIVO_IDS_LIDOS = dados.RAIZ / "data" / "ids_lidos_regras.csv"
 
 
 def ids_lidos_para_regras() -> set[str]:
-    """Mensagens lidas para escrever as regras: amostras de desenvolvimento das sementes 0 a 3 e da padrão."""
-    ids: set[str] = set()
-    for s in (0, 1, 2, 3, dados.SEED):
-        ids |= set(dados.amostra_desenvolvimento(200, s).review_id)
-    return ids
+    """Mensagens lidas para escrever as regras (amostras das sementes 0 a 3 e da padrão).
+
+    A lista fica congelada em data/ids_lidos_regras.csv, calculada sobre o pool da época em
+    que as regras foram escritas: mudar o few-shot muda o pool e embaralharia as amostras.
+    """
+    return set(pd.read_csv(ARQUIVO_IDS_LIDOS, dtype={"review_id": str}).review_id)
 
 
 def selecionar(pool: pd.DataFrame, certeza: pd.Series, excluir_do_dev: set[str]) -> pd.DataFrame:

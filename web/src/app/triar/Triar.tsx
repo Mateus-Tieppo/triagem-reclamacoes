@@ -40,6 +40,11 @@ export function Triar() {
   async function abrirArquivo(arquivo: File | undefined) {
     setErro("");
     if (!arquivo) return;
+    if (!/\.(csv|txt)$/i.test(arquivo.name)) {
+      setCsv(null);
+      setErro("Esse arquivo não é CSV. No Excel, use Salvar como e escolha CSV.");
+      return;
+    }
     try {
       const { colunas, linhas } = lerCsv(await arquivo.text());
       if (!linhas.length) throw new Error("O arquivo não tem linhas depois do cabeçalho.");

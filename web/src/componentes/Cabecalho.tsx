@@ -25,10 +25,10 @@ export function Cabecalho() {
         <Link href="/" className={estilos.marca} aria-label="TriIA, página inicial" translate="no">
           Tri<span className={estilos.ia}>IA</span>
         </Link>
-        <p className={`${estilos.fonte} codigo`} aria-live="polite">
+        <p className={`${estilos.fonte} codigo`}>
           {estado.fonte === "usuario" ? (
             <>
-              Seus dados · {numero.format(estado.painel?.total ?? 0)}{" "}
+              <span aria-live="polite">Seus dados · {numero.format(estado.painel?.total ?? 0)}</span>{" "}
               <button type="button" className={estilos.voltar} onClick={acoes.voltarParaOlist}>
                 voltar para a Olist
               </button>

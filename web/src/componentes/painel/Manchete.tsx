@@ -7,9 +7,9 @@ import type { MensagemTriada } from "@/dados/tipos";
 import estilos from "./Manchete.module.css";
 
 export function Manchete({ mensagens, origem }: { mensagens: MensagemTriada[]; origem: string }) {
-  const [segundos, setSegundos] = useState(30);
+  const [segundos, setSegundos] = useState("30");
   const campo = useId();
-  const r = calcularResumo(mensagens, segundos);
+  const r = calcularResumo(mensagens, Number(segundos));
   const tempo =
     r.horasPoupadas >= 10
       ? `${numero.format(Math.round(r.horasPoupadas))} horas`
@@ -42,7 +42,7 @@ export function Manchete({ mensagens, origem }: { mensagens: MensagemTriada[]; o
           min={1}
           max={600}
           value={segundos}
-          onChange={(e) => setSegundos(e.target.valueAsNumber)}
+          onChange={(e) => setSegundos(e.target.value)}
         />{" "}
         segundos para ler e encaminhar. <span className="apoio">É uma estimativa: troque o número se o seu time for mais rápido ou mais lento.</span>
       </p>

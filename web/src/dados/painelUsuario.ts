@@ -3,7 +3,7 @@ import { regrasQueDisparam } from "@/modelo/regras";
 import type { Predicao, RegraExportada } from "@/modelo/tipos";
 import { CATEGORIAS, type Categoria, type MensagemTriada, type Painel, type RegraTop } from "./tipos";
 
-/** Id estável pelo conteúdo, para uma correção continuar valendo se a pessoa enviar o mesmo texto de novo. */
+/** Id pela posição e pelo conteúdo: a correção volta a valer se a pessoa reenviar o mesmo arquivo. A posição separa textos repetidos. */
 function idDoTexto(texto: string, i: number): string {
   let h = 0x811c9dc5;
   for (let k = 0; k < texto.length; k++) h = Math.imul(h ^ texto.charCodeAt(k), 0x01000193);

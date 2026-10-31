@@ -30,10 +30,12 @@ export function ListaMensagens({
   const campo = useId();
   const termo = useDeferredValue(busca);
 
+  // Normaliza cada texto uma vez por lista, não a cada tecla.
+  const normalizados = useMemo(() => new Map(mensagens.map((m) => [m.id, normalizar(m.texto)])), [mensagens]);
   const filtradas = useMemo(() => {
     const t = normalizar(termo);
-    return t ? mensagens.filter((m) => normalizar(m.texto).includes(t)) : mensagens;
-  }, [mensagens, termo]);
+    return t ? mensagens.filter((m) => normalizados.get(m.id)!.includes(t)) : mensagens;
+  }, [mensagens, normalizados, termo]);
 
   const mover = useCallback(
     (id: string, categoria: Categoria) => {

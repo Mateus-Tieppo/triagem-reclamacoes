@@ -1,0 +1,93 @@
+.secao {
+  display: grid;
+  gap: var(--esp-4);
+  margin-bottom: var(--esp-8);
+  max-width: 64rem;
+}
+
+.secao h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.passos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--esp-2);
+}
+
+.passos li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--esp-3);
+  padding-block: var(--esp-4);
+  border-top: 1px dashed var(--linha);
+}
+
+.passos li > .codigo,
+.passos li > span {
+  padding-top: 0.3em;
+  color: var(--tinta-2);
+}
+
+.passos h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--esp-2);
+}
+
+.passos p {
+  max-width: 62ch;
+}
+
+.tabelaRolagem {
+  overflow-x: auto;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-cartao);
+  background: var(--cartao);
+}
+
+.tabela {
+  inline-size: 100%;
+  min-inline-size: 38rem;
+  border-collapse: collapse;
+}
+
+.tabela th,
+.tabela td {
+  padding: var(--esp-3) var(--esp-4);
+  text-align: right;
+  border-bottom: 1px dashed var(--linha);
+}
+
+.tabela th:first-child {
+  text-align: left;
+}
+
+.tabela thead th {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--tinta-2);
+  border-bottom: 1px solid var(--linha);
+}
+
+.tabela tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.tabela tr[data-destaque] th {
+  font-weight: 700;
+}
+
+
+.pontos {
+  display: grid;
+  gap: var(--esp-3);
+  padding-left: 1.25rem;
+  max-width: 70ch;
+}
+
+.secao a {
+  text-underline-offset: 3px;
+}

@@ -13,7 +13,7 @@ As decisões, com os porquês e o que ficou de fora, estão em [DECISOES.md](DEC
 
 ## TriIA: a ferramenta
 
-**[Abrir a TriIA](LINK_DA_FERRAMENTA)** · Reclamações organizadas. Decisões inteligentes.
+**[Abrir a TriIA](https://triia-swart.vercel.app)** · Reclamações organizadas. Decisões inteligentes.
 
 ![Painel da TriIA com 7.453 reclamações triadas](docs/screenshots/desktop-painel.png)
 

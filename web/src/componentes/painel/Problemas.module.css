@@ -1,0 +1,53 @@
+.titulo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--esp-2);
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--esp-4);
+  margin-top: var(--esp-5);
+}
+
+.bloco {
+  display: grid;
+  align-content: start;
+  gap: var(--esp-3);
+  padding: var(--esp-5);
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-cartao);
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  font-size: 1.125rem;
+  font-stretch: 100%;
+  letter-spacing: 0;
+}
+
+.regras {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.regras li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  padding-block: var(--esp-2);
+  border-top: 1px dashed var(--linha);
+}
+
+.exemplo {
+  margin: 0;
+  padding-top: var(--esp-3);
+  color: var(--tinta-2);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,52 @@
+.manchete {
+  display: grid;
+  gap: var(--esp-4);
+  margin-bottom: var(--esp-8);
+}
+
+.titulo {
+  font-size: clamp(2.25rem, 1.2rem + 4.4vw, 4.25rem);
+  font-weight: 750;
+  line-height: 1.02;
+  max-width: 17ch;
+}
+
+.destaque {
+  color: var(--tinta-2);
+}
+
+.origem,
+.premissa {
+  font-size: 1.0625rem;
+  max-width: 58ch;
+}
+
+.premissa {
+  padding-top: var(--esp-4);
+  border-top: 1px dashed var(--linha);
+}
+
+.segundos {
+  width: 4.5ch;
+  padding: 2px var(--esp-1);
+  font-size: 1rem;
+  text-align: center;
+  color: var(--tinta-etiqueta);
+  background: var(--etiqueta);
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--raio-etiqueta);
+  appearance: textfield;
+}
+
+.segundos::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

@@ -1,31 +1,34 @@
 "use client";
 
-import { CabecalhoSecao } from "@/componentes/CabecalhoSecao";
-import { CartaoNumero } from "@/componentes/CartaoNumero";
+import { Manchete } from "@/componentes/painel/Manchete";
+import { PorFila } from "@/componentes/painel/PorFila";
+import { PorMes } from "@/componentes/painel/PorMes";
+import { Problemas } from "@/componentes/painel/Problemas";
 import { useFonteDeDados } from "@/dados/FonteDeDados";
-
-const numero = new Intl.NumberFormat("pt-BR");
 
 export default function Painel() {
   const { estado } = useFonteDeDados();
   const p = estado.painel;
+
+  if (estado.erro) return <p role="alert">{estado.erro} Recarregue a página para tentar de novo.</p>;
+  if (!p)
+    return (
+      <p className="apoio" aria-busy="true">
+        Carregando as reclamações…
+      </p>
+    );
+
+  const origem =
+    estado.fonte === "usuario"
+      ? "Reclamações que você enviou, triadas aqui no seu navegador."
+      : "Reclamações reais da base pública da Olist que o modelo nunca viu no treino.";
+
   return (
     <>
-      <CabecalhoSecao titulo="Reclamações organizadas. Decisões inteligentes.">
-        A TriIA lê cada reclamação, diz para qual time ela vai e separa o que precisa de uma pessoa.
-      </CabecalhoSecao>
-      {estado.erro ? <p role="alert">{estado.erro}</p> : null}
-      {p ? (
-        <CartaoNumero
-          valor={numero.format(p.total)}
-          rotulo="reclamações triadas"
-          nota={`${numero.format(p.sem_humano)} sem precisar de ninguém`}
-        />
-      ) : (
-        <p className="apoio" aria-busy="true">
-          Carregando as reclamações…
-        </p>
-      )}
+      <Manchete mensagens={p.mensagens} origem={origem} />
+      <PorFila mensagens={p.mensagens} />
+      <PorMes porMes={p.por_mes} />
+      <Problemas painel={p} />
     </>
   );
 }

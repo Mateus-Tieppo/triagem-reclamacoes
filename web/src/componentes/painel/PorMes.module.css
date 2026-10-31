@@ -1,0 +1,45 @@
+.secao {
+  display: grid;
+  gap: var(--esp-2);
+  margin-bottom: var(--esp-8);
+}
+
+.titulo {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.figura {
+  margin: var(--esp-4) 0 0;
+}
+
+.grafico {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: 260px;
+  overflow: visible;
+}
+
+.base {
+  stroke: var(--linha);
+  stroke-width: 1;
+}
+
+.coluna {
+  fill: var(--tinta);
+  opacity: 0.85;
+}
+
+.pico {
+  fill: var(--etiqueta);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.rotulo {
+  fill: var(--tinta-2);
+  font-family: var(--fonte-codigo);
+  font-size: 10px;
+  text-anchor: middle;
+}

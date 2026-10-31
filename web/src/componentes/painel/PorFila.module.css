@@ -1,0 +1,102 @@
+.secao {
+  margin-bottom: var(--esp-8);
+}
+
+.titulo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--esp-4);
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista li + li {
+  border-top: 1px dashed var(--linha);
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(10rem, 15rem) 1fr 9rem;
+  align-items: center;
+  gap: var(--esp-4);
+  padding: var(--esp-3) var(--esp-2);
+  margin-inline: calc(-1 * var(--esp-2));
+  border-radius: var(--raio-etiqueta);
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+
+.linha:hover {
+  background: var(--cartao);
+}
+
+.nome {
+  display: grid;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.time {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.trilho {
+  block-size: 14px;
+}
+
+.barra {
+  display: block;
+  block-size: 100%;
+  min-inline-size: 2px;
+  background: var(--tinta);
+  border-radius: 2px;
+}
+
+.linha:hover .barra {
+  background: var(--tinta);
+  box-shadow: inset 0 0 0 999px color-mix(in srgb, var(--etiqueta) 55%, transparent);
+}
+
+.numeros {
+  display: grid;
+  justify-items: end;
+}
+
+.total {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.revisao {
+  color: var(--tinta-2);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .linha {
+    grid-template-columns: 4rem 1fr auto;
+    grid-template-areas:
+      "codigo nome numeros"
+      "trilho trilho trilho";
+    row-gap: var(--esp-2);
+  }
+  .linha > :first-child {
+    grid-area: codigo;
+    justify-self: start;
+  }
+  .nome {
+    grid-area: nome;
+  }
+  .trilho {
+    grid-area: trilho;
+    block-size: 8px;
+  }
+  .numeros {
+    grid-area: numeros;
+  }
+}

@@ -1,0 +1,81 @@
+.ferramentas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--esp-4);
+}
+
+.busca {
+  display: grid;
+  gap: var(--esp-1);
+  flex: 1 1 18rem;
+  max-inline-size: 28rem;
+  font-size: 0.875rem;
+}
+
+.busca input {
+  font: inherit;
+  font-size: 1rem;
+  color: var(--tinta);
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-etiqueta);
+  padding: var(--esp-2) var(--esp-3);
+  min-block-size: 44px;
+}
+
+.busca input::placeholder {
+  color: var(--tinta-2);
+}
+
+.exportar,
+.mais {
+  font: inherit;
+  font-weight: 600;
+  color: var(--tinta);
+  background: var(--cartao);
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--raio-etiqueta);
+  padding: var(--esp-2) var(--esp-4);
+  min-block-size: 44px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.exportar:hover:not(:disabled),
+.mais:hover {
+  background: var(--etiqueta);
+  color: var(--tinta-etiqueta);
+}
+
+.exportar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contagem {
+  margin-block: var(--esp-5) var(--esp-2);
+  color: var(--tinta-2);
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--linha);
+}
+
+.lista li {
+  border-bottom: 1px dashed var(--linha);
+}
+
+.vazio {
+  padding-block: var(--esp-6);
+  color: var(--tinta-2);
+}
+
+.mais {
+  margin-top: var(--esp-5);
+  inline-size: 100%;
+}

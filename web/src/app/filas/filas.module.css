@@ -1,0 +1,57 @@
+.filas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: var(--esp-2);
+  margin-bottom: var(--esp-6);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "codigo n" "nome nome";
+  gap: var(--esp-1) var(--esp-2);
+  padding: var(--esp-3);
+  text-decoration: none;
+  background: var(--cartao);
+  border: 1.5px solid var(--linha);
+  border-radius: var(--raio-etiqueta);
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.fila:hover {
+  border-color: var(--tinta);
+}
+
+.fila[aria-current="page"] {
+  background: var(--etiqueta);
+  color: var(--tinta-etiqueta);
+  border-color: var(--tinta-etiqueta);
+}
+
+.fila > :first-child {
+  grid-area: codigo;
+  font-weight: 600;
+}
+
+.nome {
+  grid-area: nome;
+  font-size: 0.875rem;
+  line-height: 1.25;
+}
+
+.n {
+  grid-area: n;
+  justify-self: end;
+}
+
+.titulo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--esp-4);
+}
+
+@media (max-width: 480px) {
+  .filas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

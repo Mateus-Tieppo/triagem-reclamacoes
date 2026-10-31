@@ -1,5 +1,10 @@
-import { CabecalhoSecao } from "@/componentes/CabecalhoSecao";
+import { Suspense } from "react";
+import { Filas } from "./Filas";
 
 export default function Pagina() {
-  return <CabecalhoSecao titulo="Filas">Uma fila por time, como num sistema de atendimento.</CabecalhoSecao>;
+  return (
+    <Suspense>
+      <Filas />
+    </Suspense>
+  );
 }

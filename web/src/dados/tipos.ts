@@ -34,6 +34,8 @@ export type MensagemTriada = {
   motivo: Motivo;
   palavras: string[];
   data: string | null;
+  /** Uma pessoa moveu de fila. */
+  corrigida?: boolean;
 };
 
 export type RegraTop = { nome: string; rotulo_legivel: string; n: number };

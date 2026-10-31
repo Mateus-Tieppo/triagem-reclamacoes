@@ -34,8 +34,10 @@ export function ngramasCharWb(t: string, [min, max]: [number, number]): string[]
 export function vetorBloco(ngramas: string[], bloco: Bloco): Map<number, number> {
   const contagem = new Map<number, number>();
   for (const g of ngramas) {
+    // hasOwn: um texto com "constructor" ou "toString" não pode cair em propriedades herdadas.
+    if (!Object.hasOwn(bloco.vocab, g)) continue;
     const i = bloco.vocab[g];
-    if (i !== undefined) contagem.set(i, (contagem.get(i) ?? 0) + 1);
+    contagem.set(i, (contagem.get(i) ?? 0) + 1);
   }
   const v = new Map<number, number>();
   let soma = 0;

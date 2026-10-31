@@ -39,3 +39,9 @@ test("1.000 mensagens em menos de 2 s, com progresso", async () => {
   expect(r).toHaveLength(1000);
   expect(progresso.at(-1)).toBe(1000);
 });
+
+test("palavras com nome de propriedade do JavaScript não quebram a predição", () => {
+  const p = prever(modelo, "constructor toString __proto__ hasOwnProperty valueOf não chegou");
+  expect(Object.values(p.probas).every(Number.isFinite)).toBe(true);
+  expect(p.categoria).toBe(prever(modelo, "não chegou").categoria);
+});

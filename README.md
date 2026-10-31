@@ -11,6 +11,22 @@ Quando um cliente reclama, alguém precisa ler a mensagem e mandar para o time c
 
 As decisões, com os porquês e o que ficou de fora, estão em [DECISOES.md](DECISOES.md); o guia, em [docs/guia-rotulagem.md](docs/guia-rotulagem.md).
 
+## TriIA: a ferramenta
+
+**[Abrir a TriIA](LINK_DA_FERRAMENTA)** · Reclamações organizadas. Decisões inteligentes.
+
+![Painel da TriIA com 7.453 reclamações triadas](docs/screenshots/desktop-painel.png)
+
+O modelo roda inteiro no navegador. A ferramenta abre com as 7.453 reclamações da Olist que ele nunca viu no treino e tem cinco telas:
+
+- **Painel:** quantas foram triadas, quantas dispensaram uma pessoa, para qual time vai cada uma, o volume por mês e os problemas que mais aparecem.
+- **Filas:** uma por time, com busca, a certeza e as palavras que pesaram em cada decisão. Dá para mover de fila e exportar em CSV.
+- **Revisão:** as mensagens com certeza abaixo de 80% esperando uma pessoa decidir.
+- **Triar as minhas:** cole reclamações ou suba um CSV; nada sai do navegador.
+- **Sobre:** como funciona e o quanto acerta.
+
+Para rodar localmente: `make web` exporta o modelo e o painel e testa a ferramenta; `cd web && npm run dev` abre em `localhost:3000`.
+
 ## O que mais pesou: os rótulos, não o algoritmo
 
 Na primeira versão, eu e o Claude concordávamos em só 64% das mensagens. O modelo aprendia o jeito do Claude rotular e era cobrado pelo meu, então trocar de algoritmo não resolvia. Reescrevemos o guia de rotulagem em três rodadas de calibração, sempre com mensagens do treino:
@@ -112,7 +128,10 @@ src/triagem/
   taxonomia.py        categorias e guia de rotulagem
   dados.py            filtro das reclamações e montagem dos conjuntos
   llm.py, rodar_llm.py, prompts.py, baseline.py, verdade.py   comparação com LLM e conferências
+  exportar_web.py     exporta o modelo para o navegador e as referências de paridade
+  painel.py           monta o painel das reclamações nunca vistas
 tests/                testes do pipeline, sem chamar nenhuma API
+web/                  a TriIA: Next.js estático, modelo em TypeScript, testes Vitest e Playwright
 ```
 
 ## Licença

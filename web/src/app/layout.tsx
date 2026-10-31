@@ -18,10 +18,22 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const DESCRICAO =
+  "Reclamações organizadas. Decisões inteligentes. Triagem de reclamações de e-commerce em português com machine learning clássico que roda no navegador, sem LLM e sem custo.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://triia-mateus.vercel.app"),
   title: "TriIA · Triagem inteligente de reclamações",
-  description:
-    "Reclamações organizadas. Decisões inteligentes. Triagem de reclamações de e-commerce em português com machine learning que roda no navegador.",
+  description: DESCRICAO,
+  openGraph: {
+    title: "TriIA · Triagem inteligente de reclamações",
+    description: DESCRICAO,
+    url: "/",
+    siteName: "TriIA",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

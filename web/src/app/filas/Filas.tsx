@@ -15,7 +15,7 @@ const PELO_CODIGO = new Map(CATEGORIAS.map((c) => [FILAS[c].codigo, c]));
 export function Filas() {
   const codigo = useSearchParams().get("fila") ?? "";
   const ativa: Categoria = PELO_CODIGO.get(codigo) ?? "nao_recebido_atraso";
-  const { mensagens, erro, mover } = useMensagens();
+  const { mensagens, erro, mover, desfazer } = useMensagens();
 
   const porFila = useMemo(() => {
     const mapa = new Map<Categoria, number>(CATEGORIAS.map((c) => [c, 0]));
@@ -54,6 +54,7 @@ export function Filas() {
           key={ativa}
           mensagens={daFila}
           onMover={mover}
+          onDesfazer={desfazer}
           arquivo={`triia-${FILAS[ativa].codigo.toLowerCase()}.csv`}
           vazio="Nenhuma reclamação nesta fila."
         />

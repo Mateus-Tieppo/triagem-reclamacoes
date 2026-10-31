@@ -14,17 +14,19 @@ const POR_PAGINA = 30;
 export function ListaMensagens({
   mensagens,
   onMover,
+  onDesfazer,
   arquivo,
   vazio,
 }: {
   mensagens: MensagemTriada[];
   onMover: (id: string, categoria: Categoria) => void;
+  onDesfazer: (id: string, anterior: Categoria | null) => void;
   arquivo: string;
   vazio: string;
 }) {
   const [busca, setBusca] = useState("");
   const [mostrar, setMostrar] = useState(POR_PAGINA);
-  const [aviso, setAviso] = useState("");
+  const [ultima, setUltima] = useState<{ id: string; para: Categoria; anterior: Categoria | null } | null>(null);
   const campo = useId();
   const termo = useDeferredValue(busca);
 
@@ -35,10 +37,11 @@ export function ListaMensagens({
 
   const mover = useCallback(
     (id: string, categoria: Categoria) => {
+      const m = mensagens.find((x) => x.id === id);
+      setUltima({ id, para: categoria, anterior: m?.corrigida ? m.categoria : null });
       onMover(id, categoria);
-      setAviso(`Movida para ${FILAS[categoria].nome}.`);
     },
-    [onMover],
+    [mensagens, onMover],
   );
 
   return (
@@ -48,6 +51,7 @@ export function ListaMensagens({
           <span className="apoio">Buscar no texto</span>
           <input
             id={campo}
+            name="busca"
             type="search"
             value={busca}
             onChange={(e) => {
@@ -68,10 +72,24 @@ export function ListaMensagens({
           Exportar {numero.format(filtradas.length)} em CSV
         </button>
       </div>
-      <p className={`${estilos.contagem} codigo`} aria-live="polite">
-        {numero.format(filtradas.length)} {filtradas.length === 1 ? "reclamação" : "reclamações"}
-        {aviso ? ` · ${aviso}` : ""}
-      </p>
+      <div className={estilos.status}>
+        <p className={`${estilos.contagem} codigo`} aria-live="polite">
+          {numero.format(filtradas.length)} {filtradas.length === 1 ? "reclamação" : "reclamações"}
+          {ultima ? ` · Movida para ${FILAS[ultima.para].nome}.` : ""}
+        </p>
+        {ultima ? (
+          <button
+            type="button"
+            className={estilos.desfazer}
+            onClick={() => {
+              onDesfazer(ultima.id, ultima.anterior);
+              setUltima(null);
+            }}
+          >
+            Desfazer
+          </button>
+        ) : null}
+      </div>
       {filtradas.length ? (
         <ol className={estilos.lista}>
           {filtradas.slice(0, mostrar).map((m) => (

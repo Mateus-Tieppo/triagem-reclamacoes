@@ -76,13 +76,22 @@ h3 {
   text-wrap: balance;
 }
 
-p {
+p,
+li {
   margin: 0;
   text-wrap: pretty;
 }
 
 a {
   color: inherit;
+}
+
+a,
+button,
+input,
+select,
+label {
+  touch-action: manipulation;
 }
 
 ::selection {

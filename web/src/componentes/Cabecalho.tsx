@@ -22,7 +22,7 @@ export function Cabecalho() {
   return (
     <header className={estilos.cabecalho}>
       <div className={estilos.topo}>
-        <Link href="/" className={estilos.marca} aria-label="TriIA, página inicial">
+        <Link href="/" className={estilos.marca} aria-label="TriIA, página inicial" translate="no">
           Tri<span className={estilos.ia}>IA</span>
         </Link>
         <p className={`${estilos.fonte} codigo`} aria-live="polite">
@@ -44,7 +44,12 @@ export function Cabecalho() {
             const ativo = s.href === "/" ? caminho === "/" : caminho.startsWith(s.href);
             return (
               <li key={s.href}>
-                <Link href={s.href} aria-current={ativo ? "page" : undefined} className={estilos.link}>
+                <Link
+                  href={s.href}
+                  aria-current={ativo ? "page" : undefined}
+                  aria-label={s.curto ? s.rotulo : undefined}
+                  className={estilos.link}
+                >
                   {s.curto ? (
                     <>
                       <span className={estilos.longo}>{s.rotulo}</span>

@@ -54,9 +54,29 @@
   cursor: not-allowed;
 }
 
-.contagem {
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--esp-1) var(--esp-3);
   margin-block: var(--esp-5) var(--esp-2);
+  min-block-size: 44px;
+}
+
+.contagem {
   color: var(--tinta-2);
+}
+
+.desfazer {
+  font: inherit;
+  font-weight: 600;
+  color: var(--tinta);
+  background: none;
+  border: 0;
+  padding: var(--esp-2) var(--esp-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 .lista {

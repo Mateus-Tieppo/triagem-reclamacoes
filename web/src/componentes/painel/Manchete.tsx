@@ -35,6 +35,7 @@ export function Manchete({ mensagens, origem }: { mensagens: MensagemTriada[]; o
         </label>
         <input
           id={campo}
+          name="segundos"
           className={`${estilos.segundos} codigo`}
           type="number"
           inputMode="numeric"

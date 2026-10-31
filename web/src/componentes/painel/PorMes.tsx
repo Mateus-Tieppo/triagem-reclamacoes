@@ -1,11 +1,17 @@
+"use client";
+
+import { useRef } from "react";
 import { CATEGORIAS, type Painel } from "@/dados/tipos";
 import { mesCurto, numero } from "@/dados/formato";
 import estilos from "./PorMes.module.css";
+import { useCrescer } from "./useCrescer";
 
 const ALTURA = 160;
 
 /** Colunas com o volume de reclamações por mês. */
 export function PorMes({ porMes }: { porMes: Painel["por_mes"] }) {
+  const secao = useRef<HTMLElement>(null);
+  useCrescer(secao, "rect", "y");
   if (porMes.length < 2) return null;
   const meses = porMes.map((m) => ({ mes: m.mes, total: CATEGORIAS.reduce((s, c) => s + (m[c] ?? 0), 0) }));
   const pico = meses.reduce((a, b) => (b.total > a.total ? b : a));
@@ -13,7 +19,7 @@ export function PorMes({ porMes }: { porMes: Painel["por_mes"] }) {
   const marcas = meses.filter((m, i) => i === 0 || i === meses.length - 1 || m.mes.endsWith("-01"));
 
   return (
-    <section aria-labelledby="por-mes" className={estilos.secao}>
+    <section ref={secao} aria-labelledby="por-mes" className={estilos.secao}>
       <h2 id="por-mes" className={estilos.titulo}>
         Ao longo do tempo
       </h2>

@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { Etiqueta } from "@/componentes/Etiqueta";
 import { numero } from "@/dados/formato";
 import { CATEGORIAS, FILAS, type Categoria, type MensagemTriada } from "@/dados/tipos";
 import estilos from "./PorFila.module.css";
+import { useCrescer } from "./useCrescer";
 
 /** Uma linha por fila, da maior para a menor. Clicar abre a fila. */
 export function PorFila({ mensagens }: { mensagens: MensagemTriada[] }) {
@@ -17,9 +20,11 @@ export function PorFila({ mensagens }: { mensagens: MensagemTriada[] }) {
     return [...conta].map(([categoria, c]) => ({ categoria, ...c })).sort((a, b) => b.total - a.total);
   }, [mensagens]);
   const maior = Math.max(1, ...linhas.map((l) => l.total));
+  const secao = useRef<HTMLElement>(null);
+  useCrescer(secao, "[data-barra]", "x");
 
   return (
-    <section aria-labelledby="por-fila" className={estilos.secao}>
+    <section ref={secao} aria-labelledby="por-fila" className={estilos.secao}>
       <h2 id="por-fila" className={estilos.titulo}>
         Para onde vão
       </h2>
@@ -33,7 +38,7 @@ export function PorFila({ mensagens }: { mensagens: MensagemTriada[] }) {
                 <span className={`${estilos.time} apoio`}>{FILAS[l.categoria].time}</span>
               </span>
               <span className={estilos.trilho} aria-hidden>
-                {l.total ? <span className={estilos.barra} style={{ inlineSize: `${(l.total / maior) * 100}%` }} /> : null}
+                {l.total ? <span data-barra className={estilos.barra} style={{ inlineSize: `${(l.total / maior) * 100}%` }} /> : null}
               </span>
               <span className={estilos.numeros}>
                 <span className={estilos.total}>{numero.format(l.total)}</span>

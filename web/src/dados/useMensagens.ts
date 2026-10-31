@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { aplicarCorrecoes, lerCorrecoes, salvarCorrecao } from "./correcoes";
+import { aplicarCorrecoes, desfazerCorrecao, lerCorrecoes, salvarCorrecao } from "./correcoes";
 import { useFonteDeDados } from "./FonteDeDados";
 import type { Categoria, MensagemTriada } from "./tipos";
 
@@ -10,6 +10,7 @@ export function useMensagens(): {
   mensagens: MensagemTriada[] | null;
   erro: string | null;
   mover: (id: string, categoria: Categoria) => void;
+  desfazer: (id: string, anterior: Categoria | null) => void;
 } {
   const { estado } = useFonteDeDados();
   const [correcoes, setCorrecoes] = useState<Record<string, string>>({});
@@ -21,10 +22,22 @@ export function useMensagens(): {
     setCorrecoes((c) => ({ ...c, [id]: categoria }));
   }, []);
 
+  /** Volta para a categoria corrigida antes, ou tira a correção se não havia. */
+  const desfazer = useCallback((id: string, anterior: Categoria | null) => {
+    if (anterior) salvarCorrecao(id, anterior);
+    else desfazerCorrecao(id);
+    setCorrecoes((c) => {
+      const novo = { ...c };
+      if (anterior) novo[id] = anterior;
+      else delete novo[id];
+      return novo;
+    });
+  }, []);
+
   const mensagens = useMemo(
     () => (estado.painel ? aplicarCorrecoes(estado.painel.mensagens, correcoes) : null),
     [estado.painel, correcoes],
   );
 
-  return { mensagens, erro: estado.erro, mover };
+  return { mensagens, erro: estado.erro, mover, desfazer };
 }

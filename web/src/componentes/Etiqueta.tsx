@@ -6,7 +6,7 @@ export function Etiqueta({ categoria, certeza }: { categoria: Categoria; certeza
   const fila = FILAS[categoria];
   return (
     <span className={`${estilos.etiqueta} codigo`} title={fila.nome}>
-      {fila.codigo}
+      <span translate="no">{fila.codigo}</span>
       {certeza !== undefined ? <span className={estilos.certeza}>{Math.round(certeza * 100)}%</span> : null}
       <span className={estilos.oculto}>{fila.nome}</span>
     </span>

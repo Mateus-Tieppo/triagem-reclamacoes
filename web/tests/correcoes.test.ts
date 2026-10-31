@@ -1,5 +1,5 @@
 import { afterEach, expect, test, vi } from "vitest";
-import { aplicarCorrecoes, lerCorrecoes, salvarCorrecao } from "@/dados/correcoes";
+import { aplicarCorrecoes, desfazerCorrecao, lerCorrecoes, salvarCorrecao } from "@/dados/correcoes";
 import type { MensagemTriada } from "@/dados/tipos";
 
 afterEach(() => vi.unstubAllGlobals());
@@ -37,4 +37,11 @@ test("sem localStorage não quebra", () => {
 test("localStorage com lixo não quebra", () => {
   vi.stubGlobal("localStorage", { getItem: () => "{nao e json", setItem() {} });
   expect(() => lerCorrecoes()).not.toThrow();
+});
+
+test("desfazer devolve a predição do modelo", () => {
+  vi.stubGlobal("localStorage", { getItem: () => null, setItem() {} });
+  salvarCorrecao("z", "outro");
+  desfazerCorrecao("z");
+  expect(lerCorrecoes().z).toBeUndefined();
 });

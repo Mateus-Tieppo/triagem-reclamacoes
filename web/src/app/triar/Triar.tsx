@@ -92,6 +92,7 @@ export function Triar() {
             </label>
             <select
               id={ids.coluna}
+              name="coluna"
               value={csv.coluna ?? ""}
               onChange={(e) => setCsv({ ...csv, coluna: e.target.value || null })}
               className={estilos.select}
@@ -119,6 +120,7 @@ export function Triar() {
             </div>
             <textarea
               id={ids.texto}
+              name="reclamacoes"
               value={colado}
               onChange={(e) => setColado(e.target.value)}
               rows={7}
@@ -141,6 +143,7 @@ export function Triar() {
               </label>
               <input
                 id={ids.arquivo}
+                name="arquivo"
                 type="file"
                 accept=".csv,.txt,text/csv"
                 className={estilos.oculto}

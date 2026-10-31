@@ -6,7 +6,7 @@ import { ListaMensagens } from "@/componentes/filas/ListaMensagens";
 import { useMensagens } from "@/dados/useMensagens";
 
 export default function Revisao() {
-  const { mensagens, erro, mover } = useMensagens();
+  const { mensagens, erro, mover, desfazer } = useMensagens();
   const pendentes = useMemo(() => (mensagens ?? []).filter((m) => m.revisao), [mensagens]);
 
   return (
@@ -20,6 +20,7 @@ export default function Revisao() {
         <ListaMensagens
           mensagens={pendentes}
           onMover={mover}
+          onDesfazer={desfazer}
           arquivo="triia-revisao.csv"
           vazio="Nada para revisar. Todas as reclamações já têm fila."
         />

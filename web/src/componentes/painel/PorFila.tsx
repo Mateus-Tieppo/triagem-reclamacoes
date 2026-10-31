@@ -33,7 +33,7 @@ export function PorFila({ mensagens }: { mensagens: MensagemTriada[] }) {
                 <span className={`${estilos.time} apoio`}>{FILAS[l.categoria].time}</span>
               </span>
               <span className={estilos.trilho} aria-hidden>
-                <span className={estilos.barra} style={{ inlineSize: `${(l.total / maior) * 100}%` }} />
+                {l.total ? <span className={estilos.barra} style={{ inlineSize: `${(l.total / maior) * 100}%` }} /> : null}
               </span>
               <span className={estilos.numeros}>
                 <span className={estilos.total}>{numero.format(l.total)}</span>

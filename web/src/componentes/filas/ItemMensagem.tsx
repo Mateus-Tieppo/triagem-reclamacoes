@@ -3,6 +3,9 @@ import { Etiqueta } from "@/componentes/Etiqueta";
 import { CATEGORIAS, FILAS, type Categoria, type MensagemTriada } from "@/dados/tipos";
 import estilos from "./ItemMensagem.module.css";
 
+/** Os marcadores da normalização viram palavras para quem lê. */
+const legivel = (p: string) => p.replace(/_num_/g, "número").replace(/_link_/g, "link");
+
 const data = new Intl.DateTimeFormat("pt-BR", { dateStyle: "medium", timeZone: "UTC" });
 
 export const ItemMensagem = memo(function ItemMensagem({
@@ -35,7 +38,7 @@ export const ItemMensagem = memo(function ItemMensagem({
             {m.palavras.map((p, i) => (
               <span key={p}>
                 {i ? ", " : ""}
-                <mark className={estilos.palavra}>{p}</mark>
+                <mark className={estilos.palavra}>{legivel(p)}</mark>
               </span>
             ))}
           </p>

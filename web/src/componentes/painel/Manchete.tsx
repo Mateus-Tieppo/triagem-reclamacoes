@@ -10,7 +10,12 @@ export function Manchete({ mensagens, origem }: { mensagens: MensagemTriada[]; o
   const [segundos, setSegundos] = useState(30);
   const campo = useId();
   const r = calcularResumo(mensagens, segundos);
-  const horas = r.horasPoupadas >= 10 ? Math.round(r.horasPoupadas) : Math.round(r.horasPoupadas * 10) / 10;
+  const tempo =
+    r.horasPoupadas >= 10
+      ? `${numero.format(Math.round(r.horasPoupadas))} horas`
+      : r.horasPoupadas >= 1
+        ? `${numero.format(Math.round(r.horasPoupadas * 10) / 10)} horas`
+        : `${numero.format(Math.max(1, Math.round(r.horasPoupadas * 60)))} ${Math.round(r.horasPoupadas * 60) > 1 ? "minutos" : "minuto"}`;
 
   return (
     <section aria-labelledby="manchete" className={estilos.manchete}>
@@ -24,7 +29,7 @@ export function Manchete({ mensagens, origem }: { mensagens: MensagemTriada[]; o
         {origem} O modelo decidiu sozinho em {pct.format(r.pctSemHumano)} delas; o resto foi para revisão humana.
       </p>
       <p className={estilos.premissa}>
-        Isso poupa cerca de <strong>{numero.format(horas)} horas</strong> de leitura, se cada mensagem leva{" "}
+        Isso poupa cerca de <strong>{r.horasPoupadas ? tempo : "nenhum minuto"}</strong> de leitura, se cada mensagem leva{" "}
         <label htmlFor={campo} className={estilos.oculto}>
           segundos por mensagem
         </label>

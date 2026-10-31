@@ -7,7 +7,7 @@ import type { Painel } from "./tipos";
 export type Fonte = "olist" | "usuario";
 
 type FonteDeDados = {
-  estado: { painel: Painel | null; fonte: Fonte; erro: string | null };
+  estado: { painel: Painel | null; olist: Painel | null; fonte: Fonte; erro: string | null };
   acoes: { usarDadosDoUsuario: (painel: Painel) => void; voltarParaOlist: () => void };
 };
 
@@ -28,7 +28,7 @@ export function FonteDeDadosProvider({ children }: { children: ReactNode }) {
 
   const valor = useMemo<FonteDeDados>(
     () => ({
-      estado: { painel: usuario ?? olist, fonte: usuario ? "usuario" : "olist", erro },
+      estado: { painel: usuario ?? olist, olist, fonte: usuario ? "usuario" : "olist", erro },
       acoes: { usarDadosDoUsuario, voltarParaOlist },
     }),
     [olist, usuario, erro, usarDadosDoUsuario, voltarParaOlist],

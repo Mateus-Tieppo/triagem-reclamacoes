@@ -11,3 +11,8 @@ rotulagem/rotulagem.html
 CLAUDE.md
 results/supervisao_fraca/*.joblib
 data/lotes/
+web/node_modules/
+web/.next/
+web/out/
+web/next-env.d.ts
+.superpowers/

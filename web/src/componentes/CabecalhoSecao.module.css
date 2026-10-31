@@ -1,0 +1,15 @@
+.secao {
+  display: grid;
+  gap: var(--esp-3);
+  margin-bottom: var(--esp-6);
+  max-width: 62ch;
+}
+
+.titulo {
+  font-size: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+  font-weight: 700;
+}
+
+.texto {
+  font-size: 1.0625rem;
+}

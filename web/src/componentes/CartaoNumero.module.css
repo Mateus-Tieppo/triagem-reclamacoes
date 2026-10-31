@@ -1,0 +1,23 @@
+.cartao {
+  display: grid;
+  gap: var(--esp-1);
+  padding: var(--esp-5);
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-cartao);
+}
+
+.valor {
+  font-size: clamp(2rem, 1.6rem + 2vw, 2.75rem);
+  font-weight: 700;
+  font-stretch: 85%;
+  line-height: 1;
+}
+
+.rotulo {
+  font-weight: 500;
+}
+
+.nota {
+  color: var(--tinta-2);
+}

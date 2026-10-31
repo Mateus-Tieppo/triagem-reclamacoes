@@ -1,0 +1,24 @@
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esp-2);
+  padding: 1px var(--esp-2);
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--raio-etiqueta);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.certeza {
+  font-weight: 400;
+  color: var(--tinta-2);
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
